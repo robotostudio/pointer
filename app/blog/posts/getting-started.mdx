@@ -1,0 +1,99 @@
+---
+title: Getting Started with MDX CMS
+publishedAt: 2026-01-02
+summary: Learn how to use this simple and powerful MDX-based content management system for your Next.js projects.
+---
+
+# Getting Started with MDX CMS
+
+This project uses MDX files as a simple, file-based content management system. No database required!
+
+## What is MDX?
+
+MDX is Markdown with the power of JSX. You can write regular Markdown and use React components within it.
+
+```mdx
+# Regular Markdown heading
+
+And you can use components:
+
+<Button variant="primary">Click me</Button>
+```
+
+## Creating Pages
+
+Creating a new page is as simple as creating a new `.mdx` file:
+
+1. **Create the file**: `content/pages/my-page.mdx`
+2. **Add frontmatter** with metadata
+3. **Write your content** using Markdown and components
+4. **Done!** Visit `/my-page`
+
+## Custom Components
+
+You can use these components in your MDX:
+
+### Feature Cards
+
+<CardGrid columns={3}>
+  <FeatureCard 
+    title="Simple" 
+    description="One file per page"
+    icon="📝"
+  />
+  <FeatureCard 
+    title="Fast" 
+    description="Static generation"
+    icon="⚡"
+  />
+  <FeatureCard 
+    title="Flexible" 
+    description="Use React components"
+    icon="🎨"
+  />
+</CardGrid>
+
+### Callouts
+
+<Callout type="info">
+This is an informational callout. Perfect for highlighting important information!
+</Callout>
+
+<Callout type="success">
+Success! You've learned how to use callouts.
+</Callout>
+
+### Buttons
+
+<div className="flex gap-4 mt-6">
+  <Button variant="primary" href="/about">
+    Learn More
+  </Button>
+  <Button variant="secondary" href="/company/contact">
+    Contact Us
+  </Button>
+</div>
+
+## Blog Posts
+
+Blog posts work similarly, but are stored in `app/blog/posts/`:
+
+```mdx
+---
+title: My Blog Post
+publishedAt: 2026-01-02
+summary: A brief description
+---
+
+# Your content here
+```
+
+## Next Steps
+
+- Check out the [documentation](/docs)
+- Explore example pages in `content/pages/`
+- Read more blog posts
+
+<Callout type="info">
+**Pro tip:** All MDX files support syntax highlighting, custom components, and regular Markdown features!
+</Callout>

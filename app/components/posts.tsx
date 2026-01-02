@@ -1,36 +1,41 @@
-import Link from 'next/link'
-import { formatDate, getBlogPosts } from 'app/blog/utils'
+import Link from "next/link";
+import { formatDate, getBlogPosts } from "app/blog/utils";
 
 export function BlogPosts() {
-  let allBlogs = getBlogPosts()
+  const posts = getBlogPosts(); // Already sorted by date in utils
 
   return (
-    <div>
-      {allBlogs
-        .sort((a, b) => {
-          if (
-            new Date(a.metadata.publishedAt) > new Date(b.metadata.publishedAt)
-          ) {
-            return -1
-          }
-          return 1
-        })
-        .map((post) => (
-          <Link
-            key={post.slug}
-            className="flex flex-col space-y-1 mb-4"
-            href={`/blog/${post.slug}`}
-          >
-            <div className="w-full flex flex-col md:flex-row space-x-0 md:space-x-2">
-              <p className="text-neutral-600 dark:text-neutral-400 w-[100px] tabular-nums">
-                {formatDate(post.metadata.publishedAt, false)}
-              </p>
-              <p className="text-neutral-900 dark:text-neutral-100 tracking-tight">
+    <div className="space-y-6">
+      {posts.map((post) => (
+        <Link
+          key={post.slug}
+          className="block group hover:bg-neutral-50 dark:hover:bg-neutral-900 -mx-4 px-4 py-3 rounded-lg transition"
+          href={`/blog/${post.slug}`}
+        >
+          <div className="flex flex-col md:flex-row md:items-baseline gap-2">
+            <time
+              className="text-sm text-neutral-600 dark:text-neutral-400 tabular-nums md:w-32 shrink-0"
+              dateTime={post.metadata.publishedAt}
+            >
+              {formatDate(post.metadata.publishedAt)}
+            </time>
+            <div className="flex-1">
+              <h2 className="text-lg font-medium text-neutral-900 dark:text-neutral-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition">
                 {post.metadata.title}
+              </h2>
+              <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1 line-clamp-2">
+                {post.metadata.summary}
               </p>
             </div>
-          </Link>
-        ))}
+          </div>
+        </Link>
+      ))}
+
+      {posts.length === 0 && (
+        <p className="text-neutral-600 dark:text-neutral-400">
+          No blog posts yet.
+        </p>
+      )}
     </div>
-  )
+  );
 }
