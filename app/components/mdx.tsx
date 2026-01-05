@@ -10,6 +10,7 @@ import {
   FeatureCard,
   Testimonial,
 } from "./custom-mdx-components";
+import { Hero } from "./hero";
 
 interface TableProps {
   data: {
@@ -137,6 +138,7 @@ let components = {
   FeatureCard,
   Button,
   CardGrid,
+  Hero,
   Testimonial,
   Callout,
 };

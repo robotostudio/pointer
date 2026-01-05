@@ -7,9 +7,9 @@ import {
 } from "../lib/content-service";
 
 interface PageProps {
-  params: {
+  params: Promise<{
     slug: string[];
-  };
+  }>;
 }
 
 /**
@@ -29,7 +29,8 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const urlPath = params.slug.join("/");
+  const slugParams = await params;
+  const urlPath = slugParams.slug.join("/");
   const page = getPageByPath(urlPath);
 
   if (!page) {
@@ -43,7 +44,9 @@ export async function generateMetadata({
   return {
     title: metadata.title,
     description: metadata.description,
-    authors: metadata.author ? [{ name: metadata.author }] : undefined,
+    authors: metadata.author
+      ? [{ name: metadata.author }]
+      : undefined,
     openGraph: {
       title: metadata.title || "Page",
       description: metadata.description,
@@ -55,8 +58,9 @@ export async function generateMetadata({
 /**
  * Dynamic page component
  */
-export default function Page({ params }: PageProps) {
-  const urlPath = params.slug.join("/");
+export default async function Page({ params }: PageProps) {
+  const slugParams = await params;
+  const urlPath = slugParams.slug.join("/");
   const page = getPageByPath(urlPath);
 
   if (!page) {
