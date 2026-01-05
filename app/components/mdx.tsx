@@ -1,96 +1,126 @@
-import Link from 'next/link'
-import Image from 'next/image'
-import { MDXRemote } from 'next-mdx-remote/rsc'
-import { highlight } from 'sugar-high'
-import React from 'react'
+import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
+import { highlight } from "sugar-high";
 import {
-  FeatureCard,
   Button,
-  CardGrid,
-  Testimonial,
   Callout,
-} from './custom-mdx-components'
+  CardGrid,
+  FeatureCard,
+  Testimonial,
+} from "./custom-mdx-components";
 
-function Table({ data }) {
-  let headers = data.headers.map((header, index) => (
-    <th key={index}>{header}</th>
-  ))
-  let rows = data.rows.map((row, index) => (
-    <tr key={index}>
-      {row.map((cell, cellIndex) => (
-        <td key={cellIndex}>{cell}</td>
-      ))}
-    </tr>
-  ))
+interface TableProps {
+  data: {
+    headers: string[];
+    rows: string[][];
+  };
+}
 
+function Table({ data }: TableProps) {
   return (
     <table>
       <thead>
-        <tr>{headers}</tr>
+        <tr>
+          {data.headers.map((header) => (
+            <th key={header}>{header}</th>
+          ))}
+        </tr>
       </thead>
-      <tbody>{rows}</tbody>
+      <tbody>
+        {data.rows.map((row) => (
+          <tr key={row.join("-")}>
+            {row.map((cell) => (
+              <td key={cell}>{cell}</td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
     </table>
-  )
+  );
 }
 
-function CustomLink(props) {
-  let href = props.href
+interface LinkProps
+  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+  href?: string;
+  children?: React.ReactNode;
+}
 
-  if (href.startsWith('/')) {
+function CustomLink({ href, children, ...props }: LinkProps) {
+  if (!href) {
+    return <a {...props}>{children}</a>;
+  }
+
+  if (href.startsWith("/")) {
     return (
       <Link href={href} {...props}>
-        {props.children}
+        {children}
       </Link>
-    )
+    );
   }
 
-  if (href.startsWith('#')) {
-    return <a {...props} />
+  if (href.startsWith("#")) {
+    return (
+      <a href={href} {...props}>
+        {children}
+      </a>
+    );
   }
 
-  return <a target="_blank" rel="noopener noreferrer" {...props} />
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      {...props}
+    >
+      {children}
+    </a>
+  );
 }
 
-function RoundedImage(props) {
-  return <Image alt={props.alt} className="rounded-lg" {...props} />
+interface ImageProps {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
 }
 
-function Code({ children, ...props }) {
-  let codeHTML = highlight(children)
-  return <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />
+function RoundedImage({ alt, ...props }: ImageProps) {
+  return <Image alt={alt} className="rounded-lg" {...props} />;
 }
 
-function slugify(str) {
+interface CodeProps {
+  children: string;
+}
+
+function Code({ children, ...props }: CodeProps) {
+  const codeHTML = highlight(children);
+  return (
+    <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />
+  );
+}
+
+function slugify(str: string): string {
   return str
     .toString()
     .toLowerCase()
-    .trim() // Remove whitespace from both ends of a string
-    .replace(/\s+/g, '-') // Replace spaces with -
-    .replace(/&/g, '-and-') // Replace & with 'and'
-    .replace(/[^\w\-]+/g, '') // Remove all non-word characters except for -
-    .replace(/\-\-+/g, '-') // Replace multiple - with single -
+    .trim()
+    .replaceAll(/\s+/g, "-")
+    .replaceAll("&", "-and-")
+    .replaceAll(/[^\w-]+/g, "")
+    .replaceAll(/--+/g, "-");
 }
 
-function createHeading(level) {
-  const Heading = ({ children }) => {
-    let slug = slugify(children)
-    return React.createElement(
-      `h${level}`,
-      { id: slug },
-      [
-        React.createElement('a', {
-          href: `#${slug}`,
-          key: `link-${slug}`,
-          className: 'anchor',
-        }),
-      ],
-      children
-    )
+function createHeading(level: number) {
+  function Heading({ children }: { children: string }) {
+    const slug = slugify(children);
+    return React.createElement(`h${level}`, { id: slug }, children);
   }
 
-  Heading.displayName = `Heading${level}`
-
-  return Heading
+  Heading.displayName = `Heading${level}`;
+  return Heading;
 }
 
 let components = {
@@ -109,13 +139,13 @@ let components = {
   CardGrid,
   Testimonial,
   Callout,
-}
+};
 
-export function CustomMDX(props) {
+export function CustomMDX(props: MDXRemoteProps) {
   return (
     <MDXRemote
       {...props}
-      components={{ ...components, ...(props.components || {}) }}
+      components={{ ...components, ...props.components }}
     />
-  )
+  );
 }
