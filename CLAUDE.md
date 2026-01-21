@@ -83,6 +83,22 @@ Use directly in MDX files - already registered in `app/components/mdx.tsx`:
 
 All pages pre-rendered at build time via `generateStaticParams()` in route files. SEO handled with `generateMetadata()` per page.
 
+## Code Style
+
+### Imports
+
+Always use absolute import path aliases when importing components or modules. Never use relative paths like `../` or `./`.
+
+```typescript
+// ✅ Good - absolute imports
+import { Button } from "@/app/components/button"
+import { ContentService } from "@/app/lib/content-service"
+
+// ❌ Bad - relative imports
+import { Button } from "../components/button"
+import { ContentService } from "./content-service"
+```
+
 ## Tech Stack
 
 - Next.js 16 (App Router)

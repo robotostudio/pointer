@@ -1,10 +1,10 @@
 function ArrowIcon() {
   return (
     <svg
-      width="12"
+      fill="none"
       height="12"
       viewBox="0 0 12 12"
-      fill="none"
+      width="12"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
@@ -12,9 +12,9 @@ function ArrowIcon() {
         fill="currentColor"
       />
     </svg>
-  )
+  );
 }
 
 export default function Footer() {
-  return <footer className="mb-16"></footer>;
+  return <footer className="mb-16" />;
 }

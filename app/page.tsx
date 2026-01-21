@@ -1,6 +1,6 @@
-import { getPageByPath } from "./lib/content-service";
-import { PageTemplate } from "./components/page-templates";
 import { notFound } from "next/navigation";
+import { PageTemplate } from "./components/page-templates";
+import { getPageByPath } from "./lib/content-service";
 
 export default function HomePage() {
   const page = getPageByPath("home");

@@ -1,11 +1,11 @@
 import path from "node:path";
-import type { PageContent, PageMetadata } from "./content-types";
 import {
+  filePathToUrlPath,
   getMDXFiles,
   readMDXFile,
-  filePathToUrlPath,
   urlPathToFilePath,
 } from "./content-parser";
+import type { PageContent, PageMetadata } from "./content-types";
 
 const CONTENT_DIR = path.join(process.cwd(), "content", "pages");
 
@@ -33,14 +33,10 @@ export class ContentService {
     if (!urlPath) return "";
 
     // Remove leading and trailing slashes
-    let normalized = urlPath
-      .replaceAll(/^\/+/g, "")
-      .replaceAll(/\/+$/g, "");
+    let normalized = urlPath.replaceAll(/^\/+/g, "").replaceAll(/\/+$/g, "");
 
     // Remove any path traversal attempts
-    normalized = normalized
-      .replaceAll("../", "")
-      .replaceAll(/\.\.$/g, "");
+    normalized = normalized.replaceAll("../", "").replaceAll(/\.\.$/g, "");
 
     // Normalize multiple slashes to single slash
     normalized = normalized.replaceAll(/\/+/g, "/");
@@ -99,10 +95,7 @@ export class ContentService {
     }
 
     try {
-      const filePath = urlPathToFilePath(
-        normalizedPath,
-        this.contentDir
-      );
+      const filePath = urlPathToFilePath(normalizedPath, this.contentDir);
 
       if (!filePath) {
         return null;
@@ -134,10 +127,7 @@ export class ContentService {
       return pageContent;
     } catch (error) {
       if (process.env.NODE_ENV === "development") {
-        console.error(
-          `Error loading page "${normalizedPath}":`,
-          error
-        );
+        console.error(`Error loading page "${normalizedPath}":`, error);
       }
       return null;
     }
@@ -149,10 +139,7 @@ export class ContentService {
    */
   getAllPagePaths(): string[] {
     // Return cached result if available (only in production)
-    if (
-      process.env.NODE_ENV === "production" &&
-      this.pathsCache !== null
-    ) {
+    if (process.env.NODE_ENV === "production" && this.pathsCache !== null) {
       return [...this.pathsCache];
     }
 
@@ -203,14 +190,10 @@ export class ContentService {
             metadata: Partial<PageMetadata>;
           } | null => {
             try {
-              const filePath = urlPathToFilePath(
-                urlPath,
-                this.contentDir
-              );
+              const filePath = urlPathToFilePath(urlPath, this.contentDir);
               if (!filePath) return null;
 
-              const { metadata } =
-                readMDXFile<PageMetadata>(filePath);
+              const { metadata } = readMDXFile<PageMetadata>(filePath);
 
               return {
                 path: `/${urlPath}`,
@@ -258,9 +241,7 @@ export class ContentService {
         return false;
       }
 
-      return (
-        urlPathToFilePath(normalizedPath, this.contentDir) !== null
-      );
+      return urlPathToFilePath(normalizedPath, this.contentDir) !== null;
     } catch {
       return false;
     }

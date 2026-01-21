@@ -1,6 +1,6 @@
-import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
 import Image from "next/image";
 import Link from "next/link";
+import { MDXRemote, type MDXRemoteProps } from "next-mdx-remote/rsc";
 import React from "react";
 import { highlight } from "sugar-high";
 import {
@@ -42,8 +42,7 @@ function Table({ data }: TableProps) {
   );
 }
 
-interface LinkProps
-  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   href?: string;
   children?: React.ReactNode;
 }
@@ -70,12 +69,7 @@ function CustomLink({ href, children, ...props }: LinkProps) {
   }
 
   return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      {...props}
-    >
+    <a href={href} rel="noopener noreferrer" target="_blank" {...props}>
       {children}
     </a>
   );
@@ -98,9 +92,7 @@ interface CodeProps {
 
 function Code({ children, ...props }: CodeProps) {
   const codeHTML = highlight(children);
-  return (
-    <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />
-  );
+  return <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />;
 }
 
 function slugify(str: string): string {
@@ -124,7 +116,7 @@ function createHeading(level: number) {
   return Heading;
 }
 
-let components = {
+const components = {
   h1: createHeading(1),
   h2: createHeading(2),
   h3: createHeading(3),
@@ -145,9 +137,6 @@ let components = {
 
 export function CustomMDX(props: MDXRemoteProps) {
   return (
-    <MDXRemote
-      {...props}
-      components={{ ...components, ...props.components }}
-    />
+    <MDXRemote {...props} components={{ ...components, ...props.components }} />
   );
 }
