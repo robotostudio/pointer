@@ -127,3 +127,13 @@ Same as commit messages - semantic prefix, concise, backticks for code:
 feat: add `CardGrid` component
 fix: handle null in `getPageByPath`
 ```
+
+### PR Descriptions
+
+Keep descriptions concise with a summary section only. **NEVER include a "Test plan" section unless explicitly requested.**
+
+```markdown
+## Summary
+- Brief bullet points describing the changes
+- Focus on what and why
+```
