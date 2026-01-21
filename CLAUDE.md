@@ -55,19 +55,21 @@ summary: Brief description for listing
 
 ### Available MDX Components
 
-Use directly in MDX files - already registered in `app/components/mdx.tsx`:
+> **IMPORTANT**: When creating or modifying MDX components, always update this section with the component's props and usage examples. This serves as the source of truth for AI agents and developers editing MDX files.
+
+Components are registered in `app/components/mdx.tsx` and can be used directly in MDX files:
+
+#### Hero
 
 ```jsx
-<CardGrid columns={2|3|4}>
-  <FeatureCard title="Title" description="Description" icon="🚀" />
-</CardGrid>
-
-<Button variant="primary|secondary" href="/path">Text</Button>
-
-<Callout type="info|warning|success|error">Content</Callout>
-
-<Testimonial quote="..." author="Name" role="Role" company="Company" />
+<Hero variant="default" />
+<Hero variant="centered" />
+<Hero variant="full-width" />
 ```
+
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| `variant` | `"default" \| "centered" \| "full-width"` | Yes | Layout variant |
 
 ### Key Files
 
@@ -104,7 +106,7 @@ import { ContentService } from "./content-service"
 - Next.js 16 (App Router)
 - React 19
 - TypeScript (strictNullChecks enabled)
-- Tailwind CSS 4 (alpha)
+- Tailwind CSS 4
 - next-mdx-remote for MDX rendering
 - sugar-high for syntax highlighting
 - Vercel Analytics/Speed Insights
