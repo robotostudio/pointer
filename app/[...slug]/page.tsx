@@ -1,10 +1,7 @@
-import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { PageTemplate } from "../components/page-templates";
-import {
-  getPageByPath,
-  getAllPagePaths,
-} from "../lib/content-service";
+import { getAllPagePaths, getPageByPath } from "../lib/content-service";
 
 interface PageProps {
   params: Promise<{
@@ -44,9 +41,7 @@ export async function generateMetadata({
   return {
     title: metadata.title,
     description: metadata.description,
-    authors: metadata.author
-      ? [{ name: metadata.author }]
-      : undefined,
+    authors: metadata.author ? [{ name: metadata.author }] : undefined,
     openGraph: {
       title: metadata.title || "Page",
       description: metadata.description,

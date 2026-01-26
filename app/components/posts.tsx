@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { formatDate, getBlogPosts } from "app/blog/utils";
+import Link from "next/link";
 
 export function BlogPosts() {
   const posts = getBlogPosts(); // Already sorted by date in utils
@@ -8,22 +8,22 @@ export function BlogPosts() {
     <div className="space-y-6">
       {posts.map((post) => (
         <Link
-          key={post.slug}
-          className="block group hover:bg-neutral-50 dark:hover:bg-neutral-900 -mx-4 px-4 py-3 rounded-lg transition"
+          className="group -mx-4 block rounded-lg px-4 py-3 transition hover:bg-neutral-50 dark:hover:bg-neutral-900"
           href={`/blog/${post.slug}`}
+          key={post.slug}
         >
-          <div className="flex flex-col md:flex-row md:items-baseline gap-2">
+          <div className="flex flex-col gap-2 md:flex-row md:items-baseline">
             <time
-              className="text-sm text-neutral-600 dark:text-neutral-400 tabular-nums md:w-32 shrink-0"
+              className="shrink-0 text-neutral-600 text-sm tabular-nums md:w-32 dark:text-neutral-400"
               dateTime={post.metadata.publishedAt}
             >
               {formatDate(post.metadata.publishedAt)}
             </time>
             <div className="flex-1">
-              <h2 className="text-lg font-medium text-neutral-900 dark:text-neutral-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition">
+              <h2 className="font-medium text-lg text-neutral-900 transition group-hover:text-blue-600 dark:text-neutral-100 dark:group-hover:text-blue-400">
                 {post.metadata.title}
               </h2>
-              <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1 line-clamp-2">
+              <p className="mt-1 line-clamp-2 text-neutral-600 text-sm dark:text-neutral-400">
                 {post.metadata.summary}
               </p>
             </div>

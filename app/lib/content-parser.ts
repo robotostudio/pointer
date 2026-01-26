@@ -1,11 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import type {
-  BaseMetadata,
-  ContentItem,
-  PageMetadata,
-  SectionMetadata,
-} from "./content-types";
+import type { BaseMetadata, ContentItem } from "./content-types";
 
 /**
  * Parses frontmatter from MDX content
@@ -120,9 +115,7 @@ export function validateMetadata<T extends BaseMetadata>(
   const missing = requiredFields.filter((field) => !metadata[field]);
 
   if (missing.length > 0) {
-    throw new Error(
-      `Missing required metadata fields: ${missing.join(", ")}`
-    );
+    throw new Error(`Missing required metadata fields: ${missing.join(", ")}`);
   }
 }
 

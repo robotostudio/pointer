@@ -1,5 +1,5 @@
-import { CustomMDX } from "./mdx";
 import type { PageContent, PageMetadata } from "../lib/content-types";
+import { CustomMDX } from "./mdx";
 
 interface PageTemplateProps {
   page: PageContent;
@@ -17,12 +17,12 @@ function PageHeader({ metadata }: PageHeaderProps) {
   return (
     <header className="mb-12">
       {metadata.title && (
-        <h1 className="text-4xl font-bold tracking-tight mb-4">
+        <h1 className="mb-4 font-bold text-4xl tracking-tight">
           {metadata.title}
         </h1>
       )}
       {metadata.description && (
-        <p className="text-xl text-neutral-600 dark:text-neutral-400">
+        <p className="text-neutral-600 text-xl dark:text-neutral-400">
           {metadata.description}
         </p>
       )}
@@ -35,7 +35,7 @@ function PageHeader({ metadata }: PageHeaderProps) {
  */
 export function DefaultPageTemplate({ page }: PageTemplateProps) {
   return (
-    <article className="max-w-4xl mx-auto px-4 py-12">
+    <article className="mx-auto max-w-4xl px-4 py-12">
       <PageHeader metadata={page.metadata} />
 
       <div className="prose prose-neutral dark:prose-invert max-w-none">
@@ -51,7 +51,7 @@ export function DefaultPageTemplate({ page }: PageTemplateProps) {
 export function FullWidthPageTemplate({ page }: PageTemplateProps) {
   return (
     <article className="w-full px-4 py-12">
-      <div className="max-w-4xl mx-auto">
+      <div className="mx-auto max-w-4xl">
         <PageHeader metadata={page.metadata} />
       </div>
 
@@ -67,7 +67,7 @@ export function FullWidthPageTemplate({ page }: PageTemplateProps) {
  */
 export function CenteredPageTemplate({ page }: PageTemplateProps) {
   return (
-    <article className="max-w-2xl mx-auto px-4 py-12">
+    <article className="mx-auto max-w-2xl px-4 py-12">
       <PageHeader metadata={page.metadata} />
 
       <div className="prose prose-neutral dark:prose-invert max-w-none">

@@ -1,8 +1,8 @@
-import { notFound } from "next/navigation";
-import type { Metadata } from "next";
-import { CustomMDX } from "app/components/mdx";
 import { formatDate, getBlogPosts } from "app/blog/utils";
+import { CustomMDX } from "app/components/mdx";
 import { baseUrl } from "app/sitemap";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 interface BlogPostPageProps {
   params: {
@@ -67,10 +67,8 @@ export default function BlogPost({ params }: BlogPostPageProps) {
   }
 
   return (
-    <article className="max-w-4xl mx-auto px-4 py-12">
+    <article className="mx-auto max-w-4xl px-4 py-12">
       <script
-        type="application/ld+json"
-        suppressHydrationWarning
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
@@ -89,13 +87,15 @@ export default function BlogPost({ params }: BlogPostPageProps) {
             },
           }),
         }}
+        suppressHydrationWarning
+        type="application/ld+json"
       />
 
       <header className="mb-12">
-        <h1 className="text-4xl font-bold tracking-tight mb-4">
+        <h1 className="mb-4 font-bold text-4xl tracking-tight">
           {post.metadata.title}
         </h1>
-        <p className="text-sm text-neutral-600 dark:text-neutral-400">
+        <p className="text-neutral-600 text-sm dark:text-neutral-400">
           {formatDate(post.metadata.publishedAt)}
         </p>
       </header>
