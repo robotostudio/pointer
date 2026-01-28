@@ -1,4 +1,4 @@
-import "./global.css";
+import "@/app/global.css";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
@@ -16,13 +16,12 @@ const cursorGothic = localFont({
       weight: "700",
       style: "normal",
     },
-    
   ],
   variable: "--font-cursor-gothic",
   display: "swap",
 });
 
-import { cn } from "@/app/lib/util";
+import { cn } from "@/app/lib/utils";
 import Footer from "./components/footer";
 import { Navbar } from "./components/nav";
 import { baseUrl } from "./sitemap";
@@ -62,10 +61,7 @@ export default function RootLayout({
 }) {
   return (
     <html
-      className={cn(
-        "bg-background text-foreground",
-                cursorGothic.variable
-      )}
+      className={cn("bg-background text-foreground", cursorGothic.variable)}
       lang="en"
     >
       <body className="antialiased">
