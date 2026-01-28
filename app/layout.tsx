@@ -7,6 +7,7 @@ import type { Metadata } from "next";
 import Footer from "./components/footer";
 import { Navbar } from "./components/nav";
 import { baseUrl } from "./sitemap";
+import { cn } from "@/app/lib/util";
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
@@ -36,7 +37,6 @@ export const metadata: Metadata = {
   },
 };
 
-const cx = (...classes) => classes.filter(Boolean).join(" ");
 
 export default function RootLayout({
   children,
@@ -45,15 +45,15 @@ export default function RootLayout({
 }) {
   return (
     <html
-      className={cx(
-        "bg-white text-black dark:bg-black dark:text-white",
+      className={cn(
+        "bg-background text-foreground",
         GeistSans.variable,
         GeistMono.variable
       )}
       lang="en"
     >
-      <body className="mx-4 mt-8 max-w-xl antialiased lg:mx-auto">
-        <main className="mt-6 flex min-w-0 flex-auto flex-col px-2 md:px-0">
+      <body className="antialiased">
+        <main className="flex flex-col min-h-dvh" >
           <Navbar />
           {children}
           <Footer />

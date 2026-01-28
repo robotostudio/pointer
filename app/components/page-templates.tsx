@@ -35,7 +35,7 @@ function PageHeader({ metadata }: PageHeaderProps) {
  */
 export function DefaultPageTemplate({ page }: PageTemplateProps) {
   return (
-    <article className="mx-auto max-w-4xl px-4 py-12">
+    <article className="container">
       <PageHeader metadata={page.metadata} />
 
       <div className="prose prose-neutral dark:prose-invert max-w-none">
@@ -45,51 +45,10 @@ export function DefaultPageTemplate({ page }: PageTemplateProps) {
   );
 }
 
-/**
- * Full-width page template - spans entire viewport
- */
-export function FullWidthPageTemplate({ page }: PageTemplateProps) {
-  return (
-    <article className="w-full px-4 py-12">
-      <div className="mx-auto max-w-4xl">
-        <PageHeader metadata={page.metadata} />
-      </div>
-
-      <div className="prose prose-neutral dark:prose-invert max-w-none">
-        <CustomMDX source={page.content} />
-      </div>
-    </article>
-  );
-}
-
-/**
- * Centered page template - narrow, centered content (good for forms, etc.)
- */
-export function CenteredPageTemplate({ page }: PageTemplateProps) {
-  return (
-    <article className="mx-auto max-w-2xl px-4 py-12">
-      <PageHeader metadata={page.metadata} />
-
-      <div className="prose prose-neutral dark:prose-invert max-w-none">
-        <CustomMDX source={page.content} />
-      </div>
-    </article>
-  );
-}
 
 /**
  * Template selector - chooses the appropriate template based on page metadata
  */
 export function PageTemplate({ page }: PageTemplateProps) {
-  const layout = page.metadata.layout || "default";
-
-  switch (layout) {
-    case "full-width":
-      return <FullWidthPageTemplate page={page} />;
-    case "centered":
-      return <CenteredPageTemplate page={page} />;
-    case "default":
-    default:
-      return <DefaultPageTemplate page={page} />;
-  }
+        return <DefaultPageTemplate page={page} />;
 }
