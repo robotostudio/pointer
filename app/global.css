@@ -114,7 +114,12 @@ img,
 svg,
 video,
 iframe {
-  @apply select-none! } .prose .anchor { @apply absolute invisible no-underline;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+}
+
+.prose .anchor {
+  @apply absolute invisible no-underline;
 
   margin-left: -1em;
   padding-right: 0.5em;
