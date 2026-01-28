@@ -1,7 +1,5 @@
 // Content type definitions for type-safe MDX content management
 
-export type PageLayout = "default" | "full-width" | "centered";
-
 export interface BaseMetadata {
   title: string;
   description?: string;
@@ -13,7 +11,6 @@ export interface BaseMetadata {
 }
 
 export interface PageMetadata extends BaseMetadata {
-  layout?: PageLayout;
   showTitle?: boolean;
 }
 

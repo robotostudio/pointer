@@ -1,9 +1,27 @@
-import "./global.css";
+import "@/app/global.css";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { GeistMono } from "geist/font/mono";
-import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
+import localFont from "next/font/local";
+
+const cursorGothic = localFont({
+  src: [
+    {
+      path: "../fonts/CursorGothic-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../fonts/CursorGothic-Bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-cursor-gothic",
+  display: "swap",
+});
+
+import { cn } from "@/app/lib/utils";
 import Footer from "./components/footer";
 import { Navbar } from "./components/nav";
 import { baseUrl } from "./sitemap";
@@ -36,8 +54,6 @@ export const metadata: Metadata = {
   },
 };
 
-const cx = (...classes) => classes.filter(Boolean).join(" ");
-
 export default function RootLayout({
   children,
 }: {
@@ -45,15 +61,11 @@ export default function RootLayout({
 }) {
   return (
     <html
-      className={cx(
-        "bg-white text-black dark:bg-black dark:text-white",
-        GeistSans.variable,
-        GeistMono.variable
-      )}
+      className={cn("bg-background text-foreground", cursorGothic.variable)}
       lang="en"
     >
-      <body className="mx-4 mt-8 max-w-xl antialiased lg:mx-auto">
-        <main className="mt-6 flex min-w-0 flex-auto flex-col px-2 md:px-0">
+      <body className="antialiased">
+        <main className="flex min-h-dvh flex-col">
           <Navbar />
           {children}
           <Footer />
