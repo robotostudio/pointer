@@ -45,10 +45,9 @@ export function DefaultPageTemplate({ page }: PageTemplateProps) {
   );
 }
 
-
 /**
  * Template selector - chooses the appropriate template based on page metadata
  */
 export function PageTemplate({ page }: PageTemplateProps) {
-        return <DefaultPageTemplate page={page} />;
+  return <DefaultPageTemplate page={page} />;
 }
