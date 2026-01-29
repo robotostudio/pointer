@@ -61,7 +61,10 @@ export default function RootLayout({
 }) {
   return (
     <html
-      className={cn("bg-background text-foreground", cursorGothic.variable)}
+      className={cn(
+        "dark bg-background text-foreground",
+        cursorGothic.variable
+      )}
       lang="en"
     >
       <body className="antialiased">
