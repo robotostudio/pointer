@@ -21,6 +21,12 @@ const cursorGothic = localFont({
   display: "swap",
 });
 
+const jetBrainsMono = localFont({
+  src: "../fonts/JetBrainsMono-Regular.woff2",
+  variable: "--font-jetbrains-mono",
+  display: "swap",
+});
+
 import { cn } from "@/app/lib/utils";
 import Footer from "./components/footer";
 import { Navbar } from "./components/nav";
@@ -63,7 +69,8 @@ export default function RootLayout({
     <html
       className={cn(
         "dark bg-background text-foreground",
-        cursorGothic.variable
+        cursorGothic.variable,
+        jetBrainsMono.variable
       )}
       lang="en"
     >
