@@ -72,18 +72,18 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
       <div className="container">
         <div className="grid gap-12 lg:grid-cols-[200px_1fr]">
           <aside className="lg:sticky lg:top-8 lg:h-fit">
-            <nav className="flex flex-row flex-wrap gap-2 lg:flex-col lg:gap-1">
+            <nav className="flex flex-col gap-1">
               <Link
-                className="rounded-md px-3 py-1.5 text-left text-muted-foreground text-sm transition-colors hover:text-foreground data-[active=true]:text-foreground"
-                data-active={!validCategory}
+                aria-current={validCategory === null ? "page" : undefined}
+                className="rounded-md px-3 py-1.5 text-left text-muted-foreground text-sm transition-colors hover:text-foreground active:text-muted-foreground aria-[current=page]:pointer-events-none aria-[current=page]:text-foreground"
                 href="/blog"
               >
                 All Posts
               </Link>
               {categories.map((cat) => (
                 <Link
-                  className="rounded-md px-3 py-1.5 text-left text-muted-foreground text-sm transition-colors hover:text-foreground data-[active=true]:text-foreground"
-                  data-active={validCategory === cat.id}
+                  aria-current={validCategory === cat.id ? "page" : undefined}
+                  className="rounded-md px-3 py-1.5 text-left text-muted-foreground text-sm transition-colors hover:text-foreground active:text-muted-foreground aria-[current=page]:pointer-events-none aria-[current=page]:text-foreground"
                   href={`/blog?category=${cat.id}`}
                   key={cat.id}
                 >
