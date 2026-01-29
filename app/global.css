@@ -7,6 +7,46 @@
   @apply mx-auto w-full max-w-325 px-4.5 lg:px-5;
 }
 
+@utility type-h1 {
+  @apply text-balance text-4xl font-medium tracking-tight;
+}
+
+@utility type-h2 {
+  @apply text-2xl font-medium tracking-tight;
+}
+
+@utility type-h3 {
+  @apply text-xl font-medium tracking-tight;
+}
+
+@utility type-h4 {
+  @apply text-lg font-medium tracking-tight;
+}
+
+@utility type-body {
+  @apply text-neutral-800 dark:text-neutral-200 leading-relaxed;
+}
+
+@utility type-body-secondary {
+  @apply text-neutral-600 dark:text-neutral-400 leading-relaxed;
+}
+
+@utility type-link {
+  @apply underline transition-all decoration-neutral-400 dark:decoration-neutral-600 underline-offset-2 decoration-[0.1em];
+}
+
+@utility type-blockquote {
+  @apply border-l-4 border-neutral-300 dark:border-neutral-700 pl-4 italic text-neutral-600 dark:text-neutral-400;
+}
+
+@utility type-code {
+  @apply px-1 py-0.5 rounded-lg bg-neutral-100 dark:bg-neutral-800;
+}
+
+@utility type-pre {
+  @apply bg-neutral-50 dark:bg-neutral-900 rounded-lg overflow-x-auto border border-neutral-200 dark:border-neutral-900 py-2 px-3 text-sm;
+}
+
 @theme inline {
   --font-gothic: var(--font-cursor-gothic);
 
@@ -133,7 +173,7 @@ iframe {
 }
 
 .prose a {
-  @apply underline transition-all decoration-neutral-400 dark:decoration-neutral-600 underline-offset-2 decoration-[0.1em];
+  @apply type-link;
 }
 
 .prose .anchor:after {
@@ -146,7 +186,7 @@ iframe {
 }
 
 .prose pre {
-  @apply bg-neutral-50 dark:bg-neutral-900 rounded-lg overflow-x-auto border border-neutral-200 dark:border-neutral-900 py-2 px-3 text-sm;
+  @apply type-pre;
 }
 
 .prose code {
@@ -169,23 +209,23 @@ iframe {
 }
 
 .prose p {
-  @apply my-4 text-neutral-800 dark:text-neutral-200;
+  @apply type-body my-4;
 }
 
 .prose h1 {
-  @apply text-4xl font-medium tracking-tight mt-6 mb-2;
+  @apply type-h1 mt-6 mb-2;
 }
 
 .prose h2 {
-  @apply text-xl font-medium tracking-tight mt-6 mb-2;
+  @apply type-h2 mt-8 mb-3;
 }
 
 .prose h3 {
-  @apply text-xl font-medium tracking-tight mt-6 mb-2;
+  @apply type-h3 mt-6 mb-2;
 }
 
 .prose h4 {
-  @apply text-lg font-medium tracking-tight mt-6 mb-2;
+  @apply type-h4 mt-6 mb-2;
 }
 
 .prose strong {
@@ -198,6 +238,18 @@ iframe {
 
 .prose ol {
   @apply list-decimal pl-6;
+}
+
+.prose li {
+  @apply my-1;
+}
+
+.prose blockquote {
+  @apply type-blockquote my-6;
+}
+
+.prose hr {
+  @apply border-neutral-200 dark:border-neutral-800 my-8;
 }
 
 .prose > :first-child {
