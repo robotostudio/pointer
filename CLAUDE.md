@@ -15,6 +15,8 @@ pnpm build      # Production build
 pnpm start      # Start production server
 ```
 
+> **IMPORTANT**: Never run `pnpm dev` or `pnpm build` commands unless explicitly asked by the user.
+
 ## Architecture
 
 ### Content System
@@ -86,6 +88,22 @@ Components are registered in `app/components/mdx.tsx` and can be used directly i
 All pages pre-rendered at build time via `generateStaticParams()` in route files. SEO handled with `generateMetadata()` per page.
 
 ## Code Style
+
+### Comments
+
+Never add unnecessary comments to the codebase. Code should be self-documenting. Only add comments when explaining complex business logic that isn't obvious from the code itself.
+
+### Tailwind CSS
+
+Use `size-*` utility when height and width are the same value:
+
+```tsx
+// ✅ Good
+<div className="size-4" />
+
+// ❌ Bad
+<div className="h-4 w-4" />
+```
 
 ### Imports
 
