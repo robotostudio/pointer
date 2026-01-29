@@ -87,11 +87,15 @@ function RoundedImage({ alt, ...props }: ImageProps) {
 }
 
 interface CodeProps {
-  children: string;
+  children: React.ReactNode;
 }
 
 function Code({ children, ...props }: CodeProps) {
+  if (typeof children !== "string") {
+    return <code {...props}>{children}</code>;
+  }
   const codeHTML = highlight(children);
+  // biome-ignore lint/security/noDangerouslySetInnerHtml: <Its for Codeblock>
   return <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />;
 }
 
@@ -135,8 +139,18 @@ const components = {
   Callout,
 };
 
-export function CustomMDX(props: MDXRemoteProps) {
+export async function CustomMDX(props: MDXRemoteProps) {
+  const { rehypeShiki } = await import("@/app/lib/rehype-shiki");
+
   return (
-    <MDXRemote {...props} components={{ ...components, ...props.components }} />
+    <MDXRemote
+      {...props}
+      components={{ ...components, ...props.components }}
+      options={{
+        mdxOptions: {
+          rehypePlugins: [[rehypeShiki, { showLineNumbers: true }]],
+        },
+      }}
+    />
   );
 }
