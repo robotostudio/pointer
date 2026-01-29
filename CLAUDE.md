@@ -128,6 +128,7 @@ import { ContentService } from "./content-service"
 - next-mdx-remote for MDX rendering
 - sugar-high for syntax highlighting
 - Vercel Analytics/Speed Insights
+- **pnpm** - Always use `pnpm` instead of `npm` for all commands
 
 ## Git Conventions
 
