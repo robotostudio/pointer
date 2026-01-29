@@ -15,32 +15,25 @@ export function BlogPosts({ posts }: BlogPostsProps) {
     <div className="flex flex-col gap-4">
       {posts.map((post) => (
         <Link
-          className="group relative block overflow-hidden rounded-lg border border-border/50 bg-card/30 transition-all duration-300 hover:border-amber-500/30 hover:bg-card/50"
+          className="group block max-w-162.5 rounded-2xl bg-zinc-900/80 p-4 transition-all duration-300 hover:bg-zinc-900"
           href={`/blog/${post.slug}`}
           key={post.slug}
         >
-          <div className="absolute inset-y-0 left-0 w-1 bg-linear-to-b from-amber-500/80 via-amber-600/60 to-amber-700/40 opacity-60 transition-opacity group-hover:opacity-100" />
+          <h2 className="type-base">{post.metadata.title}</h2>
+          <p className="type-base mt-1 line-clamp-2 text-muted-foreground">
+            {post.metadata.summary}
+          </p>
 
-          <div className="p-5 pl-6">
-            <h2 className="font-medium text-foreground text-lg leading-snug tracking-tight transition-colors group-hover:text-amber-100">
-              {post.metadata.title}
-            </h2>
-
-            <p className="mt-2 line-clamp-2 text-muted-foreground text-sm leading-relaxed">
-              {post.metadata.summary}
-            </p>
-
-            <div className="mt-4 flex items-center gap-2 text-muted-foreground text-xs">
-              {post.metadata.category && (
-                <>
-                  <span className="capitalize">{post.metadata.category}</span>
-                  <span className="text-border">·</span>
-                </>
-              )}
-              <time dateTime={post.metadata.publishedAt}>
-                {formatDate(post.metadata.publishedAt)}
-              </time>
-            </div>
+          <div className="mt-5 flex items-center gap-2 text-muted-foreground text-sm">
+            {post.metadata.category && (
+              <>
+                <span className="capitalize">{post.metadata.category}</span>
+                <span>·</span>
+              </>
+            )}
+            <time dateTime={post.metadata.publishedAt}>
+              {formatDate(post.metadata.publishedAt)}
+            </time>
           </div>
         </Link>
       ))}
