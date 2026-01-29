@@ -168,6 +168,7 @@
 
 @theme inline {
   --font-gothic: var(--font-cursor-gothic);
+  --font-mono: var(--font-jetbrains-mono);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -400,4 +401,61 @@ table {
 
 .title {
   text-wrap: balance;
+}
+
+.shiki-wrapper {
+  @apply my-6 relative;
+}
+
+.shiki-wrapper pre {
+  @apply rounded-lg overflow-x-auto border border-border py-4 px-0 text-sm;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.shiki-wrapper pre::-webkit-scrollbar {
+  display: none;
+}
+
+.shiki-wrapper code {
+  display: block;
+  min-width: 100%;
+  background: transparent !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  font-size: inherit !important;
+}
+
+.shiki-wrapper .line {
+  @apply px-4 inline-block w-full;
+  min-height: 1.5rem;
+}
+
+.shiki-wrapper .line::before {
+  counter-increment: line;
+  content: counter(line);
+  @apply inline-block w-8 mr-4 text-right select-none;
+  color: oklch(0.5 0 0 / 40%);
+  font-variant-numeric: tabular-nums;
+}
+
+.shiki-wrapper pre {
+  counter-reset: line;
+}
+
+.shiki-wrapper::before {
+  content: attr(data-language);
+  @apply absolute top-2 right-3 text-xs uppercase tracking-wider;
+  color: oklch(0.6 0 0 / 50%);
+  font-family: var(--font-gothic);
+}
+
+.prose .shiki-wrapper pre {
+  @apply border border-border;
+}
+
+.prose .shiki-wrapper pre code {
+  background: transparent !important;
+  padding: 0 !important;
 }
