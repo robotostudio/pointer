@@ -43,20 +43,38 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
   const categories = getBlogCategories();
 
   return (
-    <div className="min-h-dvh bg-background">
-      <header className="relative overflow-hidden border-border/50 border-b">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] from-amber-900/20 via-transparent to-transparent" />
-        <div className="container relative py-16 md:py-24">
-          <h1 className="text-5xl text-foreground">Blog</h1>
+    <div className="bg-background">
+      <header className="relative overflow-hidden">
+        <div className="container relative py-12 md:py-32 md:pb-24">
+          <h1 className="text-5xl">
+            {validCategory ? (
+              <Link
+                className="text-muted-foreground transition-opacity hover:opacity-70"
+                href="/blog"
+              >
+                Blog
+              </Link>
+            ) : (
+              <span className="text-foreground">Blog</span>
+            )}
+            {validCategory && (
+              <>
+                <span className="text-muted-foreground"> / </span>
+                <span className="text-foreground">
+                  {CATEGORY_LABELS[validCategory]}
+                </span>
+              </>
+            )}
+          </h1>
         </div>
       </header>
 
-      <div className="container py-12">
+      <div className="container">
         <div className="grid gap-12 lg:grid-cols-[200px_1fr]">
           <aside className="lg:sticky lg:top-8 lg:h-fit">
             <nav className="flex flex-row flex-wrap gap-2 lg:flex-col lg:gap-1">
               <Link
-                className="rounded-md px-3 py-1.5 text-left text-muted-foreground text-sm transition-colors hover:bg-accent hover:text-foreground data-[active=true]:text-foreground"
+                className="rounded-md px-3 py-1.5 text-left text-muted-foreground text-sm transition-colors hover:text-foreground data-[active=true]:text-foreground"
                 data-active={!validCategory}
                 href="/blog"
               >
@@ -64,7 +82,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
               </Link>
               {categories.map((cat) => (
                 <Link
-                  className="rounded-md px-3 py-1.5 text-left text-muted-foreground text-sm transition-colors hover:bg-accent hover:text-foreground data-[active=true]:text-foreground"
+                  className="rounded-md px-3 py-1.5 text-left text-muted-foreground text-sm transition-colors hover:text-foreground data-[active=true]:text-foreground"
                   data-active={validCategory === cat.id}
                   href={`/blog?category=${cat.id}`}
                   key={cat.id}
