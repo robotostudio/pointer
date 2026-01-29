@@ -97,7 +97,7 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
       />
 
       <header className="mb-12">
-        <h1 className="mb-4 font-bold text-4xl tracking-tight">
+        <h1 className="mt-6 mb-2 max-w-lg text-balance font-medium text-4xl tracking-tight">
           {post.metadata.title}
         </h1>
         <p className="text-neutral-600 text-sm dark:text-neutral-400">
