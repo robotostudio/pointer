@@ -1,0 +1,63 @@
+---
+title: How Dropbox Built an AI-Native Development Workflow
+publishedAt: 2026-01-30
+summary: Dropbox achieved 90% AI tool adoption across engineering, now accepting over 1 million lines of AI-generated code monthly.
+category: news
+---
+
+# How Dropbox Built an AI-Native Development Workflow
+
+Dropbox engineers now accept more than one million lines of AI-suggested code each month. This case study explores how they achieved widespread adoption and transformed their software development lifecycle.
+
+<Callout type="success">
+**Key Results**: 550,000 files indexed • 1M+ lines of AI-generated code accepted monthly • 90% adoption across engineering
+</Callout>
+
+## The Catalyst: Speed as Competitive Advantage
+
+Dropbox CTO Ali Dasdan emphasized that "Speed is the only advantage of any company," noting that slow AI adoption posed greater risk than rapid implementation. The team required an AI system capable of reasoning across the entire codebase with widespread adoption to achieve velocity goals.
+
+## Organic Adoption
+
+By 2024, Dropbox engineers began experimenting with AI coding tools informally through Slack and internal documentation. Leadership identified this grassroots activity and created AI champion groups to amplify adoption while removing friction.
+
+<Callout type="info">
+"Signing up for these tools needed to feel like a single click." — Ali Dasdan, CTO
+</Callout>
+
+## Leaders Try the Tools
+
+During April 2025's company-wide hackathon, Dasdan completed his "smart finder" project in approximately two hours using AI coding assistance for the first time. He later shared this experience with fellow CTOs, demonstrating that even a single head of engineering can test these tools and immediately see the impact.
+
+## Indexing the Monorepo
+
+Deployment began by indexing the codebase—scanning files, creating structured chunks, and generating embeddings that capture relationships between code sections. At Dropbox's scale of 550,000 files, this semantic index proved critical for contextual code generation.
+
+<CardGrid columns={2}>
+  <FeatureCard
+    title="550K Files"
+    description="Entire monorepo indexed"
+    icon="📁"
+  />
+  <FeatureCard
+    title="Semantic Search"
+    description="Embeddings capture code relationships"
+    icon="🔍"
+  />
+</CardGrid>
+
+The result: "People can actually understand the existing codebase really well and far, far faster."
+
+## Measurable Impact on Velocity
+
+Over 90% of Dropbox engineers now use AI tools weekly. PR throughput and cycle time reached industry-leading benchmarks. AI assistance now integrates across development phases:
+
+- **Writing** — Initial code generation
+- **Reviewing** — PR analysis and suggestions
+- **Testing** — Test case generation
+- **Documentation** — Automated doc updates
+- **Migrations** — Large-scale refactoring support
+
+## Looking Forward
+
+Dasdan concluded that "We are reexamining and redesigning every part of how we build software in the context of AI." This transformation represents more than tool adoption—it's a fundamental shift in how engineering organizations approach software development.

@@ -1,0 +1,110 @@
+---
+title: Vercel Ship 2025 - Everything Announced for AI Development
+publishedAt: 2026-01-30
+summary: A comprehensive look at Vercel's AI SDK 6, Workflows, AI Gateway, and enterprise features announced at Ship 2025.
+category: news
+---
+
+# Vercel Ship 2025: Everything Announced for AI Development
+
+Vercel's Ship 2025 conference delivered a wave of AI-focused announcements that fundamentally change how developers build and deploy AI applications. Here's a breakdown of the most significant releases.
+
+## AI SDK 6 (Beta)
+
+The AI SDK provides a unified way of calling virtually every AI model without needing to change how your code is written. Version 6 introduces several major features:
+
+<CardGrid columns={2}>
+  <FeatureCard
+    title="Loop Management"
+    description="ToolLoopAgent controls iteration cycles to prevent runaway costs"
+    icon="🔄"
+  />
+  <FeatureCard
+    title="Human-in-the-Loop"
+    description="needsApproval helper gates risky actions"
+    icon="👤"
+  />
+  <FeatureCard
+    title="Structured Outputs"
+    description="Force responses into fixed shapes with streaming"
+    icon="📐"
+  />
+  <FeatureCard
+    title="Reranking"
+    description="Reorder search results for relevance"
+    icon="📊"
+  />
+</CardGrid>
+
+Migration from v5 is straightforward—most existing code functions unchanged in v6.
+
+## Workflows
+
+Workflows handle long-running, reliable AI agents without manually wiring infrastructure. Key capabilities:
+
+- Tool calling and model interaction
+- Webhook and event responses
+- Human approval waiting periods
+- Exact resumption points after interruptions
+- Extended pauses (up to `await sleep("365d")`)
+
+<Callout type="info">
+Workflows eliminate traditional queue complexity, cron job management, and state persistence headaches that previously plagued AI agent development.
+</Callout>
+
+## AI Gateway
+
+A unified interface for working with AI models across providers:
+
+- **Multi-provider support** — Use any model through one API
+- **Consolidated billing** — Single invoice for all providers
+- **Improved rate limiting** — Intelligent request management
+- **Model failover** — Automatic switching when models are unavailable
+- **Complete observability** — Full visibility into AI operations
+- **Zero infrastructure changes** — New models work immediately
+
+## Fluid and Active CPU Pricing
+
+Vercel's compute orchestration enables up to 85% cost savings through optimizations like in-function concurrency, allowing concurrent requests to share underlying resources.
+
+## Vercel Sandboxes
+
+Isolated micro-VM execution environments for potentially unsafe code. These sandboxes prevent production incidents while validating agent-generated fixes—essential for AI agents that write and execute code.
+
+## Marketplace of Agents & AI Tools
+
+One-click installation of pre-configured agents and services streamlines deployment:
+
+- Pre-built agent templates
+- Database integrations
+- Storage solutions
+- Authentication providers
+
+## Enterprise AI Features
+
+### Observability
+
+Step-through prompt inspection and tool execution tracking provides deep visibility into agent behavior.
+
+### BotID
+
+Enhanced bot detection prevents expensive brute-force attacks on AI endpoints.
+
+### Agents in Observability
+
+AI-powered error investigation reduces debugging time by automatically analyzing failures.
+
+### Open-Source Examples
+
+Vercel released reference implementations including:
+
+- **Lead processing agent** — Sales enrichment automation
+- **Data analyst agent** — SQL query generation from natural language
+
+## Key Takeaway
+
+<Callout type="success">
+AI tooling is evolving rapidly with only recent mainstream adoption. This suite of tools removes infrastructure friction, enabling teams to focus on shipping features rather than managing complexity.
+</Callout>
+
+The message is clear: the infrastructure for AI development has matured significantly, and the barrier to building sophisticated AI applications continues to drop.
