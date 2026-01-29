@@ -26,14 +26,19 @@ export interface BlogPost {
 
 const FRONTMATTER_REGEX = /---\s*([\s\S]*?)\s*---/;
 const QUOTE_REGEX = /^['"](.*)['"]$/;
-const VALID_CATEGORIES: BlogCategory[] = [
+export const VALID_CATEGORIES: BlogCategory[] = [
   "product",
   "research",
   "company",
   "news",
 ];
 
-function isValidCategory(value: string): value is BlogCategory {
+export function isValidCategory(
+  value: string | undefined
+): value is BlogCategory {
+  if (!value) {
+    return false;
+  }
   return VALID_CATEGORIES.includes(value as BlogCategory);
 }
 
