@@ -1,13 +1,13 @@
-import { formatDate, getBlogPosts } from "app/blog/utils";
-import { CustomMDX } from "app/components/mdx";
-import { baseUrl } from "app/sitemap";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { formatDate, getBlogPosts } from "@/app/blog/utils";
+import { CustomMDX } from "@/app/components/mdx";
+import { baseUrl } from "@/app/sitemap";
 
 interface BlogPostPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export async function generateStaticParams() {
@@ -18,8 +18,11 @@ export async function generateStaticParams() {
   }));
 }
 
-export function generateMetadata({ params }: BlogPostPageProps): Metadata {
-  const post = getBlogPosts().find((post) => post.slug === params.slug);
+export async function generateMetadata({
+  params,
+}: BlogPostPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const post = getBlogPosts().find((post) => post.slug === slug);
 
   if (!post) {
     return {
@@ -59,8 +62,9 @@ export function generateMetadata({ params }: BlogPostPageProps): Metadata {
   };
 }
 
-export default function BlogPost({ params }: BlogPostPageProps) {
-  const post = getBlogPosts().find((post) => post.slug === params.slug);
+export default async function BlogPost({ params }: BlogPostPageProps) {
+  const { slug } = await params;
+  const post = getBlogPosts().find((post) => post.slug === slug);
 
   if (!post) {
     notFound();
@@ -69,6 +73,7 @@ export default function BlogPost({ params }: BlogPostPageProps) {
   return (
     <article className="mx-auto max-w-4xl px-4 py-12">
       <script
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: <Its safe, sinces its for SEO purposes JSON-LD>
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
