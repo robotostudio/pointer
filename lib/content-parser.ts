@@ -2,6 +2,14 @@ import fs from "node:fs";
 import path from "node:path";
 import type { BaseMetadata, ContentItem } from "./content-types";
 
+const FRONTMATTER_REGEX = /---\s*([\s\S]*?)\s*---/;
+const QUOTES_REGEX = /^['"](.*)['"]$/;
+const MDX_EXT_REGEX = /\.mdx$/;
+const INDEX_SUFFIX_REGEX = /\/index$/;
+const BACKSLASH_REGEX = /\\/g;
+const LEADING_SLASH_REGEX = /^\//;
+const TRAILING_SLASH_REGEX = /\/$/;
+
 /**
  * Parses frontmatter from MDX content
  * @param fileContent - Raw file content
@@ -10,8 +18,7 @@ import type { BaseMetadata, ContentItem } from "./content-types";
 export function parseFrontmatter<T extends BaseMetadata>(
   fileContent: string
 ): { metadata: Partial<T>; content: string } {
-  const frontmatterRegex = /---\s*([\s\S]*?)\s*---/;
-  const match = frontmatterRegex.exec(fileContent);
+  const match = FRONTMATTER_REGEX.exec(fileContent);
 
   if (!match) {
     return {
@@ -21,25 +28,29 @@ export function parseFrontmatter<T extends BaseMetadata>(
   }
 
   const frontMatterBlock = match[1];
-  const content = fileContent.replace(frontmatterRegex, "").trim();
+  const content = fileContent.replace(FRONTMATTER_REGEX, "").trim();
   const frontMatterLines = frontMatterBlock.trim().split("\n");
-  const metadata: Record<string, any> = {};
+  const metadata: Record<string, string | number | boolean | string[]> = {};
 
-  frontMatterLines.forEach((line) => {
+  for (const line of frontMatterLines) {
     const [key, ...valueArr] = line.split(": ");
-    if (!key) return;
+    if (!key) {
+      continue;
+    }
 
-    let value: any = valueArr.join(": ").trim();
+    let value: string | number | boolean | string[] = valueArr
+      .join(": ")
+      .trim();
 
     // Remove quotes
-    value = value.replace(/^['"](.*)['"]$/, "$1");
+    value = value.replace(QUOTES_REGEX, "$1");
 
     // Parse arrays (tags, etc.)
     if (value.startsWith("[") && value.endsWith("]")) {
       value = value
         .slice(1, -1)
         .split(",")
-        .map((v) => v.trim().replace(/^['"](.*)['"]$/, "$1"));
+        .map((v) => v.trim().replace(QUOTES_REGEX, "$1"));
     }
 
     // Convert to number if it's a number
@@ -48,11 +59,15 @@ export function parseFrontmatter<T extends BaseMetadata>(
     }
 
     // Convert to boolean
-    if (value === "true") value = true;
-    if (value === "false") value = false;
+    if (value === "true") {
+      value = true;
+    }
+    if (value === "false") {
+      value = false;
+    }
 
     metadata[key.trim()] = value;
-  });
+  }
 
   return { metadata: metadata as Partial<T>, content };
 }
@@ -126,9 +141,9 @@ export function validateMetadata<T extends BaseMetadata>(
  */
 export function filePathToUrlPath(filePath: string): string {
   return filePath
-    .replace(/\.mdx$/, "")
-    .replace(/\/index$/, "")
-    .replace(/\\/g, "/");
+    .replace(MDX_EXT_REGEX, "")
+    .replace(INDEX_SUFFIX_REGEX, "")
+    .replace(BACKSLASH_REGEX, "/");
 }
 
 /**
@@ -141,7 +156,9 @@ export function urlPathToFilePath(
   urlPath: string,
   contentDir: string
 ): string | null {
-  const normalizedPath = urlPath.replace(/^\//, "").replace(/\/$/, "");
+  const normalizedPath = urlPath
+    .replace(LEADING_SLASH_REGEX, "")
+    .replace(TRAILING_SLASH_REGEX, "");
 
   const possiblePaths = [
     path.join(contentDir, `${normalizedPath}.mdx`),
