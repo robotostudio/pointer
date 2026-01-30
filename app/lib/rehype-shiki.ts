@@ -41,7 +41,7 @@ export function rehypeShiki() {
         }
 
         const meta =
-          (codeElement.data as Record<string, unknown>)?.meta ||
+          (codeElement.data as unknown as Record<string, unknown>)?.meta ||
           codeElement.properties?.metastring ||
           "";
         const lineNumbersMatch = String(meta).match(LINE_NUMBERS_REGEX);

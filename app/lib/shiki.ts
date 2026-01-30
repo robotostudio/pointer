@@ -50,6 +50,8 @@ export async function highlightCode({
   showLineNumbers = true,
   startLineNumber = 1,
 }: HighlightOptions): Promise<string> {
+  "use cache";
+
   const highlighter = await getHighlighter();
 
   const loadedLangs = highlighter.getLoadedLanguages();
