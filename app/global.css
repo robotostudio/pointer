@@ -521,23 +521,23 @@ html:not(.dark) .shiki span {
   display: inline-block !important;
 }
 
-/* Light theme diff colors */
-html:not(.dark) .shiki-wrapper .line.diff.add,
-html:not(.dark) .shiki-wrapper .line.diff.add span {
-  background-color: #d4edda !important;
+/* Diff colors */
+.shiki-wrapper .line.diff.add,
+.shiki-wrapper .line.diff.add span {
+  @apply bg-[#d4edda]! dark:bg-[#0a280a]!;
 }
 
-html:not(.dark) .shiki-wrapper .line.diff.remove,
-html:not(.dark) .shiki-wrapper .line.diff.remove span {
-  background-color: #f8d7da !important;
+.shiki-wrapper .line.diff.remove,
+.shiki-wrapper .line.diff.remove span {
+  @apply bg-[#f8d7da]! dark:bg-[#401114]!;
 }
 
-html:not(.dark) .shiki-wrapper .line.diff.add::before {
+.shiki-wrapper .line.diff.add::before {
   content: "+";
   color: #28a745;
 }
 
-html:not(.dark) .shiki-wrapper .line.diff.remove::before {
+.shiki-wrapper .line.diff.remove::before {
   content: "-";
   color: #dc3545;
 }
@@ -549,15 +549,15 @@ html:not(.dark) .shiki-wrapper .line.highlighted span {
 }
 
 /* Dark theme */
-html.dark .shiki-wrapper .line.diff.add,
+/* html.dark .shiki-wrapper .line.diff.add,
 html.dark .shiki-wrapper .line.diff.add span {
-  background-color: oklch(0.35 0.15 145 / 0.4) !important;
-}
+  background-color: oklab(36.091% -0.09744 0.07474 / 0.4) !important;
+} */
 
-html.dark .shiki-wrapper .line.diff.remove,
+/* html.dark .shiki-wrapper .line.diff.remove,
 html.dark .shiki-wrapper .line.diff.remove span {
   background-color: oklch(0.4 0.15 25 / 0.4) !important;
-}
+} */
 
 html.dark .shiki-wrapper .line.diff.add::before {
   content: "+";
