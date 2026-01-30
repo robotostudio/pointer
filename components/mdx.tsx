@@ -3,6 +3,7 @@ import Link from "next/link";
 import { MDXRemote, type MDXRemoteProps } from "next-mdx-remote/rsc";
 import React from "react";
 import { CodeBlockEnhancer } from "@/components/code-block";
+import { CodeTabsEnhancer } from "@/components/code-tabs";
 import {
   Button,
   Callout,
@@ -140,6 +141,7 @@ export async function CustomMDX(props: MDXRemoteProps) {
         }}
       />
       <CodeBlockEnhancer />
+      <CodeTabsEnhancer />
     </>
   );
 }
