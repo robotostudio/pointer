@@ -1,6 +1,6 @@
 import Link from "next/link";
-import type { BlogPost } from "@/app/blog/utils";
-import { formatDate } from "@/app/blog/utils";
+import type { BlogPost } from "@/app/blog/types";
+import { formatDate } from "@/app/blog/types";
 
 interface BlogPostsProps {
   posts: BlogPost[];
