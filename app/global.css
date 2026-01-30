@@ -511,3 +511,56 @@ html:not(.dark) .shiki span {
   background: transparent !important;
   padding: 0 !important;
 }
+
+/* Diff notation styles */
+.shiki-wrapper .line.diff {
+  @apply w-full inline-block;
+}
+
+.shiki-wrapper .line.diff.add {
+  background-color: oklch(0.45 0.15 145 / 0.2);
+}
+
+.shiki-wrapper .line.diff.remove {
+  background-color: oklch(0.55 0.2 25 / 0.2);
+}
+
+.shiki-wrapper .line.diff::before {
+  display: inline-block !important;
+}
+
+.shiki-wrapper .line.diff.add::before {
+  content: "+";
+  color: oklch(0.7 0.2 145);
+}
+
+.shiki-wrapper .line.diff.remove::before {
+  content: "-";
+  color: oklch(0.7 0.2 25);
+}
+
+/* Line highlight styles */
+.shiki-wrapper .line.highlighted {
+  background-color: oklch(0.6 0.1 250 / 0.15);
+}
+
+/* Light theme diff colors */
+html:not(.dark) .shiki-wrapper .line.diff.add {
+  background-color: oklch(0.85 0.15 145 / 0.3);
+}
+
+html:not(.dark) .shiki-wrapper .line.diff.remove {
+  background-color: oklch(0.85 0.15 25 / 0.3);
+}
+
+html:not(.dark) .shiki-wrapper .line.diff.add::before {
+  color: oklch(0.45 0.2 145);
+}
+
+html:not(.dark) .shiki-wrapper .line.diff.remove::before {
+  color: oklch(0.5 0.2 25);
+}
+
+html:not(.dark) .shiki-wrapper .line.highlighted {
+  background-color: oklch(0.7 0.1 250 / 0.2);
+}

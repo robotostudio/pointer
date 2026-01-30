@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/complexity/noExcessiveCognitiveComplexity: <Its a Shiki Parser File, it'll these nested complexity> */
 import type { Element, Root, Text } from "hast";
 import { fromHtml } from "hast-util-from-html";
 import { visit } from "unist-util-visit";

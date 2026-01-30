@@ -1,5 +1,9 @@
 import { transformerColorizedBrackets } from "@shikijs/colorized-brackets";
-import type { BundledLanguage, Highlighter } from "shiki";
+import {
+  transformerNotationDiff,
+  transformerNotationHighlight,
+} from "@shikijs/transformers";
+import type { BundledLanguage, Highlighter, ShikiTransformer } from "shiki";
 import { createHighlighter } from "shiki";
 
 let highlighterPromise: Promise<Highlighter> | null = null;
@@ -52,6 +56,27 @@ export async function highlightCode({
     ? lang
     : "plaintext";
 
+  const transformers: ShikiTransformer[] = [
+    transformerColorizedBrackets(),
+    transformerNotationDiff(),
+    transformerNotationHighlight(),
+  ];
+
+  if (showLineNumbers) {
+    transformers.push({
+      name: "line-numbers",
+      line(node, line) {
+        const displayLine = line + (startLineNumber - 1);
+        node.properties["data-line"] = displayLine;
+        if (node.properties.class) {
+          node.properties.class += " line";
+        } else {
+          node.properties.class = "line";
+        }
+      },
+    });
+  }
+
   const html = highlighter.codeToHtml(code, {
     lang: language,
     themes: {
@@ -59,23 +84,7 @@ export async function highlightCode({
       dark: "vesper",
     },
     defaultColor: "dark",
-    transformers: showLineNumbers
-      ? [
-          transformerColorizedBrackets(),
-          {
-            name: "line-numbers",
-            line(node, line) {
-              const displayLine = line + (startLineNumber - 1);
-              node.properties["data-line"] = displayLine;
-              if (node.properties.class) {
-                node.properties.class += " line";
-              } else {
-                node.properties.class = "line";
-              }
-            },
-          },
-        ]
-      : [transformerColorizedBrackets()],
+    transformers,
   });
 
   return html;

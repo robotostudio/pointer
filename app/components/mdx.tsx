@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { MDXRemote, type MDXRemoteProps } from "next-mdx-remote/rsc";
 import React from "react";
-import { highlight } from "sugar-high";
 import { CodeBlockEnhancer } from "@/app/components/code-block";
 import {
   Button,
@@ -87,19 +86,6 @@ function RoundedImage({ alt, ...props }: ImageProps) {
   return <Image alt={alt} className="rounded-lg" {...props} />;
 }
 
-interface CodeProps {
-  children: React.ReactNode;
-}
-
-function Code({ children, ...props }: CodeProps) {
-  if (typeof children !== "string") {
-    return <code {...props}>{children}</code>;
-  }
-  const codeHTML = highlight(children);
-  // biome-ignore lint/security/noDangerouslySetInnerHtml: <Its for Codeblock>
-  return <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />;
-}
-
 function slugify(str: string): string {
   return str
     .toString()
@@ -130,7 +116,6 @@ const components = {
   h6: createHeading(6),
   Image: RoundedImage,
   a: CustomLink,
-  code: Code,
   Table,
   FeatureCard,
   Button,

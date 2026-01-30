@@ -8,18 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@tailwindcss/postcss':
-        specifier: ^4.1.7
-        version: 4.1.18
-      '@types/node':
-        specifier: 20.11.17
-        version: 20.11.17
-      '@types/react':
-        specifier: 18.2.55
-        version: 18.2.55
-      '@types/react-dom':
-        specifier: 18.2.19
-        version: 18.2.19
       '@vercel/analytics':
         specifier: ^1.1.3
         version: 1.1.3
@@ -32,9 +20,6 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
-      geist:
-        specifier: 1.2.2
-        version: 1.2.2(next@16.0.10(react-dom@19.2.3(react@19.2.3))(react@19.2.3))
       hast:
         specifier: ^1.0.0
         version: 1.0.0
@@ -62,9 +47,6 @@ importers:
       shiki:
         specifier: ^3.21.0
         version: 3.21.0
-      sugar-high:
-        specifier: ^0.6.0
-        version: 0.6.0
       tailwind-merge:
         specifier: ^3.4.0
         version: 3.4.0
@@ -87,6 +69,21 @@ importers:
       '@shikijs/colorized-brackets':
         specifier: ^3.21.0
         version: 3.21.0
+      '@shikijs/transformers':
+        specifier: ^3.21.0
+        version: 3.21.0
+      '@tailwindcss/postcss':
+        specifier: ^4.1.18
+        version: 4.1.18
+      '@types/node':
+        specifier: 20.11.17
+        version: 20.11.17
+      '@types/react':
+        specifier: 18.2.55
+        version: 18.2.55
+      '@types/react-dom':
+        specifier: 18.2.19
+        version: 18.2.19
       ultracite:
         specifier: 7.0.12
         version: 7.0.12(typescript@5.3.3)
@@ -397,6 +394,9 @@ packages:
   '@shikijs/themes@3.21.0':
     resolution: {integrity: sha512-BAE4cr9EDiZyYzwIHEk7JTBJ9CzlPuM4PchfcA5ao1dWXb25nv6hYsoDiBq2aZK9E3dlt3WB78uI96UESD+8Mw==}
 
+  '@shikijs/transformers@3.21.0':
+    resolution: {integrity: sha512-CZwvCWWIiRRiFk9/JKzdEooakAP8mQDtBOQ1TKiCaS2E1bYtyBCOkUzS8akO34/7ufICQ29oeSfkb3tT5KtrhA==}
+
   '@shikijs/types@3.21.0':
     resolution: {integrity: sha512-zGrWOxZ0/+0ovPY7PvBU2gIS9tmhSUUt30jAcNV0Bq0gb2S98gwfjIs1vxlmH5zM7/4YxLamT6ChlqqAJmPPjA==}
 
@@ -702,11 +702,6 @@ packages:
 
   extend@3.0.2:
     resolution: {integrity: sha512-fjquC59cD7CyW6urNXK0FBufkZcoiGG80wTuPujX590cB5Ttln20E2UB4S/WARVqhXffZl2LNgS+gQdPIIim/g==}
-
-  geist@1.2.2:
-    resolution: {integrity: sha512-uRDrxhvdnPwWJmh+K5+/5LXSKwvJzaYCl9tDXgiBi4hj7hB4K7+n/WLcvJMFs5btvyn0r9OSwCd1s6CmqAsxEw==}
-    peerDependencies:
-      next: '>=13.2.0 <15'
 
   glob@13.0.0:
     resolution: {integrity: sha512-tvZgpqk6fz4BaNZ66ZsRaZnbHvP/jG3uKJvAZOwEVUL4RTA5nJeeLYfyN9/VA8NX/V3IBG+hkeuGpKjvELkVhA==}
@@ -1198,9 +1193,6 @@ packages:
       babel-plugin-macros:
         optional: true
 
-  sugar-high@0.6.0:
-    resolution: {integrity: sha512-SBE1FI2NTVgLDo9E9yLO2rBT56HZAi3ONGeoTqJsHIN9cEAATrrKjZfIrSc5H5AoZ/mQd8OI7j27rvVXT9IxoA==}
-
   tailwind-merge@3.4.0:
     resolution: {integrity: sha512-uSaO4gnW+b3Y2aWoWfFpX62vn2sR3skfhbjsEnaBI81WD1wBLlHZe5sWf0AqjksNdYTbGBEd0UasQMT3SNV15g==}
 
@@ -1607,6 +1599,11 @@ snapshots:
     dependencies:
       '@shikijs/types': 3.21.0
 
+  '@shikijs/transformers@3.21.0':
+    dependencies:
+      '@shikijs/core': 3.21.0
+      '@shikijs/types': 3.21.0
+
   '@shikijs/types@3.21.0':
     dependencies:
       '@shikijs/vscode-textmate': 10.0.2
@@ -1855,10 +1852,6 @@ snapshots:
       '@types/estree': 1.0.5
 
   extend@3.0.2: {}
-
-  geist@1.2.2(next@16.0.10(react-dom@19.2.3(react@19.2.3))(react@19.2.3)):
-    dependencies:
-      next: 16.0.10(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
 
   glob@13.0.0:
     dependencies:
@@ -2606,8 +2599,6 @@ snapshots:
     dependencies:
       client-only: 0.0.1
       react: 19.2.3
-
-  sugar-high@0.6.0: {}
 
   tailwind-merge@3.4.0: {}
 
