@@ -17,6 +17,10 @@ pnpm start      # Start production server
 
 > **IMPORTANT**: Never run `pnpm dev` or `pnpm build` commands unless explicitly asked by the user.
 
+### Linting & Type Checking
+
+> **IMPORTANT**: Never run linting or type checking on the entire project unless explicitly asked. Only run these checks on modified files/changes.
+
 ## Architecture
 
 ### Content System
