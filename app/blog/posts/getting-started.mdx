@@ -68,8 +68,18 @@ pnpm dev
 yarn dev
 ```
 
+```mdx filename="app/blog/posts/my-post.mdx"
+---
+title: My Blog Post
+publishedAt: 2026-01-02
+summary: A brief description
+---
 
-```ts filename="app/lib/rehype-shiki.ts" lineNumbers
+# Your content here
+```
+
+
+```ts tab="Rehype Shiki" filename="app/lib/rehype-shiki.ts" lineNumbers
 import type { Element, Root, Text } from "hast";
 import { fromHtml } from "hast-util-from-html";
 import { visit } from "unist-util-visit";
@@ -285,7 +295,7 @@ function getTextContent(node: Element | Text): string {
 
 
 
-```mdx filename="content/pages/example.mdx" lineNumbers
+```mdx tab="Markdown Test" filename="content/pages/example.mdx" lineNumbers
 # Regular Markdown heading
 
 And you can use components:
