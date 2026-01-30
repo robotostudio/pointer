@@ -508,8 +508,7 @@ html:not(.dark) .shiki span {
 }
 
 .prose .shiki-wrapper pre code {
-  background: transparent !important;
-  padding: 0 !important;
+  @apply selection:bg-primary/10 selection:text-(--shiki-light) dark:selection:text-current bg-transparent! p-0!;
 }
 
 /* Diff notation styles */
