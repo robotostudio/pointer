@@ -613,10 +613,6 @@ html.dark .shiki-wrapper .line.highlighted span {
   font-family: var(--font-mono), ui-monospace, monospace;
 }
 
-.code-tabs-list-placeholder {
-  @apply min-h-[38px];
-}
-
 .code-tab {
   @apply px-4 py-2 text-sm font-medium;
   @apply text-muted-foreground;
@@ -650,12 +646,4 @@ html.dark .shiki-wrapper .line.highlighted span {
 
 .code-tabs-container .shiki-wrapper.has-header .code-block-header {
   @apply rounded-t-none;
-}
-
-.code-tabs-container:not([data-mounted]) .code-tab-panel {
-  @apply block mb-4;
-}
-
-.code-tabs-container:not([data-mounted]) .code-tabs-list-placeholder {
-  @apply hidden;
 }
