@@ -543,9 +543,12 @@ html:not(.dark) .shiki span {
 }
 
 /* Line highlight styles - light theme */
-html:not(.dark) .shiki-wrapper .line.highlighted,
-html:not(.dark) .shiki-wrapper .line.highlighted span {
-  background-color: #fff3cd !important;
+
+.shiki-wrapper .line.highlighted,
+.shiki-wrapper .line.highlighted span {
+  @apply bg-[#ecf4fe]! dark:bg-[#151f44]!;
+  /* dark:bg-[#102130] */
+  /* background-color: #fff3cd !important; */
 }
 
 /* Dark theme */
@@ -569,10 +572,10 @@ html.dark .shiki-wrapper .line.diff.remove::before {
   color: oklch(0.7 0.2 25);
 }
 
-html.dark .shiki-wrapper .line.highlighted,
+/* html.dark .shiki-wrapper .line.highlighted,
 html.dark .shiki-wrapper .line.highlighted span {
   background-color: oklch(0.4 0.1 250 / 0.3) !important;
-}
+} */
 
 /* Focus mode styles */
 .shiki-wrapper .has-focused .line:not(.focused) {
