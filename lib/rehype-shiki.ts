@@ -2,8 +2,8 @@
 import type { Element, Root, Text } from "hast";
 import { fromHtml } from "hast-util-from-html";
 import { visit } from "unist-util-visit";
-import { COPY_ICON_SVG, getFileIconSvg } from "@/app/lib/file-icons";
-import { highlightCode } from "@/app/lib/shiki";
+import { COPY_ICON_SVG, getFileIconSvg } from "@/lib/file-icons";
+import { highlightCode } from "@/lib/shiki";
 
 const LINE_NUMBERS_REGEX = /\blineNumbers(?:=(\d+))?\b/;
 const FILENAME_REGEX = /\bfilename=["']([^"']+)["']/;

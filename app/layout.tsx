@@ -3,10 +3,10 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { cn } from "@/app/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
-import Footer from "./components/footer";
-import { Navbar } from "./components/nav";
+import { cn } from "@/lib/utils";
+import Footer from "../components/footer";
+import { Navbar } from "../components/nav";
 import { baseUrl } from "./sitemap";
 
 const cursorGothic = localFont({

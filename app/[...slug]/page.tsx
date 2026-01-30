@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { PageTemplate } from "../components/page-templates";
-import { getAllPagePaths, getPageByPath } from "../lib/content-service";
+import { PageTemplate } from "../../components/page-templates";
+import { getAllPagePaths, getPageByPath } from "../../lib/content-service";
 
 interface PageProps {
   params: Promise<{

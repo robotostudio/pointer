@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { formatDate } from "@/app/blog/types";
 import { getBlogPosts } from "@/app/blog/utils";
-import { CustomMDX } from "@/app/components/mdx";
 import { baseUrl } from "@/app/sitemap";
+import { CustomMDX } from "@/components/mdx";
 
 interface BlogPostPageProps {
   params: Promise<{

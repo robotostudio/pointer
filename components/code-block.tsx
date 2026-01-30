@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { CHECK_ICON_SVG, COPY_ICON_SVG } from "@/app/lib/file-icons";
+import { CHECK_ICON_SVG, COPY_ICON_SVG } from "@/lib/file-icons";
 
 export function CodeBlockEnhancer() {
   useEffect(() => {

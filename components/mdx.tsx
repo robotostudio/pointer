@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { MDXRemote, type MDXRemoteProps } from "next-mdx-remote/rsc";
 import React from "react";
-import { CodeBlockEnhancer } from "@/app/components/code-block";
+import { CodeBlockEnhancer } from "@/components/code-block";
 import {
   Button,
   Callout,
@@ -126,7 +126,7 @@ const components = {
 };
 
 export async function CustomMDX(props: MDXRemoteProps) {
-  const { rehypeShiki } = await import("@/app/lib/rehype-shiki");
+  const { rehypeShiki } = await import("@/lib/rehype-shiki");
 
   return (
     <>

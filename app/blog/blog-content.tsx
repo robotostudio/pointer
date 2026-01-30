@@ -7,7 +7,7 @@ import {
   CATEGORY_LABELS,
   isValidCategory,
 } from "@/app/blog/types";
-import { BlogPosts } from "@/app/components/posts";
+import { BlogPosts } from "@/components/posts";
 
 interface BlogContentProps {
   allPosts: BlogPost[];
