@@ -60,10 +60,10 @@ export async function highlightCode({
     : "plaintext";
 
   const transformers: ShikiTransformer[] = [
-    transformerColorizedBrackets(),
     transformerNotationDiff(),
     transformerNotationFocus(),
     transformerNotationHighlight(),
+    transformerColorizedBrackets(),
   ];
 
   if (showLineNumbers) {
@@ -87,7 +87,8 @@ export async function highlightCode({
       light: "github-light",
       dark: "vesper",
     },
-    defaultColor: "dark",
+    defaultColor: false,
+    cssVariablePrefix: "--shiki-",
     transformers,
   });
 
