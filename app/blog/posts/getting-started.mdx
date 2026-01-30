@@ -41,7 +41,7 @@ import { highlightCode } from "@/app/lib/shiki";
 const LINE_NUMBERS_REGEX = /\blineNumbers(?:=(\d+))?\b/; // [!code highlight]
 const FILENAME_REGEX = /\bfilename=["']([^"']+)["']/;
 
-export function rehypeShiki() {
+export function rehypeShiki() { 
   return async function transformer(tree: Root) {
     const codeBlocks: Array<{
       node: Element;

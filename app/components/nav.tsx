@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ThemeToggle } from "@/app/components/theme-toggle";
 
 const navItems = {
   "/": {
@@ -14,7 +15,7 @@ export function Navbar() {
     <aside className="container">
       <div className="lg:sticky lg:top-20">
         <nav
-          className="fade relative flex flex-row items-start md:relative"
+          className="fade relative flex flex-row items-center justify-between md:relative"
           id="nav"
         >
           <div className="flex flex-row gap-2">
@@ -30,6 +31,7 @@ export function Navbar() {
               );
             })}
           </div>
+          <ThemeToggle />
         </nav>
       </div>
     </aside>

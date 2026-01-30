@@ -3,6 +3,11 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { cn } from "@/app/lib/utils";
+import { ThemeProvider } from "@/components/theme-provider";
+import Footer from "./components/footer";
+import { Navbar } from "./components/nav";
+import { baseUrl } from "./sitemap";
 
 const cursorGothic = localFont({
   src: [
@@ -26,11 +31,6 @@ const jetBrainsMono = localFont({
   variable: "--font-jetbrains-mono",
   display: "swap",
 });
-
-import { cn } from "@/app/lib/utils";
-import Footer from "./components/footer";
-import { Navbar } from "./components/nav";
-import { baseUrl } from "./sitemap";
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
@@ -68,20 +68,28 @@ export default function RootLayout({
   return (
     <html
       className={cn(
-        "dark bg-background text-foreground",
+        "bg-background text-foreground",
         cursorGothic.variable,
         jetBrainsMono.variable
       )}
       lang="en"
+      suppressHydrationWarning
     >
       <body className="antialiased">
-        <main className="flex min-h-dvh flex-col">
-          <Navbar />
-          {children}
-          <Footer />
-          <Analytics />
-          <SpeedInsights />
-        </main>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          disableTransitionOnChange
+          enableSystem
+        >
+          <main className="flex min-h-dvh flex-col">
+            <Navbar />
+            {children}
+            <Footer />
+            <Analytics />
+            <SpeedInsights />
+          </main>
+        </ThemeProvider>
       </body>
     </html>
   );

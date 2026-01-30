@@ -1,6 +1,7 @@
 import { transformerColorizedBrackets } from "@shikijs/colorized-brackets";
 import {
   transformerNotationDiff,
+  transformerNotationFocus,
   transformerNotationHighlight,
 } from "@shikijs/transformers";
 import type { BundledLanguage, Highlighter, ShikiTransformer } from "shiki";
@@ -59,6 +60,7 @@ export async function highlightCode({
   const transformers: ShikiTransformer[] = [
     transformerColorizedBrackets(),
     transformerNotationDiff(),
+    transformerNotationFocus(),
     transformerNotationHighlight(),
   ];
 

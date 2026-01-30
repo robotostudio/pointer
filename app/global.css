@@ -517,50 +517,73 @@ html:not(.dark) .shiki span {
   @apply w-full inline-block;
 }
 
-.shiki-wrapper .line.diff.add {
-  background-color: oklch(0.45 0.15 145 / 0.2);
-}
-
-.shiki-wrapper .line.diff.remove {
-  background-color: oklch(0.55 0.2 25 / 0.2);
-}
-
 .shiki-wrapper .line.diff::before {
   display: inline-block !important;
 }
 
-.shiki-wrapper .line.diff.add::before {
+/* Light theme diff colors */
+html:not(.dark) .shiki-wrapper .line.diff.add,
+html:not(.dark) .shiki-wrapper .line.diff.add span {
+  background-color: #d4edda !important;
+}
+
+html:not(.dark) .shiki-wrapper .line.diff.remove,
+html:not(.dark) .shiki-wrapper .line.diff.remove span {
+  background-color: #f8d7da !important;
+}
+
+html:not(.dark) .shiki-wrapper .line.diff.add::before {
+  content: "+";
+  color: #28a745;
+}
+
+html:not(.dark) .shiki-wrapper .line.diff.remove::before {
+  content: "-";
+  color: #dc3545;
+}
+
+/* Line highlight styles - light theme */
+html:not(.dark) .shiki-wrapper .line.highlighted,
+html:not(.dark) .shiki-wrapper .line.highlighted span {
+  background-color: #fff3cd !important;
+}
+
+/* Dark theme */
+html.dark .shiki-wrapper .line.diff.add,
+html.dark .shiki-wrapper .line.diff.add span {
+  background-color: oklch(0.35 0.15 145 / 0.4) !important;
+}
+
+html.dark .shiki-wrapper .line.diff.remove,
+html.dark .shiki-wrapper .line.diff.remove span {
+  background-color: oklch(0.4 0.15 25 / 0.4) !important;
+}
+
+html.dark .shiki-wrapper .line.diff.add::before {
   content: "+";
   color: oklch(0.7 0.2 145);
 }
 
-.shiki-wrapper .line.diff.remove::before {
+html.dark .shiki-wrapper .line.diff.remove::before {
   content: "-";
   color: oklch(0.7 0.2 25);
 }
 
-/* Line highlight styles */
-.shiki-wrapper .line.highlighted {
-  background-color: oklch(0.6 0.1 250 / 0.15);
+html.dark .shiki-wrapper .line.highlighted,
+html.dark .shiki-wrapper .line.highlighted span {
+  background-color: oklch(0.4 0.1 250 / 0.3) !important;
 }
 
-/* Light theme diff colors */
-html:not(.dark) .shiki-wrapper .line.diff.add {
-  background-color: oklch(0.85 0.15 145 / 0.3);
+/* Focus mode styles */
+.shiki-wrapper .has-focused .line:not(.focused) {
+  opacity: 0.4;
+  filter: blur(0.8px);
+  transition:
+    opacity 0.2s,
+    filter 0.2s;
 }
 
-html:not(.dark) .shiki-wrapper .line.diff.remove {
-  background-color: oklch(0.85 0.15 25 / 0.3);
-}
-
-html:not(.dark) .shiki-wrapper .line.diff.add::before {
-  color: oklch(0.45 0.2 145);
-}
-
-html:not(.dark) .shiki-wrapper .line.diff.remove::before {
-  color: oklch(0.5 0.2 25);
-}
-
-html:not(.dark) .shiki-wrapper .line.highlighted {
-  background-color: oklch(0.7 0.1 250 / 0.2);
+.shiki-wrapper .has-focused:hover .line:not(.focused) {
+  opacity: 0.7;
+  filter: blur(0.4px);
 }
