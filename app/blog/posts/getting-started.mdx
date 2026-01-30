@@ -16,18 +16,23 @@ MDX is Markdown with the power of JSX. You can write regular Markdown and use Re
 ```tsx filename="app/components/cards.tsx" lineNumbers
 import { HomeIcon } from 'lucide-react';
 
-<Cards>
+export default function Test() {
+
+ return (
+ <Cards> 
   <Card
     href="https://nextjs.org/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating"
     title="Fetching, Caching, and Revalidating"
   >
-    Learn more about caching in Next.js
+    Learn more about caching in Next.js 
   </Card>
   <Card title="href is optional">Learn more about `fetch` in Next.js.</Card>
   <Card icon={<HomeIcon />} href="/" title="Home">
     You can include icons too.
   </Card>
 </Cards>
+ )
+}
 ```
 
 
@@ -41,7 +46,7 @@ import { highlightCode } from "@/app/lib/shiki";
 const LINE_NUMBERS_REGEX = /\blineNumbers(?:=(\d+))?\b/; // [!code highlight]
 const FILENAME_REGEX = /\bfilename=["']([^"']+)["']/;
 
-export function rehypeShiki() { 
+export function rehypeShiki() { // [!code focus:3]
   return async function transformer(tree: Root) {
     const codeBlocks: Array<{
       node: Element;
