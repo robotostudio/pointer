@@ -1,7 +1,7 @@
 import type { Element, Root, Text } from "hast";
 import { fromHtml } from "hast-util-from-html";
 import { visit } from "unist-util-visit";
-import { getFileIconSvg } from "./file-icons";
+import { COPY_ICON_SVG, getFileIconSvg } from "./file-icons";
 import { highlightCode } from "./shiki";
 
 const LINE_NUMBERS_REGEX = /\blineNumbers(?:=(\d+))?\b/;
@@ -129,11 +129,15 @@ export function rehypeShiki() {
                 },
                 {
                   type: "element",
-                  tagName: "div",
+                  tagName: "button",
                   properties: {
-                    className: ["copy-button-container"],
+                    type: "button",
+                    className: ["copy-button"],
+                    "aria-label": "Copy code",
                   },
-                  children: [],
+                  children: fromHtml(COPY_ICON_SVG, {
+                    fragment: true,
+                  }).children as Element[],
                 },
               ],
             };
@@ -142,6 +146,31 @@ export function rehypeShiki() {
 
           if (preElement) {
             wrapperChildren.push(preElement);
+          }
+
+          if (!filename) {
+            const copyButtonContainer: Element = {
+              type: "element",
+              tagName: "div",
+              properties: {
+                className: ["copy-button-container"],
+              },
+              children: [
+                {
+                  type: "element",
+                  tagName: "button",
+                  properties: {
+                    type: "button",
+                    className: ["copy-button"],
+                    "aria-label": "Copy code",
+                  },
+                  children: fromHtml(COPY_ICON_SVG, {
+                    fragment: true,
+                  }).children as Element[],
+                },
+              ],
+            };
+            wrapperChildren.push(copyButtonContainer);
           }
 
           const wrapper: Element = {

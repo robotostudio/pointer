@@ -1,64 +1,15 @@
 "use client";
 
-import { Check, Copy } from "lucide-react";
-import { useEffect, useState } from "react";
-import { createPortal } from "react-dom";
-
-function CopyButton({ code }: { code: string }) {
-  const [copied, setCopied] = useState(false);
-
-  async function handleCopy() {
-    try {
-      await navigator.clipboard.writeText(code);
-    } catch {
-      const textarea = document.createElement("textarea");
-      textarea.value = code;
-      textarea.style.position = "absolute";
-      textarea.style.left = "-9999px";
-      document.body.appendChild(textarea);
-      textarea.select();
-      document.execCommand("copy");
-      document.body.removeChild(textarea);
-    }
-    setCopied(true);
-  }
-
-  useEffect(() => {
-    if (copied) {
-      const timeout = setTimeout(() => setCopied(false), 2000);
-      return () => clearTimeout(timeout);
-    }
-  }, [copied]);
-
-  return (
-    <button
-      aria-label={copied ? "Copied" : "Copy code"}
-      className="copy-button"
-      data-copied={copied}
-      onClick={handleCopy}
-      type="button"
-    >
-      {copied ? <Check size={14} /> : <Copy size={14} />}
-    </button>
-  );
-}
-
-interface CodeBlockPortal {
-  container: HTMLElement;
-  code: string;
-}
+import { useEffect } from "react";
+import { CHECK_ICON_SVG, COPY_ICON_SVG } from "@/app/lib/file-icons";
 
 export function CodeBlockEnhancer() {
-  const [portals, setPortals] = useState<CodeBlockPortal[]>([]);
-
   useEffect(() => {
     const wrappers = Array.from(
       document.querySelectorAll<HTMLElement>(
         ".shiki-wrapper:not([data-enhanced])"
       )
     );
-
-    const newPortals: CodeBlockPortal[] = [];
 
     for (const wrapper of wrappers) {
       wrapper.setAttribute("data-enhanced", "true");
@@ -69,39 +20,37 @@ export function CodeBlockEnhancer() {
       }
 
       const code = decodeURIComponent(encodedCode);
-      const hasHeader = wrapper.classList.contains("has-header");
+      const copyButton =
+        wrapper.querySelector<HTMLButtonElement>(".copy-button");
 
-      let container: HTMLElement | null = null;
+      if (copyButton) {
+        copyButton.addEventListener("click", async () => {
+          try {
+            await navigator.clipboard.writeText(code);
+          } catch {
+            const textarea = document.createElement("textarea");
+            textarea.value = code;
+            textarea.style.position = "absolute";
+            textarea.style.left = "-9999px";
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textarea);
+          }
 
-      if (hasHeader) {
-        container = wrapper.querySelector(
-          ".code-block-header .copy-button-container"
-        );
-      } else {
-        container = document.createElement("div");
-        container.className = "copy-button-container";
-        wrapper.appendChild(container);
+          copyButton.setAttribute("data-copied", "true");
+          copyButton.setAttribute("aria-label", "Copied");
+          copyButton.innerHTML = CHECK_ICON_SVG;
+
+          setTimeout(() => {
+            copyButton.setAttribute("data-copied", "false");
+            copyButton.setAttribute("aria-label", "Copy code");
+            copyButton.innerHTML = COPY_ICON_SVG;
+          }, 2000);
+        });
       }
-
-      if (container) {
-        newPortals.push({ container, code });
-      }
-    }
-
-    if (newPortals.length > 0) {
-      setPortals((prev) => [...prev, ...newPortals]);
     }
   }, []);
 
-  return (
-    <>
-      {portals.map((portal, index) =>
-        createPortal(
-          <CopyButton code={portal.code} />,
-          portal.container,
-          `code-block-${index}`
-        )
-      )}
-    </>
-  );
+  return null;
 }
