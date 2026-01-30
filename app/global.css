@@ -278,6 +278,15 @@ iframe {
   user-select: none !important;
 }
 
+pre {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+pre::-webkit-scrollbar {
+  display: none;
+}
+
 .prose .anchor {
   @apply absolute invisible no-underline;
 
@@ -376,15 +385,6 @@ iframe {
   margin-bottom: 1.25em !important;
 }
 
-pre {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-pre::-webkit-scrollbar {
-  display: none;
-}
-
 input[type="text"],
 input[type="email"] {
   -webkit-appearance: none;
@@ -408,14 +408,9 @@ table {
 }
 
 .shiki-wrapper pre {
-  @apply rounded-lg overflow-x-auto border border-border py-4 px-0 text-sm;
+  @apply rounded-lg overflow-auto border border-border py-3 px-0 text-sm;
   font-family: var(--font-mono), ui-monospace, monospace;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-.shiki-wrapper pre::-webkit-scrollbar {
-  display: none;
+  max-height: 500px;
 }
 
 .shiki-wrapper code {
@@ -433,22 +428,69 @@ table {
 }
 
 .shiki-wrapper .line::before {
-  counter-increment: line;
-  content: counter(line);
-  @apply inline-block w-8 mr-4 text-right select-none;
-  color: oklch(0.5 0 0 / 40%);
+  display: none;
+}
+
+.shiki-wrapper[data-line-numbers="true"] .line {
+  @apply pl-0 pr-4;
+}
+
+.shiki-wrapper[data-line-numbers="true"] .line::before {
+  content: attr(data-line);
+  @apply inline-block w-10 pr-4 mr-2 text-right select-none;
+  color: oklch(0.5 0 0 / 35%);
   font-variant-numeric: tabular-nums;
 }
 
-.shiki-wrapper pre {
-  counter-reset: line;
+.copy-button-container {
+  @apply absolute top-2 right-2;
 }
 
-.shiki-wrapper::before {
-  content: attr(data-language);
-  @apply absolute top-2 right-3 text-xs uppercase tracking-wider;
-  color: oklch(0.6 0 0 / 50%);
-  font-family: var(--font-gothic);
+.copy-button {
+  @apply p-1.5 rounded-md transition-all duration-150;
+  @apply text-neutral-500 hover:text-neutral-300;
+  @apply bg-transparent hover:bg-white/5;
+}
+
+.copy-button[data-copied="true"] {
+  @apply text-emerald-400;
+}
+
+.code-block-header-container {
+  @apply relative;
+}
+
+.code-block-header {
+  @apply flex items-center justify-between px-4 py-2;
+  @apply border border-border border-b-0;
+  @apply bg-background;
+  @apply rounded-t-lg;
+  font-family: var(--font-mono), ui-monospace, monospace;
+}
+
+.code-block-header-filename {
+  @apply flex items-center gap-2 text-sm text-muted-foreground;
+}
+
+.code-block-icon {
+  @apply size-3.5 flex items-center justify-center;
+}
+
+.code-block-header-filename svg {
+  @apply text-muted-foreground/70;
+}
+
+.code-block-header .copy-button-container {
+  @apply static;
+}
+
+.shiki-wrapper.has-header pre {
+  @apply rounded-t-none;
+}
+
+.code-block-header .copy-button {
+  @apply text-muted-foreground hover:text-foreground;
+  @apply hover:bg-white/10;
 }
 
 .prose .shiki-wrapper pre {

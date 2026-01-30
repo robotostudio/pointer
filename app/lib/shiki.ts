@@ -35,12 +35,14 @@ export interface HighlightOptions {
   code: string;
   lang: string;
   showLineNumbers?: boolean;
+  startLineNumber?: number;
 }
 
 export async function highlightCode({
   code,
   lang,
   showLineNumbers = true,
+  startLineNumber = 1,
 }: HighlightOptions): Promise<string> {
   const highlighter = await getHighlighter();
 
@@ -57,7 +59,8 @@ export async function highlightCode({
           {
             name: "line-numbers",
             line(node, line) {
-              node.properties["data-line"] = line;
+              const displayLine = line + (startLineNumber - 1);
+              node.properties["data-line"] = displayLine;
               if (node.properties.class) {
                 node.properties.class += " line";
               } else {

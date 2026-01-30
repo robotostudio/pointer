@@ -13,7 +13,33 @@ This project uses MDX files as a simple, file-based content management system. N
 
 MDX is Markdown with the power of JSX. You can write regular Markdown and use React components within it.
 
-```mdx
+```tsx filename="app/components/cards.tsx" lineNumbers
+import { HomeIcon } from 'lucide-react';
+
+<Cards>
+  <Card
+    href="https://nextjs.org/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating"
+    title="Fetching, Caching, and Revalidating"
+  >
+    Learn more about caching in Next.js
+  </Card>
+  <Card title="href is optional">Learn more about `fetch` in Next.js.</Card>
+  <Card icon={<HomeIcon />} href="/" title="Home">
+    You can include icons too.
+  </Card>
+</Cards>
+```
+
+
+```js lineNumbers=4
+function main() {
+  console.log('starts from 4');
+
+  return 0;
+}
+```
+
+```mdx filename="content/pages/example.mdx" lineNumbers
 # Regular Markdown heading
 
 And you can use components:
@@ -79,7 +105,7 @@ Success! You've learned how to use callouts.
 
 Blog posts work similarly, but are stored in `app/blog/posts/`:
 
-```mdx
+```mdx filename="app/blog/posts/my-post.mdx"
 ---
 title: My Blog Post
 publishedAt: 2026-01-02

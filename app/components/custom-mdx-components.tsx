@@ -42,7 +42,7 @@ export function Button({ children, variant = "primary", href }: ButtonProps) {
   }
 
   return (
-    <button className={`${baseStyles} ${variantStyles[variant]}`}>
+    <button className={`${baseStyles} ${variantStyles[variant]}`} type="button">
       {children}
     </button>
   );
@@ -112,31 +112,3 @@ export function Callout({ children, type = "info" }: CalloutProps) {
     </div>
   );
 }
-
-// Example usage in MDX:
-//
-// <CardGrid columns={3}>
-//   <FeatureCard
-//     title="Fast"
-//     description="Blazing fast performance"
-//     icon="⚡"
-//   />
-//   <FeatureCard
-//     title="Secure"
-//     description="Enterprise-grade security"
-//     icon="🔒"
-//   />
-//   <FeatureCard
-//     title="Scalable"
-//     description="Grows with your needs"
-//     icon="📈"
-//   />
-// </CardGrid>
-//
-// <Button variant="primary" href="/signup">
-//   Get Started
-// </Button>
-//
-// <Callout type="info">
-//   This is an informational callout!
-// </Callout>

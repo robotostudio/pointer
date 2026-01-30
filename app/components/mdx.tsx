@@ -3,6 +3,7 @@ import Link from "next/link";
 import { MDXRemote, type MDXRemoteProps } from "next-mdx-remote/rsc";
 import React from "react";
 import { highlight } from "sugar-high";
+import { CodeBlockEnhancer } from "@/app/components/code-block";
 import {
   Button,
   Callout,
@@ -143,14 +144,17 @@ export async function CustomMDX(props: MDXRemoteProps) {
   const { rehypeShiki } = await import("@/app/lib/rehype-shiki");
 
   return (
-    <MDXRemote
-      {...props}
-      components={{ ...components, ...props.components }}
-      options={{
-        mdxOptions: {
-          rehypePlugins: [[rehypeShiki, { showLineNumbers: true }]],
-        },
-      }}
-    />
+    <>
+      <MDXRemote
+        {...props}
+        components={{ ...components, ...props.components }}
+        options={{
+          mdxOptions: {
+            rehypePlugins: [rehypeShiki],
+          },
+        }}
+      />
+      <CodeBlockEnhancer />
+    </>
   );
 }

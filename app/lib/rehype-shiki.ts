@@ -3,13 +3,10 @@ import { fromHtml } from "hast-util-from-html";
 import { visit } from "unist-util-visit";
 import { highlightCode } from "./shiki";
 
-interface RehypeShikiOptions {
-  showLineNumbers?: boolean;
-}
+const LINE_NUMBERS_REGEX = /\blineNumbers(?:=(\d+))?\b/;
+const FILENAME_REGEX = /\bfilename=["']([^"']+)["']/;
 
-export function rehypeShiki(options: RehypeShikiOptions = {}) {
-  const { showLineNumbers = true } = options;
-
+export function rehypeShiki() {
   return async function transformer(tree: Root) {
     const codeBlocks: Array<{
       node: Element;
@@ -17,6 +14,9 @@ export function rehypeShiki(options: RehypeShikiOptions = {}) {
       index: number;
       code: string;
       lang: string;
+      showLineNumbers: boolean;
+      startLineNumber: number;
+      filename: string | null;
     }> = [];
 
     visit(tree, "element", (node: Element, index, parent) => {
@@ -38,39 +38,129 @@ export function rehypeShiki(options: RehypeShikiOptions = {}) {
           }
         }
 
+        const meta =
+          (codeElement.data as Record<string, unknown>)?.meta ||
+          codeElement.properties?.metastring ||
+          "";
+        const lineNumbersMatch = String(meta).match(LINE_NUMBERS_REGEX);
+        const hasLineNumbers = lineNumbersMatch !== null;
+        const startLineNumber = lineNumbersMatch?.[1]
+          ? Number.parseInt(lineNumbersMatch[1], 10)
+          : 1;
+
+        const filenameMatch = String(meta).match(FILENAME_REGEX);
+        const filename = filenameMatch?.[1] || null;
+
         const code = getTextContent(codeElement);
 
         if (parent && typeof index === "number") {
-          codeBlocks.push({ node, parent, index, code, lang });
+          codeBlocks.push({
+            node,
+            parent,
+            index,
+            code,
+            lang,
+            showLineNumbers: hasLineNumbers,
+            startLineNumber,
+            filename,
+          });
         }
       }
     });
 
     await Promise.all(
-      codeBlocks.map(async ({ parent, index, code, lang }) => {
-        const highlightedHtml = await highlightCode({
-          code: code.trim(),
+      codeBlocks.map(
+        async ({
+          parent,
+          index,
+          code,
           lang,
           showLineNumbers,
-        });
+          startLineNumber,
+          filename,
+        }) => {
+          const trimmedCode = code.trim();
+          const highlightedHtml = await highlightCode({
+            code: trimmedCode,
+            lang,
+            showLineNumbers,
+            startLineNumber,
+          });
 
-        const hastTree = fromHtml(highlightedHtml, { fragment: true });
-        const preElement = hastTree.children[0] as Element;
+          const hastTree = fromHtml(highlightedHtml, { fragment: true });
+          const preElement = hastTree.children[0] as Element;
 
-        const wrapper: Element = {
-          type: "element",
-          tagName: "div",
-          properties: {
-            className: ["shiki-wrapper"],
-            "data-language": lang,
-          },
-          children: preElement ? [preElement] : [],
-        };
+          const wrapperChildren: Element[] = [];
 
-        if (Array.isArray(parent.children)) {
-          parent.children[index] = wrapper;
+          if (filename) {
+            const headerElement: Element = {
+              type: "element",
+              tagName: "div",
+              properties: {
+                className: ["code-block-header"],
+              },
+              children: [
+                {
+                  type: "element",
+                  tagName: "div",
+                  properties: {
+                    className: ["code-block-header-filename"],
+                    "data-filename": filename,
+                  },
+                  children: [
+                    {
+                      type: "element",
+                      tagName: "span",
+                      properties: {
+                        className: ["code-block-icon"],
+                      },
+                      children: [],
+                    },
+                    {
+                      type: "element",
+                      tagName: "span",
+                      properties: {},
+                      children: [{ type: "text", value: filename }],
+                    },
+                  ],
+                },
+                {
+                  type: "element",
+                  tagName: "div",
+                  properties: {
+                    className: ["copy-button-container"],
+                  },
+                  children: [],
+                },
+              ],
+            };
+            wrapperChildren.push(headerElement);
+          }
+
+          if (preElement) {
+            wrapperChildren.push(preElement);
+          }
+
+          const wrapper: Element = {
+            type: "element",
+            tagName: "div",
+            properties: {
+              className: filename
+                ? ["shiki-wrapper", "has-header"]
+                : ["shiki-wrapper"],
+              "data-language": lang,
+              "data-line-numbers": String(showLineNumbers),
+              "data-code": encodeURIComponent(trimmedCode),
+              ...(filename && { "data-filename": filename }),
+            },
+            children: wrapperChildren,
+          };
+
+          if (Array.isArray(parent.children)) {
+            parent.children[index] = wrapper;
+          }
         }
-      })
+      )
     );
   };
 }
