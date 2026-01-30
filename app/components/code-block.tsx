@@ -3,7 +3,6 @@
 import { Check, Copy } from "lucide-react";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { getFileIcon } from "@/app/lib/file-icons";
 
 function CopyButton({ code }: { code: string }) {
   const [copied, setCopied] = useState(false);
@@ -44,16 +43,9 @@ function CopyButton({ code }: { code: string }) {
   );
 }
 
-function FileIcon({ filename }: { filename: string }) {
-  const Icon = getFileIcon(filename);
-  return <Icon size={14} />;
-}
-
 interface CodeBlockPortal {
   container: HTMLElement;
   code: string;
-  type: "copy-button" | "icon";
-  filename?: string;
 }
 
 export function CodeBlockEnhancer() {
@@ -77,34 +69,22 @@ export function CodeBlockEnhancer() {
       }
 
       const code = decodeURIComponent(encodedCode);
-      const filename = wrapper.getAttribute("data-filename");
+      const hasHeader = wrapper.classList.contains("has-header");
 
-      if (filename) {
-        const iconContainer = wrapper.querySelector(".code-block-icon");
-        if (iconContainer) {
-          newPortals.push({
-            container: iconContainer as HTMLElement,
-            code,
-            type: "icon",
-            filename,
-          });
-        }
+      let container: HTMLElement | null = null;
 
-        const copyContainer = wrapper.querySelector(
+      if (hasHeader) {
+        container = wrapper.querySelector(
           ".code-block-header .copy-button-container"
         );
-        if (copyContainer) {
-          newPortals.push({
-            container: copyContainer as HTMLElement,
-            code,
-            type: "copy-button",
-          });
-        }
       } else {
-        const container = document.createElement("div");
+        container = document.createElement("div");
         container.className = "copy-button-container";
         wrapper.appendChild(container);
-        newPortals.push({ container, code, type: "copy-button" });
+      }
+
+      if (container) {
+        newPortals.push({ container, code });
       }
     }
 
@@ -117,11 +97,7 @@ export function CodeBlockEnhancer() {
     <>
       {portals.map((portal, index) =>
         createPortal(
-          portal.type === "icon" && portal.filename ? (
-            <FileIcon filename={portal.filename} />
-          ) : (
-            <CopyButton code={portal.code} />
-          ),
+          <CopyButton code={portal.code} />,
           portal.container,
           `code-block-${index}`
         )

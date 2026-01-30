@@ -1,6 +1,7 @@
 import type { Element, Root, Text } from "hast";
 import { fromHtml } from "hast-util-from-html";
 import { visit } from "unist-util-visit";
+import { getFileIconSvg } from "./file-icons";
 import { highlightCode } from "./shiki";
 
 const LINE_NUMBERS_REGEX = /\blineNumbers(?:=(\d+))?\b/;
@@ -114,7 +115,9 @@ export function rehypeShiki() {
                       properties: {
                         className: ["code-block-icon"],
                       },
-                      children: [],
+                      children: fromHtml(getFileIconSvg(filename), {
+                        fragment: true,
+                      }).children as Element[],
                     },
                     {
                       type: "element",
