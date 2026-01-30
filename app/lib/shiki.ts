@@ -1,3 +1,4 @@
+import { transformerColorizedBrackets } from "@shikijs/colorized-brackets";
 import type { BundledLanguage, Highlighter } from "shiki";
 import { createHighlighter } from "shiki";
 
@@ -60,6 +61,7 @@ export async function highlightCode({
     defaultColor: "dark",
     transformers: showLineNumbers
       ? [
+          transformerColorizedBrackets(),
           {
             name: "line-numbers",
             line(node, line) {
@@ -73,7 +75,7 @@ export async function highlightCode({
             },
           },
         ]
-      : [],
+      : [transformerColorizedBrackets()],
   });
 
   return html;

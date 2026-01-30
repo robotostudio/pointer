@@ -84,6 +84,9 @@ importers:
       '@biomejs/biome':
         specifier: 2.3.11
         version: 2.3.11
+      '@shikijs/colorized-brackets':
+        specifier: ^3.21.0
+        version: 3.21.0
       ultracite:
         specifier: 7.0.12
         version: 7.0.12(typescript@5.3.3)
@@ -375,6 +378,9 @@ packages:
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [win32]
+
+  '@shikijs/colorized-brackets@3.21.0':
+    resolution: {integrity: sha512-glkCUJHayT/Si3j75uxT8NlBZP9tNZMNcXjJK5eWtsvHXg9/T8xQLpA0SQHR8yhsuX3B1+jFq5/hLURkbMUgjw==}
 
   '@shikijs/core@3.21.0':
     resolution: {integrity: sha512-AXSQu/2n1UIQekY8euBJlvFYZIw0PHY63jUzGbrOma4wPxzznJXTXkri+QcHeBNaFxiiOljKxxJkVSoB3PjbyA==}
@@ -1570,6 +1576,10 @@ snapshots:
 
   '@next/swc-win32-x64-msvc@16.0.10':
     optional: true
+
+  '@shikijs/colorized-brackets@3.21.0':
+    dependencies:
+      shiki: 3.21.0
 
   '@shikijs/core@3.21.0':
     dependencies:

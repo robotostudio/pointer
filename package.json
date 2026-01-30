@@ -40,6 +40,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.3.11",
+    "@shikijs/colorized-brackets": "^3.21.0",
     "ultracite": "7.0.12"
   }
 }
