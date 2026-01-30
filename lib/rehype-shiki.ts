@@ -2,7 +2,7 @@
 import type { Element, Root, Text } from "hast";
 import { fromHtml } from "hast-util-from-html";
 import { visit } from "unist-util-visit";
-import { COPY_ICON_SVG, getFileIconSvg } from "@/lib/file-icons";
+import { getFileIconSvg } from "@/lib/file-icons";
 import { highlightCode } from "@/lib/shiki";
 
 const LINE_NUMBERS_REGEX = /\blineNumbers(?:=(\d+))?\b/;
@@ -130,15 +130,11 @@ export function rehypeShiki() {
                 },
                 {
                   type: "element",
-                  tagName: "button",
+                  tagName: "div",
                   properties: {
-                    type: "button",
-                    className: ["copy-button"],
-                    "aria-label": "Copy code",
+                    className: ["copy-button-placeholder"],
                   },
-                  children: fromHtml(COPY_ICON_SVG, {
-                    fragment: true,
-                  }).children as Element[],
+                  children: [],
                 },
               ],
             };
@@ -159,15 +155,11 @@ export function rehypeShiki() {
               children: [
                 {
                   type: "element",
-                  tagName: "button",
+                  tagName: "div",
                   properties: {
-                    type: "button",
-                    className: ["copy-button"],
-                    "aria-label": "Copy code",
+                    className: ["copy-button-placeholder"],
                   },
-                  children: fromHtml(COPY_ICON_SVG, {
-                    fragment: true,
-                  }).children as Element[],
+                  children: [],
                 },
               ],
             };
