@@ -13,26 +13,59 @@ This project uses MDX files as a simple, file-based content management system. N
 
 MDX is Markdown with the power of JSX. You can write regular Markdown and use React components within it.
 
-```tsx filename="app/components/cards.tsx" lineNumbers
-import { HomeIcon } from 'lucide-react';
-
-export default function Test() {
-
- return (
- <Cards> 
-  <Card
-    href="https://nextjs.org/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating"
-    title="Fetching, Caching, and Revalidating"
-  >
-    Learn more about caching in Next.js 
-  </Card>
-  <Card title="href is optional">Learn more about `fetch` in Next.js.</Card>
-  <Card icon={<HomeIcon />} href="/" title="Home">
-    You can include icons too.
-  </Card>
-</Cards>
- )
+```tsx tab="TypeScript" filename="greeting.tsx" lineNumbers
+interface GreetingProps {
+  name: string;
+  age?: number;
 }
+
+export function Greeting({ name, age }: GreetingProps) {
+  return (
+    <div>
+      <h1>Hello, {name}!</h1>
+      {age && <p>You are {age} years old.</p>}
+    </div>
+  );
+}
+```
+
+```jsx tab="JavaScript" filename="greeting.jsx" lineNumbers
+export function Greeting({ name, age }) {
+  return (
+    <div>
+      <h1>Hello, {name}!</h1>
+      {age && <p>You are {age} years old.</p>}
+    </div>
+  );
+}
+```
+
+You can also use tabs for package manager commands:
+
+```bash tab="npm" groupId="pkg"
+npm install next react react-dom
+```
+
+```bash tab="pnpm" groupId="pkg"
+pnpm add next react react-dom
+```
+
+```bash tab="yarn" groupId="pkg"
+yarn add next react react-dom
+```
+
+And here's another example with the same `groupId` to show synced tabs:
+
+```bash tab="npm" groupId="pkg"
+npm run dev
+```
+
+```bash tab="pnpm" groupId="pkg"
+pnpm dev
+```
+
+```bash tab="yarn" groupId="pkg"
+yarn dev
 ```
 
 
@@ -248,8 +281,9 @@ function getTextContent(node: Element | Text): string {
   }
   return "";
 }
-
 ```
+
+
 
 ```mdx filename="content/pages/example.mdx" lineNumbers
 # Regular Markdown heading
