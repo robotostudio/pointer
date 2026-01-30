@@ -457,13 +457,29 @@ html:not(.dark) .shiki span {
 }
 
 .copy-button {
-  @apply p-1.5 rounded-md transition-all duration-150;
+  @apply p-1.5 rounded-md;
   @apply text-neutral-500 hover:text-neutral-300;
   @apply bg-transparent hover:bg-white/5;
+  transition:
+    color 150ms ease-out,
+    background-color 150ms ease-out;
+}
+
+.copy-button svg {
+  transition:
+    transform 150ms ease-out,
+    opacity 150ms ease-out,
+    filter 150ms ease-out;
 }
 
 .copy-button[data-copied="true"] {
-  @apply text-emerald-400;
+  @apply text-emerald-500 bg-emerald-500/10;
+}
+
+.copy-button.icon-exit svg {
+  transform: scale(0.5);
+  opacity: 0;
+  filter: blur(4px);
 }
 
 .code-block-header-container {

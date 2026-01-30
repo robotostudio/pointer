@@ -38,14 +38,24 @@ export function CodeBlockEnhancer() {
             document.body.removeChild(textarea);
           }
 
+          copyButton.classList.add("icon-exit");
           copyButton.setAttribute("data-copied", "true");
           copyButton.setAttribute("aria-label", "Copied");
-          copyButton.innerHTML = CHECK_ICON_SVG;
 
           setTimeout(() => {
+            copyButton.innerHTML = CHECK_ICON_SVG;
+            copyButton.classList.remove("icon-exit");
+          }, 150);
+
+          setTimeout(() => {
+            copyButton.classList.add("icon-exit");
             copyButton.setAttribute("data-copied", "false");
             copyButton.setAttribute("aria-label", "Copy code");
-            copyButton.innerHTML = COPY_ICON_SVG;
+
+            setTimeout(() => {
+              copyButton.innerHTML = COPY_ICON_SVG;
+              copyButton.classList.remove("icon-exit");
+            }, 150);
           }, 2000);
         });
       }
