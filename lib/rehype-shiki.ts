@@ -133,10 +133,22 @@ export function rehypeShiki() {
             type: "element",
             tagName: "div",
             properties: {
-              className: ["code-tabs-list-placeholder"],
-              "data-tabs": JSON.stringify(tabLabels),
+              className: ["code-tabs-list"],
+              role: "tablist",
             },
-            children: [],
+            children: tabLabels.map((label, i) => ({
+              type: "element",
+              tagName: "button",
+              properties: {
+                className:
+                  i === 0 ? ["code-tab", "code-tab-active"] : ["code-tab"],
+                role: "tab",
+                "aria-selected": String(i === 0),
+                "data-tab": label,
+                type: "button",
+              },
+              children: [{ type: "text", value: label }],
+            })),
           },
           ...tabPanels,
         ],
