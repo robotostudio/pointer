@@ -14,12 +14,12 @@ export function CodeBlockEnhancer() {
     for (const wrapper of wrappers) {
       wrapper.setAttribute("data-enhanced", "true");
 
-      const encodedCode = wrapper.getAttribute("data-code");
-      if (!encodedCode) {
+      const codeElement = wrapper.querySelector<HTMLElement>("pre code");
+      if (!codeElement) {
         continue;
       }
 
-      const code = decodeURIComponent(encodedCode);
+      const code = codeElement.textContent || "";
       const copyButton =
         wrapper.querySelector<HTMLButtonElement>(".copy-button");
 

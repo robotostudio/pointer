@@ -183,7 +183,6 @@ export function rehypeShiki() {
                 : ["shiki-wrapper"],
               "data-language": lang,
               "data-line-numbers": String(showLineNumbers),
-              "data-code": encodeURIComponent(trimmedCode),
               ...(filename && { "data-filename": filename }),
             },
             children: wrapperChildren,
