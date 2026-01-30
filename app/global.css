@@ -410,7 +410,7 @@ table {
 }
 
 .shiki-wrapper {
-  @apply my-6 relative;
+  @apply my-6 grid relative overflow-hidden;
 }
 
 .shiki-wrapper pre {
@@ -605,7 +605,7 @@ html.dark .shiki-wrapper .line.highlighted span {
 
 /* Code Tabs */
 .code-tabs-container {
-  @apply my-6;
+  @apply my-6 overflow-hidden;
 }
 
 .code-tabs-list {
