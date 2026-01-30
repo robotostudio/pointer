@@ -24,7 +24,7 @@ const PRELOADED_LANGUAGES: BundledLanguage[] = [
 export function getHighlighter(): Promise<Highlighter> {
   if (!highlighterPromise) {
     highlighterPromise = createHighlighter({
-      themes: ["vesper"],
+      themes: ["vesper", "github-light"],
       langs: PRELOADED_LANGUAGES,
     });
   }
@@ -53,7 +53,11 @@ export async function highlightCode({
 
   const html = highlighter.codeToHtml(code, {
     lang: language,
-    theme: "vesper",
+    themes: {
+      light: "github-light",
+      dark: "vesper",
+    },
+    defaultColor: "dark",
     transformers: showLineNumbers
       ? [
           {

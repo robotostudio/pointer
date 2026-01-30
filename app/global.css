@@ -442,6 +442,16 @@ table {
   font-variant-numeric: tabular-nums;
 }
 
+/* Light theme: use --shiki-light colors */
+html:not(.dark) .shiki,
+html:not(.dark) .shiki span {
+  color: var(--shiki-light) !important;
+  background-color: var(--shiki-light-bg) !important;
+  font-style: var(--shiki-light-font-style) !important;
+  font-weight: var(--shiki-light-font-weight) !important;
+  text-decoration: var(--shiki-light-text-decoration) !important;
+}
+
 .copy-button-container {
   @apply absolute top-2 right-2;
 }
@@ -463,7 +473,7 @@ table {
 .code-block-header {
   @apply flex items-center justify-between px-4 py-2;
   @apply border border-border border-b-0;
-  @apply bg-background;
+  @apply bg-secondary dark:bg-background;
   @apply rounded-t-lg;
   font-family: var(--font-mono), ui-monospace, monospace;
 }

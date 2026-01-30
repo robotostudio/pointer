@@ -111,16 +111,18 @@ Use `size-*` utility when height and width are the same value:
 
 ### Imports
 
-Always use absolute import path aliases when importing components or modules. Never use relative paths like `../` or `./`.
+Always use absolute import path aliases (`@/`) when importing components or modules. Only use relative paths (`./` or `../`) when absolute imports cause environment issues.
 
 ```typescript
 // ✅ Good - absolute imports
 import { Button } from "@/app/components/button"
 import { ContentService } from "@/app/lib/content-service"
+import { highlightCode } from "@/app/lib/shiki"
 
 // ❌ Bad - relative imports
 import { Button } from "../components/button"
 import { ContentService } from "./content-service"
+import { highlightCode } from "./shiki"
 ```
 
 ## Tech Stack
