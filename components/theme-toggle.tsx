@@ -2,22 +2,21 @@
 
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { cn } from "@/lib/utils";
 
-function MonitorIcon({ className }: { className?: string }) {
+function MonitorIcon() {
   return (
     <svg
-      className={className}
+      aria-hidden="true"
       fill="none"
-      height="16"
+      height="14"
       stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth="1.5"
       viewBox="0 0 24 24"
-      width="16"
+      width="14"
     >
-      <title>System theme</title>
       <rect height="14" rx="2" ry="2" width="20" x="2" y="3" />
       <line x1="8" x2="16" y1="21" y2="21" />
       <line x1="12" x2="12" y1="17" y2="21" />
@@ -25,20 +24,19 @@ function MonitorIcon({ className }: { className?: string }) {
   );
 }
 
-function SunIcon({ className }: { className?: string }) {
+function SunIcon() {
   return (
     <svg
-      className={className}
+      aria-hidden="true"
       fill="none"
-      height="16"
+      height="14"
       stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth="1.5"
       viewBox="0 0 24 24"
-      width="16"
+      width="14"
     >
-      <title>Light theme</title>
       <circle cx="12" cy="12" r="5" />
       <line x1="12" x2="12" y1="1" y2="3" />
       <line x1="12" x2="12" y1="21" y2="23" />
@@ -52,20 +50,19 @@ function SunIcon({ className }: { className?: string }) {
   );
 }
 
-function MoonIcon({ className }: { className?: string }) {
+function MoonIcon() {
   return (
     <svg
-      className={className}
+      aria-hidden="true"
       fill="none"
-      height="16"
+      height="14"
       stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth="1.5"
       viewBox="0 0 24 24"
-      width="16"
+      width="14"
     >
-      <title>Dark theme</title>
       <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
     </svg>
   );
@@ -87,27 +84,29 @@ export function ThemeToggle() {
 
   if (!mounted) {
     return (
-      <div
-        aria-hidden="true"
-        className="flex h-8 w-26 items-center rounded-lg bg-muted"
-      />
+      <div aria-hidden="true" className="h-7 w-19 rounded-full bg-muted/50" />
     );
   }
 
   return (
-    <Tabs className="flex-row" onValueChange={setTheme} value={theme}>
-      <TabsList className="h-8 rounded-full">
-        {themes.map(({ value, icon: Icon, label }) => (
-          <TabsTrigger
-            aria-label={label}
-            className="size-7 rounded-full px-0 data-active:rounded-full"
-            key={value}
-            value={value}
-          >
-            <Icon />
-          </TabsTrigger>
-        ))}
-      </TabsList>
-    </Tabs>
+    <div className="flex h-7 items-center gap-0.5 rounded-full bg-muted/50 p-1">
+      {themes.map(({ value, icon: Icon, label }) => (
+        <button
+          aria-label={label}
+          aria-pressed={theme === value}
+          className={cn(
+            "relative flex size-5 items-center justify-center rounded-full transition-all duration-200",
+            theme === value
+              ? "bg-foreground/10 text-foreground"
+              : "text-muted-foreground hover:text-foreground/70"
+          )}
+          key={value}
+          onClick={() => setTheme(value)}
+          type="button"
+        >
+          <Icon />
+        </button>
+      ))}
+    </div>
   );
 }
