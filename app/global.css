@@ -233,8 +233,6 @@
   --border: oklch(0.923 0.003 48.717);
   --input: oklch(0.923 0.003 48.717);
   --ring: oklch(0.709 0.01 56.259);
-
-  --line-number-color: var(--shiki-light-bg);
 }
 
 .dark {
@@ -263,8 +261,6 @@
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.553 0.013 58.071);
-
-  --line-number-color: var(--shiki-dark-bg);
 }
 
 @layer base {
@@ -450,6 +446,8 @@ table {
 /* Light theme: use --shiki-light colors */
 html:not(.dark) .shiki,
 html:not(.dark) .shiki span {
+  --line-number-color: var(--shiki-light-bg) !important;
+
   color: var(--shiki-light) !important;
   background-color: var(--shiki-light-bg) !important;
   font-style: var(--shiki-light-font-style) !important;
