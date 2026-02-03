@@ -19,7 +19,7 @@ export function Hero({ children, className, variant = "default" }: HeroProps) {
     >
       <div
         className={cn(
-          "container relative z-10 py-12 md:py-16",
+          "container z-10 flex flex-col py-12 md:py-16",
           variant === "centered" && "mx-auto max-w-4xl"
         )}
       >
@@ -61,7 +61,7 @@ export function HeroTitle({
   return (
     <Tag
       className={cn(
-        "mt-0! mb-6! max-w-4xl text-balance font-medium text-3xl tracking-tight md:text-4xl",
+        "mt-0! mb-6! max-w-4xl text-balance font-medium text-xl! tracking-tight md:text-4xl!",
         className
       )}
     >
@@ -79,7 +79,7 @@ export function HeroDescription({ children, className }: HeroDescriptionProps) {
   return (
     <p
       className={cn(
-        "mt-6 max-w-xl text-lg text-neutral-400 leading-relaxed",
+        "max-w-xl text-lg text-neutral-400 leading-relaxed",
         className
       )}
     >
@@ -95,7 +95,7 @@ interface HeroActionsProps {
 
 export function HeroActions({ children, className }: HeroActionsProps) {
   return (
-    <div className={cn("mt-6 flex flex-wrap items-center gap-3", className)}>
+    <div className={cn("flex flex-wrap items-center gap-3", className)}>
       {children}
     </div>
   );
@@ -119,7 +119,7 @@ export function HeroButton({
 
   const variants = {
     primary:
-      "bg-white text-neutral-950 hover:bg-neutral-100 active:scale-[0.98]",
+      "bg-black dark:bg-white text-neutral-100 dark:text-neutral-950 hover:bg-neutral-700 dark:hover:bg-neutral-100 active:scale-[0.98]",
     secondary:
       "border border-white/20 bg-white/5 text-white hover:bg-white/10 hover:border-white/30",
     ghost: "text-neutral-400 hover:text-white",
@@ -147,7 +147,7 @@ export function HeroMedia({ children, className }: HeroMediaProps) {
   return (
     <div
       className={cn(
-        "relative mt-12 lg:absolute lg:inset-y-0 lg:right-0 lg:mt-0 lg:w-1/2",
+        "relative mt-12 aspect-video w-full overflow-hidden rounded-2xl border border-white/10 bg-neutral-900/50 shadow-2xl",
         className
       )}
     >

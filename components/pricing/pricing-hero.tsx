@@ -30,13 +30,13 @@ export function PricingHero({
         </p>
       )}
       <Tabs
-        className="mb-12"
+        className="mb-12 "
         defaultValue="monthly"
         onValueChange={(value) => setPeriod(value as BillingPeriod)}
       >
-        <TabsList>
-          <TabsTrigger value="monthly">Monthly</TabsTrigger>
-          <TabsTrigger value="yearly">Yearly</TabsTrigger>
+        <TabsList className="rounded-full p-1 transition-colors ">
+          <TabsTrigger  className="rounded-full duration-200 delay-100 ease-in-out will-change-transform px-4 py-2" value="monthly">Monthly</TabsTrigger>
+          <TabsTrigger className="rounded-full duration-200 delay-100 ease-in-out will-change-transform px-4 py-2" value="yearly">Yearly</TabsTrigger>
         </TabsList>
       </Tabs>
       <PricingProvider period={period}>
