@@ -5,7 +5,7 @@ import { createPortal } from "react-dom";
 import { CopyButton } from "@/components/copy-button";
 
 interface CodeBlockMount {
-  placeholder: Element;
+  placeholder: HTMLElement;
   code: string;
 }
 
@@ -36,6 +36,15 @@ export function CodeBlockEnhancer() {
     if (newMounts.length > 0) {
       setMounts((prev) => [...prev, ...newMounts]);
     }
+
+    return () => {
+      for (const placeholder of placeholders) {
+        placeholder.removeAttribute("data-mounted");
+      }
+      setMounts((prev) =>
+        prev.filter((mount) => !placeholders.includes(mount.placeholder))
+      );
+    };
   }, []);
 
   return (

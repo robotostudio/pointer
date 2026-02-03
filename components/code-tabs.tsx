@@ -125,6 +125,9 @@ export function CodeTabsEnhancer() {
       for (const cleanup of cleanups) {
         cleanup();
       }
+      for (const container of containers) {
+        container.removeAttribute("data-mounted");
+      }
     };
   }, []);
 
