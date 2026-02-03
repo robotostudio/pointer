@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-Next.js 16 portfolio/content platform using file-based MDX. Philosophy: "Content is just code" - no CMS, no database, everything in git.
+Next.js 16 portfolio/content platform with file-based MDX. No CMS, no database - content is code.
 
 ## Commands
 
@@ -10,21 +10,20 @@ pnpm dev        # Development server
 pnpm build      # Production build
 ```
 
-Never run `pnpm dev` or `pnpm build` unless explicitly asked. Never run linting/type-checking on the entire project - only on modified files.
+**Never run `dev`, `build`, `lint`, `format`, or `typecheck` unless explicitly asked.** Run lint/typecheck on modified files only, not the entire project.
 
-## Content System
+## Content
 
-- **Pages**: `content/pages/*.mdx` → Routes to `/*`
-- **Blog Posts**: `app/blog/posts/*.mdx` → Routes to `/blog/*`
+- **Pages**: MDX files in `content/pages/` → routes to `/*`
+- **Blog**: MDX files in `app/blog/posts/` → routes to `/blog/*`
 
 ## Conventions
 
-- For code style conventions, see `.claude/CLAUDE.md`
-- For available MDX components, see `docs/MDX_COMPONENTS.md`
-- For git conventions, see `docs/GIT_CONVENTIONS.md`
-
+- Code style: `docs/CODE_STYLE.md`
+- MDX components: `docs/MDX_COMPONENTS.md`
+- Git conventions: `docs/GIT_CONVENTIONS.md`
 
 ## Plan Mode
 
-- Make the plan extremely concise. Sacrifice grammar for the sake of concision.
-- At the end of each plan, give me a list of unresolved questions to answer, if any.
+- Keep plans extremely concise; sacrifice grammar for brevity
+- End each plan with unresolved questions, if any

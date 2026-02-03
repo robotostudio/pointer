@@ -7,9 +7,10 @@ Semantic prefixes, short and concise. Wrap code/component names in backticks.
 ```
 feat: add `Button` component
 fix: resolve `ContentService` caching issue
-chore: update dependencies
-docs: add API documentation
+style: fix mobile overflow for code-block
 refactor: simplify `getPageByPath` logic
+docs: add API documentation
+chore: update dependencies
 ```
 
 ## Branch Names
