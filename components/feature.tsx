@@ -11,7 +11,7 @@ export function Feature({ children, className, reverse }: FeatureProps) {
   return (
     <section
       className={cn(
-        "grid items-center gap-8 bg-background py-12 text-foreground md:gap-12 md:py-16 lg:grid-cols-2",
+        "my-6 grid items-center gap-8 border border-muted/60 bg-muted/30 p-4 text-foreground md:my-12 md:gap-12 md:py-4 lg:grid-cols-3",
         reverse && "lg:[&>*:first-child]:order-2",
         className
       )}
@@ -44,7 +44,7 @@ export function FeatureTitle({
   return (
     <Tag
       className={cn(
-        "mt-0! mb-4! text-balance font-medium text-2xl tracking-tight md:text-3xl",
+        "mt-0! mb-2! text-balance font-medium text-2xl tracking-tight md:text-3xl",
         className
       )}
     >
@@ -63,14 +63,14 @@ export function FeatureDescription({
   className,
 }: FeatureDescriptionProps) {
   return (
-    <p
+    <div
       className={cn(
-        "max-w-lg text-base text-muted-foreground leading-relaxed",
+        "max-w-lg text-base text-muted-foreground leading-relaxed [&>p]:my-0! [&_p]:text-inherit!",
         className
       )}
     >
       {children}
-    </p>
+    </div>
   );
 }
 
@@ -81,7 +81,7 @@ interface FeatureActionsProps {
 
 export function FeatureActions({ children, className }: FeatureActionsProps) {
   return (
-    <div className={cn("mt-6 flex flex-wrap items-center gap-3", className)}>
+    <div className={cn("mt-2 flex flex-wrap items-center gap-3", className)}>
       {children}
     </div>
   );
@@ -118,7 +118,7 @@ export function FeatureButton({
     );
   }
 
-  return <span className={classes}>{children}</span>;
+  return <button type="button" className={classes}>{children}</button>;
 }
 
 interface FeatureMediaProps {
@@ -130,7 +130,7 @@ export function FeatureMedia({ children, className }: FeatureMediaProps) {
   return (
     <div
       className={cn(
-        "relative overflow-hidden rounded-lg shadow-xl [&_img]:size-full [&_img]:object-cover",
+        "relative aspect-square overflow-hidden rounded-lg shadow-xl lg:col-span-2 [&_img]:size-full [&_img]:object-cover",
         className
       )}
     >

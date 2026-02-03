@@ -4,27 +4,33 @@ import { cn } from "@/lib/utils";
 
 interface HighlightCardGridProps {
   children: ReactNode;
-  columns?: 2 | 3;
+  columns?: 3 | 4;
   title?: string;
+  description?: string;
 }
 
 const columnClasses = {
   2: "lg:grid-cols-2",
   3: "lg:grid-cols-3",
+  4: "lg:grid-cols-4",
 };
 
 export function HighlightCardGrid({
   children,
-  columns = 3,
+  columns = 4,
   title,
+  description,
 }: HighlightCardGridProps) {
   return (
-    <section className="my-12">
+    <section className="my-12!">
       {title && (
-        <h2 className="mb-6 font-normal! text-base! text-zinc-500 dark:text-zinc-400">
-          {title}
-        </h2>
+        <h2 className="mb-2! font-normal! text-foreground text-md!">{title}</h2>
       )}
+      {
+        <p className="mb-2 font-normal! text-xl! text-zinc-500! dark:text-zinc-400!">
+          {description}
+        </p>
+      }
       <div
         className={cn(
           "grid grid-cols-1 gap-4 md:grid-cols-2",
@@ -43,7 +49,7 @@ interface HighlightCardProps {
 
 export function HighlightCard({ children }: HighlightCardProps) {
   return (
-    <div className="flex flex-col overflow-hidden rounded-lg border border-border bg-background">
+    <div className="flex flex-col justify-between overflow-hidden rounded-lg border border-muted/60 bg-muted/30">
       {children}
     </div>
   );
@@ -69,7 +75,7 @@ export function HighlightCardDescription({
   children,
 }: HighlightCardDescriptionProps) {
   return (
-    <div className="px-5 pt-2 text-muted-foreground text-sm [&>p]:my-0!">
+    <div className="px-5 pt-2 text-muted-foreground text-sm [&>p]:my-0! [&_p]:text-inherit!">
       {children}
     </div>
   );
@@ -80,17 +86,18 @@ interface HighlightCardActionProps {
   href: string;
 }
 
+import { FeatureButton } from "./feature";
+
 export function HighlightCardAction({
   children,
   href,
 }: HighlightCardActionProps) {
   return (
-    <a
-      className="no-underline! px-5 pt-3 text-muted-foreground text-sm transition-colors hover:text-foreground"
-      href={href}
-    >
-      {children}
-    </a>
+    <div className="px-5 pt-3">
+      <FeatureButton className="text-xs!" href={href} variant="primary">
+        {children}
+      </FeatureButton>
+    </div>
   );
 }
 
@@ -101,10 +108,10 @@ interface HighlightCardImageProps {
 
 export function HighlightCardImage({ src, alt = "" }: HighlightCardImageProps) {
   return (
-    <div className="mt-4 px-3 pb-3">
+    <div className="mt-4 flex-end px-3 pb-3">
       <Image
         alt={alt}
-        className="my-0! h-auto w-full rounded-md"
+        className="my-0! aspect-square h-auto w-full rounded-md"
         height={240}
         src={src}
         width={400}

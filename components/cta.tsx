@@ -10,7 +10,7 @@ export function CTA({ children, className }: CTAProps) {
   return (
     <section
       className={cn(
-        "my-12 flex flex-col items-center gap-6 rounded-xl bg-background px-8 py-16 text-center",
+        "my-16! flex flex-col items-center gap-6 px-6 py-12 text-center md:my-24! md:px-12 md:py-20",
         className
       )}
     >
@@ -28,7 +28,7 @@ export function CTATitle({ children, className }: CTATitleProps) {
   return (
     <h2
       className={cn(
-        "font-medium text-3xl tracking-tight md:text-4xl",
+        "max-w-2xl text-balance font-medium text-3xl! text-foreground tracking-tight md:text-5xl!",
         className
       )}
     >
@@ -45,7 +45,9 @@ interface CTAButtonProps {
 
 export function CTAButton({ children, href, className }: CTAButtonProps) {
   const buttonClasses = cn(
-    "inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 font-medium text-neutral-900 text-sm transition-colors hover:bg-neutral-100",
+    "no-underline! hover:underline! inline-flex items-center gap-2 rounded-full px-8 py-3 font-medium text-sm transition-all",
+    "bg-foreground text-background hover:opacity-90 active:scale-95",
+    "dark:bg-white dark:text-black dark:hover:bg-white",
     className
   );
 

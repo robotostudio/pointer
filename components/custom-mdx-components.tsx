@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 // Custom components that can be used in MDX files
 // Import these in mdx.tsx to make them available
 
@@ -18,7 +20,7 @@ export function FeatureCard({ title, description, icon }: FeatureCardProps) {
 }
 
 interface ButtonProps {
-  children: React.ReactNode;
+  children: ReactNode;
   variant?: "primary" | "secondary";
   href?: string;
 }
@@ -49,7 +51,7 @@ export function Button({ children, variant = "primary", href }: ButtonProps) {
 }
 
 interface CardGridProps {
-  children: React.ReactNode;
+  children: ReactNode;
   columns?: 2 | 3 | 4;
 }
 
@@ -91,7 +93,7 @@ export function Testimonial({
 }
 
 interface CalloutProps {
-  children: React.ReactNode;
+  children: ReactNode;
   type?: "info" | "warning" | "success" | "error";
 }
 

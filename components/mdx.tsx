@@ -4,6 +4,13 @@ import { MDXRemote, type MDXRemoteProps } from "next-mdx-remote/rsc";
 import React from "react";
 import { CodeBlockEnhancer } from "@/components/code-block";
 import { CodeTabsEnhancer } from "@/components/code-tabs";
+import {
+  Changelog,
+  ChangelogAction,
+  ChangelogCard,
+  ChangelogContent,
+  ChangelogHeader,
+} from "./changelog";
 import { CTA, CTAButton, CTATitle } from "./cta";
 import {
   Button,
@@ -12,6 +19,14 @@ import {
   FeatureCard,
   Testimonial,
 } from "./custom-mdx-components";
+import {
+  EnterpriseFeature,
+  EnterpriseFeatureContent,
+  EnterpriseFeatureDescription,
+  EnterpriseFeatureMedia,
+  EnterpriseFeatureTestimonial,
+  EnterpriseFeatureTitle,
+} from "./enterprise-feature";
 import { FAQ, FAQItem } from "./faq";
 import {
   Feature,
@@ -41,6 +56,7 @@ import {
   HighlightCardTitle,
 } from "./highlight-card";
 import { LogoCloud, LogoCloudItem } from "./logo-cloud";
+import { HighlightItem, Highlights, HighlightsAction } from "./posts";
 import {
   PricingAction,
   PricingCard,
@@ -50,6 +66,14 @@ import {
   PricingGrid,
   PricingHero,
 } from "./pricing";
+import {
+  SecurityActions,
+  SecurityGrid,
+  SecurityItem,
+  SecuritySection,
+} from "./security-features";
+import { StatsGrid, StatsItem, StatsSection } from "./stats-section";
+import { TestimonialCard, TestimonialGrid } from "./testimonials";
 
 interface TableProps {
   data: {
@@ -196,6 +220,29 @@ const components = {
   PricingDescription,
   PricingAction,
   PricingHero,
+  Changelog,
+  ChangelogAction,
+  ChangelogCard,
+  ChangelogHeader,
+  ChangelogContent,
+  Highlights,
+  HighlightItem,
+  HighlightsAction,
+  SecurityActions,
+  SecurityGrid,
+  SecurityItem,
+  SecuritySection,
+  StatsGrid,
+  StatsItem,
+  StatsSection,
+  TestimonialGrid,
+  TestimonialCard,
+  EnterpriseFeature,
+  EnterpriseFeatureContent,
+  EnterpriseFeatureDescription,
+  EnterpriseFeatureMedia,
+  EnterpriseFeatureTestimonial,
+  EnterpriseFeatureTitle,
 };
 
 export async function CustomMDX(props: MDXRemoteProps) {

@@ -25,7 +25,7 @@ export function PricingCard({
     billingPeriod === "yearly" && yearlyPrice ? yearlyPrice : price;
 
   return (
-    <div className="flex flex-col rounded border border-neutral-200 p-5 dark:border-neutral-800">
+    <div className="flex flex-col rounded border border-neutral-200 bg-muted/30 hover:bg-muted/60 dark:bg-muted/30 dark:hover:bg-muted/50 cursor-pointer p-5 dark:border-neutral-800">
       <div className="flex items-center gap-2">
         <h3 className="my-0! font-normal text-base text-neutral-900 dark:text-neutral-100">
           {title}

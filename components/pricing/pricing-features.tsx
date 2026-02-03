@@ -28,7 +28,7 @@ export function PricingFeature({ children }: PricingFeatureProps) {
 
 export function PricingDescription({ children }: PricingDescriptionProps) {
   return (
-    <p className="mb-3 text-neutral-600 text-sm dark:text-neutral-400">
+    <p className="mb-3 text-neutral-600 text-sm dark:text-neutral-400! [&_p]:text-inherit!">
       {children}
     </p>
   );

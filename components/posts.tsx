@@ -15,7 +15,7 @@ export function BlogPosts({ posts }: BlogPostsProps) {
     <div className="flex flex-col gap-4">
       {posts.map((post) => (
         <Link
-          className="group block max-w-162.5 rounded-2xl bg-zinc-900/80 p-4 transition-all duration-300 hover:bg-zinc-900"
+          className="group block cursor-pointer rounded-2xl bg-muted/30 p-4 transition-all duration-300 hover:bg-muted/60 dark:bg-muted/30 dark:hover:bg-muted/50"
           href={`/blog/${post.slug}`}
           key={post.slug}
         >
@@ -37,6 +37,78 @@ export function BlogPosts({ posts }: BlogPostsProps) {
           </div>
         </Link>
       ))}
+    </div>
+  );
+}
+
+interface HighlightsProps {
+  children: React.ReactNode;
+  title?: string;
+}
+
+export function Highlights({
+  children,
+  title = "Recent highlights",
+}: HighlightsProps) {
+  return (
+    <section className="my-16! grid w-full grid-cols-1 gap-8 md:grid-cols-3">
+      <div className="md:col-span-1">
+        <h2 className="font-medium text-muted-foreground text-xl!">{title}</h2>
+      </div>
+      <div className="flex max-w-2xl! flex-col gap-4 md:col-span-2">
+        {children}
+      </div>
+    </section>
+  );
+}
+
+interface HighlightItemProps {
+  title: string;
+  summary: string;
+  category: string;
+  date: string;
+  href: string;
+}
+
+export function HighlightItem({
+  title,
+  summary,
+  category,
+  date,
+  href,
+}: HighlightItemProps) {
+  return (
+    <Link
+      className="group no-underline! block rounded-lg border border-muted/40 bg-muted/30 p-6 transition-colors hover:bg-muted/20"
+      href={href}
+    >
+      <h3 className="mb-1 font-medium text-lg!">{title}</h3>
+      <p className="mb-4 line-clamp-2 text-muted-foreground text-sm!">
+        {summary}
+      </p>
+      <div className="flex items-center gap-2 text-muted-foreground text-xs">
+        <span className="capitalize">{category}</span>
+        <span>·</span>
+        <time>{date}</time>
+      </div>
+    </Link>
+  );
+}
+
+interface HighlightsActionProps {
+  href: string;
+  children: React.ReactNode;
+}
+
+export function HighlightsAction({ href, children }: HighlightsActionProps) {
+  return (
+    <div className="mt-4">
+      <Link
+        className="type-sm no-underline! font-medium text-orange-600 hover:text-orange-700 hover:underline dark:text-orange-500"
+        href={href}
+      >
+        {children}
+      </Link>
     </div>
   );
 }

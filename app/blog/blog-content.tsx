@@ -52,13 +52,13 @@ export function BlogContent({ allPosts, categories }: BlogContentProps) {
         </div>
       </header>
 
-      <div className="container">
+      <div className="container mb-5 md:mb-10">
         <div className="grid gap-12 lg:grid-cols-[200px_1fr]">
           <aside className="lg:sticky lg:top-8 lg:h-fit">
             <nav className="flex flex-col gap-1">
               <Link
                 aria-current={validCategory === null ? "page" : undefined}
-                className="rounded-md px-3 py-1.5 text-left text-muted-foreground text-sm transition-colors hover:text-foreground active:text-muted-foreground aria-[current=page]:pointer-events-none aria-[current=page]:text-foreground"
+                className="rounded-md px-3 py-1.5 text-left text-md text-muted-foreground transition-colors hover:text-foreground active:text-muted-foreground aria-[current=page]:pointer-events-none aria-[current=page]:text-foreground"
                 href="/blog"
               >
                 All Posts
@@ -66,7 +66,7 @@ export function BlogContent({ allPosts, categories }: BlogContentProps) {
               {categories.map((cat) => (
                 <Link
                   aria-current={validCategory === cat.id ? "page" : undefined}
-                  className="rounded-md px-3 py-1.5 text-left text-muted-foreground text-sm transition-colors hover:text-foreground active:text-muted-foreground aria-[current=page]:pointer-events-none aria-[current=page]:text-foreground"
+                  className="rounded-md px-3 py-1.5 text-left text-md text-muted-foreground transition-colors hover:text-foreground active:text-muted-foreground aria-[current=page]:pointer-events-none aria-[current=page]:text-foreground"
                   href={`/blog?category=${cat.id}`}
                   key={cat.id}
                 >
@@ -76,13 +76,13 @@ export function BlogContent({ allPosts, categories }: BlogContentProps) {
             </nav>
           </aside>
 
-          <main>
+          <main className="max-w-2xl">
             <BlogPosts posts={posts} />
 
             {posts.length > 10 && (
               <div className="mt-12 flex justify-end">
                 <Link
-                  className="group flex flex-col items-end rounded-lg border border-border/50 bg-card/30 px-6 py-4 transition-all hover:border-amber-500/30 hover:bg-card/50"
+                  className="group flex w-full flex-col items-end rounded-lg border border-border/50 bg-muted/30 px-6 py-4 transition-all hover:border-muted-50/30 hover:bg-muted/50"
                   href={
                     validCategory
                       ? `/blog?category=${validCategory}&page=2`
