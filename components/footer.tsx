@@ -160,7 +160,7 @@ export default function Footer() {
 
         <div className="mt-12 flex flex-col items-start justify-between gap-4 border-white/5 border-t pt-8 sm:flex-row sm:items-center">
           <div className="flex items-center gap-4 text-muted-foreground text-sm">
-            <span>© {new Date().getFullYear()} Cursor</span>
+            <span>© 2026 Cursor</span>
             <span className="flex items-center gap-1.5">
               <span className="size-2 rounded-full bg-red-500" />
               SOC 2 Certified
