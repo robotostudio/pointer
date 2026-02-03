@@ -9,6 +9,30 @@ category: news
 
 Dropbox engineers now accept more than one million lines of AI-suggested code each month. This case study explores how they achieved widespread adoption and transformed their software development lifecycle.
 
+
+```tsx tab="TypeScript" filename="greeting.tsx" lineNumbers
+interface GreetingProps {
+  name: string;
+  age?: number;
+}
+
+export function Greeting({ name, age }: GreetingProps) {
+  return (
+    <div>
+      <h1>Hello, {name}!</h1>
+      {age && <p>You are {age} years old.</p>}
+    </div>
+  );
+}
+```
+
+```ts tab="JavaScript" filename="test.js" lineNumbers
+
+const x = 234;
+
+console.log(x)
+```
+
 <Callout type="success">
 **Key Results**: 550,000 files indexed • 1M+ lines of AI-generated code accepted monthly • 90% adoption across engineering
 </Callout>

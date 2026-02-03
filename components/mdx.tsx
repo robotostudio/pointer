@@ -4,6 +4,7 @@ import { MDXRemote, type MDXRemoteProps } from "next-mdx-remote/rsc";
 import React from "react";
 import { CodeBlockEnhancer } from "@/components/code-block";
 import { CodeTabsEnhancer } from "@/components/code-tabs";
+import { CTA, CTAButton, CTATitle } from "./cta";
 import {
   Button,
   Callout,
@@ -11,7 +12,44 @@ import {
   FeatureCard,
   Testimonial,
 } from "./custom-mdx-components";
-import { Hero } from "./hero";
+import { FAQ, FAQItem } from "./faq";
+import {
+  Feature,
+  FeatureActions,
+  FeatureButton,
+  FeatureContent,
+  FeatureDescription,
+  FeatureMedia,
+  FeatureTitle,
+} from "./feature";
+import {
+  Hero,
+  HeroActions,
+  HeroBackdrop,
+  HeroButton,
+  HeroDescription,
+  HeroLabel,
+  HeroMedia,
+  HeroTitle,
+} from "./hero";
+import {
+  HighlightCard,
+  HighlightCardAction,
+  HighlightCardDescription,
+  HighlightCardGrid,
+  HighlightCardImage,
+  HighlightCardTitle,
+} from "./highlight-card";
+import { LogoCloud, LogoCloudItem } from "./logo-cloud";
+import {
+  PricingAction,
+  PricingCard,
+  PricingDescription,
+  PricingFeature,
+  PricingFeatures,
+  PricingGrid,
+  PricingHero,
+} from "./pricing";
 
 interface TableProps {
   data: {
@@ -122,8 +160,42 @@ const components = {
   Button,
   CardGrid,
   Hero,
+  HeroLabel,
+  HeroTitle,
+  HeroDescription,
+  HeroActions,
+  HeroButton,
+  HeroMedia,
+  HeroBackdrop,
+  HighlightCard,
+  HighlightCardAction,
+  HighlightCardDescription,
+  HighlightCardGrid,
+  HighlightCardImage,
+  HighlightCardTitle,
   Testimonial,
   Callout,
+  CTA,
+  CTAButton,
+  CTATitle,
+  FAQ,
+  FAQItem,
+  Feature,
+  FeatureContent,
+  FeatureTitle,
+  FeatureDescription,
+  FeatureActions,
+  FeatureButton,
+  FeatureMedia,
+  LogoCloud,
+  LogoCloudItem,
+  PricingGrid,
+  PricingCard,
+  PricingFeatures,
+  PricingFeature,
+  PricingDescription,
+  PricingAction,
+  PricingHero,
 };
 
 export async function CustomMDX(props: MDXRemoteProps) {
