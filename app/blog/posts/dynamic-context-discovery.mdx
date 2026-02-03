@@ -1,0 +1,70 @@
+---
+title: Dynamic Context Discovery in AI Coding Agents
+publishedAt: 2026-01-30
+summary: As AI models improve as agents, providing fewer details up front enables better autonomous context retrieval and more efficient token usage.
+category: research
+---
+
+# Dynamic Context Discovery in AI Coding Agents
+
+Coding agents are rapidly transforming software development. Their advancement stems from both enhanced agentic models and superior context engineering strategies.
+
+A key insight from recent research: as models have become better as agents, there's been success by providing fewer details up front, making it easier for the agent to pull relevant context on its own.
+
+## Dynamic vs. Static Context
+
+The concept of **dynamic context discovery** contrasts with *static context*, which is perpetually included in every interaction. Dynamic discovery proves substantially more token-efficient while improving response quality by reducing potentially contradictory information.
+
+<Callout type="info">
+Rather than front-loading all possible context, let the AI agent discover what it needs as it works through a problem.
+</Callout>
+
+## Five Implementation Strategies
+
+### 1. Converting Long Tool Responses to Files
+
+Tool calls frequently expand context windows via large JSON responses. While optimized first-party tools use minimal response formats, third-party tools (shell commands, MCP calls) lack this optimization.
+
+Rather than truncating outputs—risking data loss—a better approach is writing results to files, enabling agents to selectively read needed portions using commands like `tail` or `grep`.
+
+### 2. Leveraging Chat History During Summarization
+
+Context window saturation triggers summarization, potentially degrading agent knowledge. This can be mitigated by referencing chat history as accessible files, allowing agents to recover missing details through search when needed.
+
+### 3. Agent Skills Open Standard Support
+
+Agent Skills is an open standard for domain-specific agent capabilities defined through files. Agents discover relevant skills dynamically using grep and semantic search tools, rather than loading all possible skills into context upfront.
+
+### 4. Efficient MCP Tool Loading
+
+MCP servers often include numerous tools with lengthy descriptions, inflating context unnecessarily. By syncing tool descriptions to folders and providing agents only basic naming information initially, significant token savings can be achieved.
+
+<Callout type="success">
+In A/B testing, this strategy reduced total agent tokens by 46.9% in runs that called an MCP tool—a statistically significant improvement.
+</Callout>
+
+### 5. Terminal Sessions as Files
+
+Rather than requiring manual copy-paste of terminal outputs, syncing integrated terminal outputs directly to the local filesystem enables agents to grep relevant logs and understand command failures through context when needed.
+
+## Key Takeaways
+
+Files represent a simple, powerful primitive for LLM tool interfaces. As coding agents advance, this approach provides flexibility for future developments while maintaining current effectiveness.
+
+<CardGrid columns={3}>
+  <FeatureCard
+    title="Token Efficient"
+    description="Load context only when needed"
+    icon="📉"
+  />
+  <FeatureCard
+    title="Better Quality"
+    description="Less contradictory information"
+    icon="✨"
+  />
+  <FeatureCard
+    title="Flexible"
+    description="Adapts to future model improvements"
+    icon="🔄"
+  />
+</CardGrid>

@@ -1,18 +1,18 @@
-# Ultracite Code Standards
+# Code Standards
 
-This project uses **Ultracite**, a zero-config preset that enforces strict code quality standards through automated formatting and linting.
+This project uses **Ultracite** (Biome-based) for linting and formatting. Run `pnpm dlx ultracite fix` before committing.
 
-## Quick Reference
+## Project-Specific Rules
 
-- **Format code**: `pnpm dlx ultracite fix`
-- **Check for issues**: `pnpm dlx ultracite check`
-- **Diagnose setup**: `pnpm dlx ultracite doctor`
+**Tailwind CSS**: Use `size-*` when height and width are equal. Use `cn()` from `@/lib/utils` for conditional classes.
 
-Biome (the underlying engine) provides robust linting and formatting. Most issues are automatically fixable.
+**Imports**: Always use absolute imports with `@/` path alias.
+
+**Comments**: Avoid unnecessary comments. Code should be self-documenting.
 
 ---
 
-## Core Principles
+## Core Principles (Ultracite)
 
 Write code that is **accessible, performant, type-safe, and maintainable**. Focus on clarity and explicit intent over brevity.
 
@@ -118,6 +118,3 @@ Biome's linter will catch most issues automatically. Focus your attention on:
 5. **User experience** - Accessibility, performance, and usability considerations
 6. **Documentation** - Add comments for complex logic, but prefer self-documenting code
 
----
-
-Most formatting and common issues are automatically fixed by Biome. Run `pnpm dlx ultracite fix` before committing to ensure compliance.

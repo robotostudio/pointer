@@ -2,7 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { MDXRemote, type MDXRemoteProps } from "next-mdx-remote/rsc";
 import React from "react";
-import { highlight } from "sugar-high";
+import { CodeBlockEnhancer } from "@/components/code-block";
+import { CodeTabsEnhancer } from "@/components/code-tabs";
+import { CTA, CTAButton, CTATitle } from "./cta";
 import {
   Button,
   Callout,
@@ -10,7 +12,44 @@ import {
   FeatureCard,
   Testimonial,
 } from "./custom-mdx-components";
-import { Hero } from "./hero";
+import { FAQ, FAQItem } from "./faq";
+import {
+  Feature,
+  FeatureActions,
+  FeatureButton,
+  FeatureContent,
+  FeatureDescription,
+  FeatureMedia,
+  FeatureTitle,
+} from "./feature";
+import {
+  Hero,
+  HeroActions,
+  HeroBackdrop,
+  HeroButton,
+  HeroDescription,
+  HeroLabel,
+  HeroMedia,
+  HeroTitle,
+} from "./hero";
+import {
+  HighlightCard,
+  HighlightCardAction,
+  HighlightCardDescription,
+  HighlightCardGrid,
+  HighlightCardImage,
+  HighlightCardTitle,
+} from "./highlight-card";
+import { LogoCloud, LogoCloudItem } from "./logo-cloud";
+import {
+  PricingAction,
+  PricingCard,
+  PricingDescription,
+  PricingFeature,
+  PricingFeatures,
+  PricingGrid,
+  PricingHero,
+} from "./pricing";
 
 interface TableProps {
   data: {
@@ -86,15 +125,6 @@ function RoundedImage({ alt, ...props }: ImageProps) {
   return <Image alt={alt} className="rounded-lg" {...props} />;
 }
 
-interface CodeProps {
-  children: string;
-}
-
-function Code({ children, ...props }: CodeProps) {
-  const codeHTML = highlight(children);
-  return <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />;
-}
-
 function slugify(str: string): string {
   return str
     .toString()
@@ -125,18 +155,65 @@ const components = {
   h6: createHeading(6),
   Image: RoundedImage,
   a: CustomLink,
-  code: Code,
   Table,
   FeatureCard,
   Button,
   CardGrid,
   Hero,
+  HeroLabel,
+  HeroTitle,
+  HeroDescription,
+  HeroActions,
+  HeroButton,
+  HeroMedia,
+  HeroBackdrop,
+  HighlightCard,
+  HighlightCardAction,
+  HighlightCardDescription,
+  HighlightCardGrid,
+  HighlightCardImage,
+  HighlightCardTitle,
   Testimonial,
   Callout,
+  CTA,
+  CTAButton,
+  CTATitle,
+  FAQ,
+  FAQItem,
+  Feature,
+  FeatureContent,
+  FeatureTitle,
+  FeatureDescription,
+  FeatureActions,
+  FeatureButton,
+  FeatureMedia,
+  LogoCloud,
+  LogoCloudItem,
+  PricingGrid,
+  PricingCard,
+  PricingFeatures,
+  PricingFeature,
+  PricingDescription,
+  PricingAction,
+  PricingHero,
 };
 
-export function CustomMDX(props: MDXRemoteProps) {
+export async function CustomMDX(props: MDXRemoteProps) {
+  const { rehypeShiki } = await import("@/lib/rehype-shiki");
+
   return (
-    <MDXRemote {...props} components={{ ...components, ...props.components }} />
+    <>
+      <MDXRemote
+        {...props}
+        components={{ ...components, ...props.components }}
+        options={{
+          mdxOptions: {
+            rehypePlugins: [rehypeShiki],
+          },
+        }}
+      />
+      <CodeBlockEnhancer />
+      <CodeTabsEnhancer />
+    </>
   );
 }

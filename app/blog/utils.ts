@@ -1,25 +1,23 @@
+import "server-only";
+
 import fs from "node:fs";
 import path from "node:path";
+import {
+  type BlogCategory,
+  type BlogPost,
+  type BlogPostMetadata,
+  CATEGORY_LABELS,
+  isValidCategory,
+} from "@/app/blog/types";
 
-export interface BlogPostMetadata {
-  title: string;
-  publishedAt: string;
-  summary: string;
-  image?: string;
-}
-
-export interface BlogPost {
-  metadata: BlogPostMetadata;
-  slug: string;
-  content: string;
-}
+const FRONTMATTER_REGEX = /---\s*([\s\S]*?)\s*---/;
+const QUOTE_REGEX = /^['"](.*)['"]$/;
 
 function parseFrontmatter(fileContent: string): {
   metadata: BlogPostMetadata;
   content: string;
 } {
-  const frontmatterRegex = /---\s*([\s\S]*?)\s*---/;
-  const match = frontmatterRegex.exec(fileContent);
+  const match = FRONTMATTER_REGEX.exec(fileContent);
 
   if (!match) {
     return {
@@ -29,18 +27,29 @@ function parseFrontmatter(fileContent: string): {
   }
 
   const frontMatterBlock = match[1];
-  const content = fileContent.replace(frontmatterRegex, "").trim();
+  const content = fileContent.replace(FRONTMATTER_REGEX, "").trim();
   const frontMatterLines = frontMatterBlock.trim().split("\n");
   const metadata: Partial<BlogPostMetadata> = {};
 
-  frontMatterLines.forEach((line) => {
+  for (const line of frontMatterLines) {
     const [key, ...valueArr] = line.split(": ");
-    if (!key) return;
+    if (!key) {
+      continue;
+    }
 
+    const trimmedKey = key.trim();
     let value = valueArr.join(": ").trim();
-    value = value.replace(/^['"](.*)['"]$/, "$1");
-    metadata[key.trim() as keyof BlogPostMetadata] = value;
-  });
+    value = value.replace(QUOTE_REGEX, "$1");
+
+    if (trimmedKey === "category") {
+      if (isValidCategory(value)) {
+        metadata.category = value;
+      }
+    } else {
+      metadata[trimmedKey as Exclude<keyof BlogPostMetadata, "category">] =
+        value;
+    }
+  }
 
   return { metadata: metadata as BlogPostMetadata, content };
 }
@@ -74,14 +83,9 @@ function getMDXData(dir: string): BlogPost[] {
   });
 }
 
-/**
- * Get all blog posts
- * @returns Array of blog posts sorted by date (newest first)
- */
 export function getBlogPosts(): BlogPost[] {
   const posts = getMDXData(path.join(process.cwd(), "app", "blog", "posts"));
 
-  // Sort by date, newest first
   return posts.sort((a, b) => {
     const dateA = new Date(a.metadata.publishedAt);
     const dateB = new Date(b.metadata.publishedAt);
@@ -89,47 +93,28 @@ export function getBlogPosts(): BlogPost[] {
   });
 }
 
-/**
- * Format date for display
- * @param date - Date string in YYYY-MM-DD format
- * @param includeRelative - Whether to include relative time (e.g., "2y ago")
- * @returns Formatted date string
- */
-export function formatDate(date: string, includeRelative = false): string {
-  const currentDate = new Date();
-  let dateString = date;
+export function getBlogCategories(): {
+  id: BlogCategory;
+  label: string;
+  count: number;
+}[] {
+  const posts = getBlogPosts();
+  const categoryCounts = new Map<BlogCategory, number>();
 
-  if (!dateString.includes("T")) {
-    dateString = `${dateString}T00:00:00`;
+  for (const post of posts) {
+    if (post.metadata.category) {
+      const count = categoryCounts.get(post.metadata.category) || 0;
+      categoryCounts.set(post.metadata.category, count + 1);
+    }
   }
 
-  const targetDate = new Date(dateString);
+  return Array.from(categoryCounts.entries()).map(([id, count]) => ({
+    id,
+    label: CATEGORY_LABELS[id],
+    count,
+  }));
+}
 
-  const yearsAgo = currentDate.getFullYear() - targetDate.getFullYear();
-  const monthsAgo = currentDate.getMonth() - targetDate.getMonth();
-  const daysAgo = currentDate.getDate() - targetDate.getDate();
-
-  let formattedDate = "";
-
-  if (yearsAgo > 0) {
-    formattedDate = `${yearsAgo}y ago`;
-  } else if (monthsAgo > 0) {
-    formattedDate = `${monthsAgo}mo ago`;
-  } else if (daysAgo > 0) {
-    formattedDate = `${daysAgo}d ago`;
-  } else {
-    formattedDate = "Today";
-  }
-
-  const fullDate = targetDate.toLocaleString("en-us", {
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-  });
-
-  if (!includeRelative) {
-    return fullDate;
-  }
-
-  return `${fullDate} (${formattedDate})`;
+export function getBlogPostsByCategory(category: BlogCategory): BlogPost[] {
+  return getBlogPosts().filter((post) => post.metadata.category === category);
 }

@@ -2,6 +2,7 @@
 title: Getting Started with MDX CMS
 publishedAt: 2026-01-02
 summary: Learn how to use this simple and powerful MDX-based content management system for your Next.js projects.
+category: product
 ---
 
 # Getting Started with MDX CMS
@@ -12,7 +13,289 @@ This project uses MDX files as a simple, file-based content management system. N
 
 MDX is Markdown with the power of JSX. You can write regular Markdown and use React components within it.
 
-```mdx
+```tsx tab="TypeScript" filename="greeting.tsx" lineNumbers
+interface GreetingProps {
+  name: string;
+  age?: number;
+}
+
+export function Greeting({ name, age }: GreetingProps) {
+  return (
+    <div>
+      <h1>Hello, {name}!</h1>
+      {age && <p>You are {age} years old.</p>}
+    </div>
+  );
+}
+```
+
+```jsx tab="JavaScript" filename="greeting.jsx" lineNumbers
+export function Greeting({ name, age }) {
+  return (
+    <div>
+      <h1>Hello, {name}!</h1>
+      {age && <p>You are {age} years old.</p>}
+    </div>
+  );
+}
+```
+
+You can also use tabs for package manager commands:
+
+```bash tab="npm" groupId="pkg"
+npm install next react react-dom
+```
+
+```bash tab="pnpm" groupId="pkg"
+pnpm add next react react-dom
+```
+
+```bash tab="yarn" groupId="pkg"
+yarn add next react react-dom
+```
+
+And here's another example with the same `groupId` to show synced tabs:
+
+```bash tab="npm" groupId="pkg"
+npm run dev
+```
+
+```bash tab="pnpm" groupId="pkg"
+pnpm dev
+```
+
+```bash tab="yarn" groupId="pkg"
+yarn dev
+```
+
+```mdx filename="app/blog/posts/my-post.mdx"
+---
+title: My Blog Post
+publishedAt: 2026-01-02
+summary: A brief description
+---
+
+# Your content here
+```
+
+
+```ts tab="Rehype Shiki" filename="app/lib/rehype-shiki.ts" lineNumbers
+import type { Element, Root, Text } from "hast";
+import { fromHtml } from "hast-util-from-html";
+import { visit } from "unist-util-visit";
+import { COPY_ICON_SVG, getFileIconSvg } from "@/app/lib/file-icons";
+import { highlightCode } from "@/app/lib/shiki";
+
+const LINE_NUMBERS_REGEX = /\blineNumbers(?:=(\d+))?\b/; // [!code highlight]
+const FILENAME_REGEX = /\bfilename=["']([^"']+)["']/;
+
+export function rehypeShiki() { // [!code focus:3]
+  return async function transformer(tree: Root) {
+    const codeBlocks: Array<{
+      node: Element;
+      parent: Element | Root;
+      index: number;
+      code: any; //[!code --] 
+      code: string; //[!code ++]
+      lang: string;
+      showLineNumbers: boolean;
+      startLineNumber: number;
+      filename: string | null;
+    }> = [];
+
+    visit(tree, "element", (node: Element, index, parent) => {
+      if (
+        node.tagName === "pre" &&
+        node.children[0]?.type === "element" &&
+        (node.children[0] as Element).tagName === "code"
+      ) {
+        const codeElement = node.children[0] as Element;
+        const className = codeElement.properties?.className;
+
+        let lang = "plaintext";
+        if (Array.isArray(className)) {
+          const langClass = className.find(
+            (c) => typeof c === "string" && c.startsWith("language-")
+          );
+          if (langClass && typeof langClass === "string") {
+            lang = langClass.replace("language-", "");
+          }
+        }
+
+        const meta =
+          (codeElement.data as Record<string, unknown>)?.meta ||
+          codeElement.properties?.metastring ||
+          "";
+        const lineNumbersMatch = String(meta).match(LINE_NUMBERS_REGEX);
+        const hasLineNumbers = lineNumbersMatch !== null;
+        const startLineNumber = lineNumbersMatch?.[1]
+          ? Number.parseInt(lineNumbersMatch[1], 10)
+          : 1;
+
+        const filenameMatch = String(meta).match(FILENAME_REGEX);
+        const filename = filenameMatch?.[1] || null;
+
+        const code = getTextContent(codeElement);
+
+        if (parent && typeof index === "number") {
+          codeBlocks.push({
+            node,
+            parent,
+            index,
+            code,
+            lang,
+            showLineNumbers: hasLineNumbers,
+            startLineNumber,
+            filename,
+          });
+        }
+      }
+    });
+
+    await Promise.all(
+      codeBlocks.map(
+        async ({
+          parent,
+          index,
+          code,
+          lang,
+          showLineNumbers,
+          startLineNumber,
+          filename,
+        }) => {
+          const trimmedCode = code.trim();
+          const highlightedHtml = await highlightCode({
+            code: trimmedCode,
+            lang,
+            showLineNumbers,
+            startLineNumber,
+          });
+
+          const hastTree = fromHtml(highlightedHtml, { fragment: true });
+          const preElement = hastTree.children[0] as Element;
+
+          const wrapperChildren: Element[] = [];
+
+          if (filename) {
+            const headerElement: Element = {
+              type: "element",
+              tagName: "div",
+              properties: {
+                className: ["code-block-header"],
+              },
+              children: [
+                {
+                  type: "element",
+                  tagName: "div",
+                  properties: {
+                    className: ["code-block-header-filename"],
+                    "data-filename": filename,
+                  },
+                  children: [
+                    {
+                      type: "element",
+                      tagName: "span",
+                      properties: {
+                        className: ["code-block-icon"],
+                      },
+                      children: fromHtml(getFileIconSvg(filename), {
+                        fragment: true,
+                      }).children as Element[],
+                    },
+                    {
+                      type: "element",
+                      tagName: "span",
+                      properties: {},
+                      children: [{ type: "text", value: filename }],
+                    },
+                  ],
+                },
+                {
+                  type: "element",
+                  tagName: "button",
+                  properties: {
+                    type: "button",
+                    className: ["copy-button"],
+                    "aria-label": "Copy code",
+                  },
+                  children: fromHtml(COPY_ICON_SVG, {
+                    fragment: true,
+                  }).children as Element[],
+                },
+              ],
+            };
+            wrapperChildren.push(headerElement);
+          }
+
+          if (preElement) {
+            wrapperChildren.push(preElement);
+          }
+
+          if (!filename) {
+            const copyButtonContainer: Element = {
+              type: "element",
+              tagName: "div",
+              properties: {
+                className: ["copy-button-container"],
+              },
+              children: [
+                {
+                  type: "element",
+                  tagName: "button",
+                  properties: {
+                    type: "button",
+                    className: ["copy-button"],
+                    "aria-label": "Copy code",
+                  },
+                  children: fromHtml(COPY_ICON_SVG, {
+                    fragment: true,
+                  }).children as Element[],
+                },
+              ],
+            };
+            wrapperChildren.push(copyButtonContainer);
+          }
+
+          const wrapper: Element = {
+            type: "element",
+            tagName: "div",
+            properties: {
+              className: filename
+                ? ["shiki-wrapper", "has-header"]
+                : ["shiki-wrapper"],
+              "data-language": lang,
+              "data-line-numbers": String(showLineNumbers),
+              "data-code": encodeURIComponent(trimmedCode),
+              ...(filename && { "data-filename": filename }),
+            },
+            children: wrapperChildren,
+          };
+
+          if (Array.isArray(parent.children)) {
+            parent.children[index] = wrapper;
+          }
+        }
+      )
+    );
+  };
+}
+
+function getTextContent(node: Element | Text): string {
+  if (node.type === "text") {
+    return node.value;
+  }
+  if ("children" in node && Array.isArray(node.children)) {
+    return node.children
+      .map((child) => getTextContent(child as Element | Text))
+      .join("");
+  }
+  return "";
+}
+```
+
+
+
+```mdx tab="Markdown Test" filename="content/pages/example.mdx" lineNumbers
 # Regular Markdown heading
 
 And you can use components:
@@ -78,7 +361,7 @@ Success! You've learned how to use callouts.
 
 Blog posts work similarly, but are stored in `app/blog/posts/`:
 
-```mdx
+```mdx filename="app/blog/posts/my-post.mdx"
 ---
 title: My Blog Post
 publishedAt: 2026-01-02

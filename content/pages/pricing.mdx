@@ -1,0 +1,174 @@
+---
+title: Pricing
+description: Simple, transparent pricing for teams of all sizes
+layout: default
+showTitle: false
+---
+
+<PricingHero title="Pricing">
+
+<PricingGrid title="Individual Plans" columns={4}>
+  <PricingCard title="Hobby" price="Free">
+    <PricingDescription>Includes:</PricingDescription>
+    <PricingFeatures>
+      <PricingFeature>One-week Pro trial</PricingFeature>
+      <PricingFeature>Limited Agent requests</PricingFeature>
+      <PricingFeature>Limited Tab completions</PricingFeature>
+    </PricingFeatures>
+    <PricingAction href="/download">Download</PricingAction>
+  </PricingCard>
+
+  <PricingCard title="Pro" price="$20" yearlyPrice="$16" period="/mo.">
+    <PricingDescription>Everything in Hobby, plus:</PricingDescription>
+    <PricingFeatures>
+      <PricingFeature>Extended limits on Agent</PricingFeature>
+      <PricingFeature>Unlimited Tab completions</PricingFeature>
+      <PricingFeature>Background Agents</PricingFeature>
+      <PricingFeature>Maximum context windows</PricingFeature>
+    </PricingFeatures>
+    <PricingAction href="/signup">Get Pro</PricingAction>
+  </PricingCard>
+
+  <PricingCard title="Pro+" price="$60" yearlyPrice="$48" period="/mo." badge="Recommended">
+    <PricingDescription>Everything in Pro, plus:</PricingDescription>
+    <PricingFeatures>
+      <PricingFeature>3x usage on all OpenAI, Claude, Gemini models</PricingFeature>
+    </PricingFeatures>
+    <PricingAction href="/signup" variant="primary">Get Pro+</PricingAction>
+  </PricingCard>
+
+  <PricingCard title="Ultra" price="$200" yearlyPrice="$160" period="/mo.">
+    <PricingDescription>Everything in Pro, plus:</PricingDescription>
+    <PricingFeatures>
+      <PricingFeature>20x usage on all OpenAI, Claude, Gemini models</PricingFeature>
+      <PricingFeature>Priority access to new features</PricingFeature>
+    </PricingFeatures>
+    <PricingAction href="/signup">Get Ultra</PricingAction>
+  </PricingCard>
+</PricingGrid>
+
+<PricingGrid title="Business Plans" columns={2}>
+  <PricingCard title="Teams" price="$40" yearlyPrice="$32" period="/user/mo.">
+    <PricingDescription>Everything in Pro, plus:</PricingDescription>
+    <PricingFeatures>
+      <PricingFeature>Centralized team billing</PricingFeature>
+      <PricingFeature>Usage analytics and reporting</PricingFeature>
+      <PricingFeature>Org-wide privacy mode controls</PricingFeature>
+      <PricingFeature>Role-based access control</PricingFeature>
+      <PricingFeature>SAML/OIDC SSO</PricingFeature>
+    </PricingFeatures>
+    <PricingAction href="/teams">Get Teams</PricingAction>
+  </PricingCard>
+
+  <PricingCard title="Enterprise" price="Custom">
+    <PricingDescription>Everything in Teams, plus:</PricingDescription>
+    <PricingFeatures>
+      <PricingFeature>Pooled usage</PricingFeature>
+      <PricingFeature>Invoice/PO billing</PricingFeature>
+      <PricingFeature>SCIM seat management</PricingFeature>
+      <PricingFeature>AI code tracking API and audit logs</PricingFeature>
+      <PricingFeature>Granular admin and model controls</PricingFeature>
+      <PricingFeature>Priority support and account management</PricingFeature>
+    </PricingFeatures>
+    <PricingAction href="/contact">Contact Sales</PricingAction>
+  </PricingCard>
+</PricingGrid>
+
+<PricingGrid title="Bugbot Add-on" columns={4}>
+  <PricingCard title="Free" price="$0">
+    <PricingDescription>Includes:</PricingDescription>
+    <PricingFeatures>
+      <PricingFeature>Limited code reviews each month</PricingFeature>
+      <PricingFeature>Unlimited access to Cursor Ask</PricingFeature>
+      <PricingFeature>Cursor connection to auto-fix bugs</PricingFeature>
+      <PricingFeature>GitHub integration</PricingFeature>
+    </PricingFeatures>
+    <PricingAction href="/bugbot">Try Bugbot</PricingAction>
+  </PricingCard>
+
+  <PricingCard title="Pro" price="$40" yearlyPrice="$32" period="/user/mo.">
+    <PricingDescription>Everything in Free, plus:</PricingDescription>
+    <PricingFeatures>
+      <PricingFeature>14 day individual trial</PricingFeature>
+      <PricingFeature>Unlimited reviews on up to 200 PRs/month</PricingFeature>
+      <PricingFeature>Access to Bugbot Rules</PricingFeature>
+    </PricingFeatures>
+    <PricingAction href="/bugbot" variant="primary">Get Bugbot Pro</PricingAction>
+  </PricingCard>
+
+  <PricingCard title="Teams" price="$40" yearlyPrice="$32" period="/user/mo.">
+    <PricingDescription>Everything in Pro, plus:</PricingDescription>
+    <PricingFeatures>
+      <PricingFeature>14-day team trial</PricingFeature>
+      <PricingFeature>Unlimited code reviews on all PRs</PricingFeature>
+      <PricingFeature>Analytics and reporting dashboard</PricingFeature>
+      <PricingFeature>Advanced rules and settings</PricingFeature>
+    </PricingFeatures>
+    <PricingAction href="/bugbot">Get Bugbot Teams</PricingAction>
+  </PricingCard>
+
+  <PricingCard title="Enterprise" price="Custom">
+    <PricingDescription>Everything in Teams, plus:</PricingDescription>
+    <PricingFeatures>
+      <PricingFeature>30-day org-wide trial</PricingFeature>
+      <PricingFeature>Advanced analytics and reporting</PricingFeature>
+      <PricingFeature>Priority support and account management</PricingFeature>
+    </PricingFeatures>
+    <PricingAction href="/contact">Contact Sales</PricingAction>
+  </PricingCard>
+</PricingGrid>
+
+<LogoCloud title="Trusted every day by millions of professional developers.">
+  <LogoCloudItem name="Stripe" invertOnDark>
+    <svg viewBox="0 0 60 25"><path fill="currentColor" d="M59.64 14.28h-8.06c.19 1.93 1.6 2.55 3.2 2.55 1.64 0 2.96-.37 4.05-.95v3.32a8.33 8.33 0 0 1-4.56 1.1c-4.01 0-6.83-2.5-6.83-7.48 0-4.19 2.39-7.52 6.3-7.52 3.92 0 5.96 3.28 5.96 7.5 0 .4-.02 1.04-.06 1.48zm-6.3-5.63c-1.03 0-1.75.82-1.9 2.19h3.73c-.04-1.27-.7-2.19-1.83-2.19zM41.14 20.3V5.57l4.14-.87v15.6h-4.14zm0-18.77 4.14-.87v3.67l-4.14.87V1.53zm-5.15 10.42c0-2.14-.65-2.96-2.03-2.96-.55 0-1.2.16-1.58.36v8.72h-4.14V5.82c1.66-.7 3.96-1.14 6.26-1.14 1.81 0 3.17.45 4.14 1.35 1.07 1.04 1.5 2.38 1.5 4.78v9.49h-4.15v-8.35zm-12.96 1.67c0 2.62-2.14 6.68-7.45 6.68-1.88 0-3.77-.5-5.16-1.3l.86-3.18c1.27.66 2.72 1.12 4.1 1.12 1.85 0 3.29-1.03 3.29-2.82 0-1.51-1.03-2.44-2.97-3.5-2.3-1.24-4.53-2.9-4.53-5.97 0-3.4 2.53-5.88 6.43-5.88 1.66 0 3.25.36 4.31.87l-.8 3.1c-1.01-.5-2.26-.77-3.41-.77-1.6 0-2.66.79-2.66 2.11 0 1.39 1.3 2.25 3.1 3.2 2.5 1.33 4.89 2.94 4.89 6.34zM5.57 5.3c1.77-.7 4.12-1.14 6.52-1.14 2.24 0 3.87.57 4.88 1.71.9.99 1.25 2.14 1.25 4.38v9.83c-1.5.47-4.04 1.02-6.8 1.02-1.96 0-3.5-.27-4.6-.83-1.3-.66-2.11-1.88-2.11-3.78 0-2.97 2.57-4.27 6.83-4.27.8 0 1.46.02 2.02.1v-.53c0-1.35-.58-1.92-2.35-1.92a11.7 11.7 0 0 0-4.5.95l-.86-3.05-.28-2.47zm6.48 7.73c-.66 0-1.17.04-1.66.12-.95.16-1.52.68-1.52 1.56 0 1.04.73 1.46 1.88 1.46.6 0 1.26-.09 1.78-.26V13c-.26-.02-.65-.02-1.08-.02l.6.05z" /></svg>
+  </LogoCloudItem>
+  <LogoCloudItem name="OpenAI" invertOnDark>
+    <svg viewBox="0 0 24 24"><path fill="currentColor" d="M22.282 9.821a5.985 5.985 0 0 0-.516-4.91 6.046 6.046 0 0 0-6.51-2.9A6.065 6.065 0 0 0 4.981 4.18a5.985 5.985 0 0 0-3.998 2.9 6.046 6.046 0 0 0 .743 7.097 5.98 5.98 0 0 0 .51 4.911 6.051 6.051 0 0 0 6.515 2.9A5.985 5.985 0 0 0 13.26 24a6.056 6.056 0 0 0 5.772-4.206 5.99 5.99 0 0 0 3.997-2.9 6.056 6.056 0 0 0-.747-7.073zM13.26 22.43a4.476 4.476 0 0 1-2.876-1.04l.141-.081 4.779-2.758a.795.795 0 0 0 .392-.681v-6.737l2.02 1.168a.071.071 0 0 1 .038.052v5.583a4.504 4.504 0 0 1-4.494 4.494zM3.6 18.304a4.47 4.47 0 0 1-.535-3.014l.142.085 4.783 2.759a.771.771 0 0 0 .78 0l5.843-3.369v2.332a.08.08 0 0 1-.033.062L9.74 19.95a4.5 4.5 0 0 1-6.14-1.646zM2.34 7.896a4.485 4.485 0 0 1 2.366-1.973V11.6a.766.766 0 0 0 .388.676l5.815 3.355-2.02 1.168a.076.076 0 0 1-.071 0l-4.83-2.786A4.504 4.504 0 0 1 2.34 7.872zm16.597 3.855-5.833-3.387L15.119 7.2a.076.076 0 0 1 .071 0l4.83 2.791a4.494 4.494 0 0 1-.676 8.105v-5.678a.79.79 0 0 0-.407-.667zm2.01-3.023-.141-.085-4.774-2.782a.776.776 0 0 0-.785 0L9.409 9.23V6.897a.066.066 0 0 1 .028-.061l4.83-2.787a4.5 4.5 0 0 1 6.68 4.66zm-12.64 4.135-2.02-1.164a.08.08 0 0 1-.038-.057V6.075a4.5 4.5 0 0 1 7.375-3.453l-.142.08-4.778 2.758a.795.795 0 0 0-.393.681zm1.097-2.365 2.602-1.5 2.607 1.5v2.999l-2.597 1.5-2.607-1.5z" /></svg>
+  </LogoCloudItem>
+  <LogoCloudItem name="Linear" invertOnDark>
+    <svg viewBox="0 0 100 100"><path fill="currentColor" d="M1.22541 61.5228c-.2225-.9485.90748-1.5459 1.59638-.857L39.3342 97.1782c.6889.6889.0915 1.8189-.857 1.5765C22.0369 94.8545 5.06528 77.9617 1.22541 61.5228ZM.00189 46.8891c-.01764.2833.08887.5599.29601.7671l52.0468 52.0466c.2072.2071.4838.3136.7671.296 6.3532-.3979 12.4591-1.9118 18.0786-4.3915.2467-.1089.4231-.3248.479-.586.0558-.2612-.0077-.5336-.1722-.7392L15.1596 37.8425c-.2055-.1645-.478-.228-.7392-.1722-.2611.0559-.477.2323-.586.479C11.3558 43.2298 9.84185 49.3357 9.44387 55.6889l47.2505 47.2506c4.5853-1.8547 8.7856-4.4557 12.4327-7.6752L13.3411 39.4784c-3.2195 3.6471-5.82048 7.8474-7.67518 12.4327L52.9166 99.1618c6.3531-.398 12.459-1.912 18.0785-4.3917.2468-.1089.4231-.3248.479-.586.0558-.2612-.0077-.5336-.1722-.7392L15.1596 37.8425c-.2055-.1645-.478-.228-.7392-.1722-.2611.0559-.477.2323-.586.479C11.3558 43.2298 9.84185 49.3357 9.44387 55.6889ZM1.22541 61.5228c-.2225-.9485.90748-1.5459 1.59638-.857L39.3342 97.1782c.6889.6889.0915 1.8189-.857 1.5965C22.0369 94.8545 5.06528 77.9617 1.22541 61.5228ZM.00189 46.8891c-.01764.2833.08887.5599.29601.7671l52.0468 52.0466c.2072.2071.4838.3136.7671.296 6.3532-.3979 12.4591-1.9118 18.0786-4.3915.2467-.1089.4231-.3248.479-.586.0558-.2612-.0077-.5336-.1722-.7392L15.1596 37.8425c-.2055-.1645-.478-.228-.7392-.1722-.2611.0559-.477.2323-.586.479C11.3558 43.2298 9.84185 49.3357 9.44387 55.6889Z" /></svg>
+  </LogoCloudItem>
+  <LogoCloudItem name="Datadog" invertOnDark>
+    <svg viewBox="0 0 800.55 856.85"><path fill="currentColor" d="m668.2 565.4-89.4-35.2-31.3 55.5-78.3-220.2-219.5 85 19.7 53.2-90.3-17.2 36.4-161.4 149.2 28.6 14.4 38.8 103-39.9-64.7-174.8 193.1 37.1-103.5 40 78.3 211.7 31.3-55.5 127.8 50.5zm-317.9 19.1-23.3-63.3-68.2 26.4 23.3 63.3zm-125.4 73.2-17.9-48.8L93.9 652l17.9 48.8zM560.35 856.85l-98.9-141.1-143.1 96.8 25.1 44.3h246.8l-29.9-43.1zm-207.3-23.2 57.3-38.9-43.7-62.4-57.3 38.9zm340.9-378 149.5-57.8-384.9-330.7-97.9 37.9zm93.5-260.3-119-175.3-154.3 59.7z" /></svg>
+  </LogoCloudItem>
+  <LogoCloudItem name="Rippling" invertOnDark>
+    <svg viewBox="0 0 394 80"><path fill="currentColor" d="M48.6 0C39.2 0 30.7 4.3 25.2 11.2c-3.5-3.4-8.2-5.5-13.4-5.5C5.3 5.7 0 11 0 17.5c0 5.2 2.1 9.9 5.5 13.3C2 36.3 0 43 0 50.3 0 66.7 13.3 80 29.7 80h37.9V48.1c0-11-3.4-21.2-9.2-29.6 5.8-3.8 9.6-10.3 9.6-17.7V0H48.6zm-29 67.5c-9.5 0-17.2-7.7-17.2-17.2 0-5.2 2.3-9.8 6-13 2.2-1.9 2.5-5.2.6-7.5-1.4-1.7-2.3-3.8-2.3-6.2 0-5.2 4.2-9.4 9.4-9.4 2.4 0 4.5.9 6.2 2.3 2.3 1.9 5.6 1.6 7.5-.7 4-5 10.1-8.2 17-8.2h6.4v.8c0 6.3-4.3 11.5-10.1 13-.9.2-1.7.7-2.4 1.3-.6.6-1.1 1.3-1.5 2.1-.3.8-.5 1.7-.4 2.5 0 .9.3 1.7.6 2.5 4.6 8.7 7.2 18.6 7.2 29.2v8.5H19.6zm72.7-60.4h14.7l15.3 40.7 15.5-40.7h14.2l-22.9 56.3h-13.6L92.3 7.1zm79.5 56.3V31.9c0-8.6 4-15.9 11.8-20.9 5.6-3.6 12.7-5.3 21.5-5.3 8.9 0 15.9 1.7 21.5 5.3 7.8 5 11.8 12.4 11.8 20.9v31.5h-13.2V53H184.8v10.4h-13v-56c0 .2 0-.2 0 0zm40.7-18.7c5-1.9 8.1-6.2 8.1-12.2 0-7.9-6.6-13.6-16.8-13.6-10.3 0-16.8 5.7-16.8 13.6 0 6 3.1 10.3 8.1 12.2h17.4zm59.9-21.4h-21.5v-12h56.1v12h-21.5v40.1h-13.1V23.3zm62.9 40.1h-13.1V7.1h13.1v56.3zm50.6-56.3h13.1v56.3h-13.1V51.5l-22.5-11.9 22.5-11.9V7.1zm-35.6 56.3h13.1V7.1h-13.1v20.6l22.5 11.9-22.5 11.9v11.9zm122.1-56.3v56.3h-50.9V7.1h50.9zm-37.7 12v32.3h24.6V19.1h-24.6z" /></svg>
+  </LogoCloudItem>
+  <LogoCloudItem name="Figma" invertOnDark>
+    <svg viewBox="0 0 38 57"><path fill="currentColor" d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z" /><path fill="currentColor" d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 1 1-19 0z" /><path fill="currentColor" d="M19 0v19h9.5a9.5 9.5 0 1 0 0-19H19z" /><path fill="currentColor" d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5z" /><path fill="currentColor" d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z" /></svg>
+  </LogoCloudItem>
+  <LogoCloudItem name="Ramp" invertOnDark>
+    <svg viewBox="0 0 76 32"><path fill="currentColor" d="M0 8.064v15.808h6.592V17.12l4.288 6.752h7.616l-7.04-9.856L18.112 8.064h-7.36L6.592 14.4V8.064H0Zm22.24 15.808V13.696c0-1.6.864-2.496 2.272-2.496 1.344 0 2.144.896 2.144 2.496v10.176h6.4V13.696c0-1.6.864-2.496 2.24-2.496 1.376 0 2.176.896 2.176 2.496v10.176h6.4V12.224c0-3.296-2.176-5.088-5.6-5.088-2.4 0-4.32 1.024-5.344 2.72-1.024-1.728-2.72-2.72-4.992-2.72-2.016 0-3.712.832-4.672 2.176V7.68h-7.424v16.192h6.4Zm29.408-4.448c0 2.944 2.176 5.376 7.168 5.376 4.416 0 7.168-2.112 7.168-5.312 0-3.008-1.952-4.416-5.824-5.216l-1.632-.32c-1.248-.256-1.76-.544-1.76-1.088 0-.608.608-1.024 1.632-1.024 1.184 0 1.888.544 2.016 1.44h5.952c-.256-3.456-3.136-5.568-7.744-5.568-4.16 0-7.168 2.176-7.168 5.408 0 3.072 2.144 4.416 5.728 5.12l1.728.352c1.408.288 1.824.576 1.824 1.12 0 .608-.64.992-1.728.992-1.376 0-2.176-.64-2.304-1.568h-5.888l.832.288Zm22.272 4.448V13.632c0-1.472.832-2.432 2.112-2.432 1.344 0 2.048.896 2.048 2.496v10.176H84.48v-9.024h-4.16V7.68h-6.4v16.192Z" /></svg>
+  </LogoCloudItem>
+  <LogoCloudItem name="Adobe" invertOnDark>
+    <svg viewBox="0 0 30 26"><path fill="currentColor" d="M19 0h11v26L19 0zM11 0H0v26L11 0zm4 9.6 6.5 16.4h-5l-1.9-5H9l6-11.4z" /></svg>
+  </LogoCloudItem>
+</LogoCloud>
+
+<FAQ title="Questions & Answers">
+  <FAQItem question="What is the right plan for me?">
+    If you're an individual developer exploring AI-assisted coding, start with our **Free** plan. For professionals who need unlimited usage and advanced features, the **Pro** plan is ideal. Teams and organizations should consider **Business** for centralized billing, admin controls, and priority support.
+  </FAQItem>
+
+  <FAQItem question="What are my payment options?">
+    We accept all major credit cards (Visa, Mastercard, American Express) and support both monthly and annual billing. Annual plans include a 20% discount. For Business plans, we also offer invoicing with NET 30 terms for qualifying organizations.
+  </FAQItem>
+
+  <FAQItem question="How does usage-based pricing work?">
+    Usage-based pricing applies to AI requests beyond your plan's included allowance. You only pay for what you use, billed at the end of each billing cycle. You can set spending limits to control costs, and unused credits don't roll over. Real-time usage dashboards help you monitor consumption.
+  </FAQItem>
+
+  <FAQItem question="How can I see and manage Cursor's usage in my organization?">
+    Organization admins can access the **Admin Dashboard** to view team-wide usage analytics, manage seats, set spending limits per user or team, and export detailed usage reports. You can also configure alerts for usage thresholds and automate seat provisioning via SSO.
+  </FAQItem>
+
+  <FAQItem question="How does Cursor use my data?">
+    Your code and data are never used to train our models. We process code snippets only to generate suggestions, and this data is not stored beyond the immediate request. Business plans include additional privacy controls, SOC 2 compliance, and the option for zero data retention. See our [Privacy Policy](/privacy) for details.
+  </FAQItem>
+
+  <FAQItem question="Where can I ask more questions?">
+    Check our [documentation](/docs) for detailed guides, visit our [community forum](https://community.cursor.com) for discussions with other users, or [contact our support team](/contact) directly. Business customers have access to dedicated support channels with guaranteed response times.
+  </FAQItem>
+</FAQ>
+
+</PricingHero>

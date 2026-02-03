@@ -7,8 +7,168 @@
   @apply mx-auto w-full max-w-325 px-4.5 lg:px-5;
 }
 
+@utility type-display {
+  font-size: 4.5rem;
+  line-height: 1.1;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+@utility type-h1 {
+  font-size: 3.25rem;
+  line-height: 1.1;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+@utility type-h2 {
+  font-size: 2.25rem;
+  line-height: 1.15;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+@utility type-h3 {
+  font-size: 1.625rem;
+  line-height: 1.2;
+  font-weight: 500;
+  letter-spacing: -0.0125em;
+}
+
+@utility type-h4 {
+  font-size: 1.375rem;
+  line-height: 1.25;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+}
+
+@utility type-h5 {
+  font-size: 1.125rem;
+  line-height: 1.3;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+}
+
+@utility type-h6 {
+  font-size: 1rem;
+  line-height: 1.4;
+  font-weight: 500;
+  letter-spacing: 0.005em;
+}
+
+@utility type-lg {
+  font-size: 1.125rem;
+  line-height: 1.625;
+  letter-spacing: 0.005em;
+}
+
+@utility type-base {
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: 0.005em;
+}
+
+@utility type-sm {
+  font-size: 0.875rem;
+  line-height: 1.43;
+  letter-spacing: 0.01em;
+}
+
+@utility type-xs {
+  font-size: 0.75rem;
+  line-height: 1.33;
+  letter-spacing: 0.01em;
+}
+
+@utility type-body {
+  @apply text-foreground;
+  font-size: 1rem;
+  line-height: 1.625;
+  letter-spacing: 0.005em;
+}
+
+@utility type-body-secondary {
+  @apply text-muted-foreground;
+  font-size: 1rem;
+  line-height: 1.625;
+  letter-spacing: 0.005em;
+}
+
+@utility type-body-tertiary {
+  @apply text-muted-foreground/60;
+  font-size: 1rem;
+  line-height: 1.625;
+  letter-spacing: 0.005em;
+}
+
+@utility type-caption {
+  @apply text-muted-foreground;
+  font-size: 0.875rem;
+  line-height: 1.43;
+  letter-spacing: 0.01em;
+}
+
+@utility type-overline {
+  font-size: 0.75rem;
+  line-height: 1.33;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+@utility type-link {
+  @apply underline transition-all decoration-neutral-400 dark:decoration-neutral-600 underline-offset-2 decoration-[0.1em];
+}
+
+@utility type-link-subtle {
+  @apply text-muted-foreground hover:text-foreground transition-colors;
+}
+
+@utility type-link-accent {
+  @apply text-primary hover:text-primary/80 transition-colors;
+}
+
+@utility type-blockquote {
+  @apply border-l-4 border-neutral-300 dark:border-neutral-700 pl-4 italic text-muted-foreground;
+}
+
+@utility type-code {
+  @apply px-1.5 py-0.5 rounded bg-muted text-sm font-mono;
+}
+
+@utility type-pre {
+  @apply bg-muted rounded-lg overflow-x-auto border border-border py-3 px-4 text-sm font-mono;
+}
+
+@utility type-kbd {
+  @apply px-1.5 py-0.5 rounded border border-border bg-muted text-xs font-mono font-medium;
+}
+
+@utility type-list {
+  @apply pl-6 space-y-1;
+}
+
+@utility type-list-disc {
+  @apply type-list list-disc;
+}
+
+@utility type-list-decimal {
+  @apply type-list list-decimal;
+}
+
+@utility type-th {
+  @apply text-left font-medium text-sm text-muted-foreground;
+}
+
+@utility type-td {
+  @apply text-sm;
+}
+
 @theme inline {
   --font-gothic: var(--font-cursor-gothic);
+  --font-mono: var(--font-jetbrains-mono);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -35,6 +195,8 @@
 
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+
+  --color-line-number: var(--line-number-color);
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -71,6 +233,8 @@
   --border: oklch(0.923 0.003 48.717);
   --input: oklch(0.923 0.003 48.717);
   --ring: oklch(0.709 0.01 56.259);
+
+  --line-number-color: var(--shiki-light-bg);
 }
 
 .dark {
@@ -99,6 +263,8 @@
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.553 0.013 58.071);
+
+  --line-number-color: var(--shiki-dark-bg);
 }
 
 @layer base {
@@ -118,6 +284,15 @@ iframe {
   user-select: none !important;
 }
 
+pre {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+pre::-webkit-scrollbar {
+  display: none;
+}
+
 .prose .anchor {
   @apply absolute invisible no-underline;
 
@@ -133,7 +308,7 @@ iframe {
 }
 
 .prose a {
-  @apply underline transition-all decoration-neutral-400 dark:decoration-neutral-600 underline-offset-2 decoration-[0.1em];
+  @apply type-link;
 }
 
 .prose .anchor:after {
@@ -146,11 +321,11 @@ iframe {
 }
 
 .prose pre {
-  @apply bg-neutral-50 dark:bg-neutral-900 rounded-lg overflow-x-auto border border-neutral-200 dark:border-neutral-900 py-2 px-3 text-sm;
+  @apply type-pre;
 }
 
 .prose code {
-  @apply px-1 py-0.5 rounded-lg;
+  @apply type-code;
 }
 
 .prose pre code {
@@ -164,28 +339,27 @@ iframe {
 }
 
 .prose img {
-  /* Don't apply styles to next/image */
   @apply m-0;
 }
 
 .prose p {
-  @apply my-4 text-neutral-800 dark:text-neutral-200;
+  @apply type-body my-4;
 }
 
 .prose h1 {
-  @apply text-4xl font-medium tracking-tight mt-6 mb-2;
+  @apply type-h1 mt-6 mb-2;
 }
 
 .prose h2 {
-  @apply text-xl font-medium tracking-tight mt-6 mb-2;
+  @apply type-h2 mt-8 mb-3;
 }
 
 .prose h3 {
-  @apply text-xl font-medium tracking-tight mt-6 mb-2;
+  @apply type-h3 mt-6 mb-2;
 }
 
 .prose h4 {
-  @apply text-lg font-medium tracking-tight mt-6 mb-2;
+  @apply type-h4 mt-6 mb-2;
 }
 
 .prose strong {
@@ -193,29 +367,30 @@ iframe {
 }
 
 .prose ul {
-  @apply list-disc pl-6;
+  @apply type-list-disc;
 }
 
 .prose ol {
-  @apply list-decimal pl-6;
+  @apply type-list-decimal;
+}
+
+.prose li {
+  @apply my-1 type-body;
+}
+
+.prose blockquote {
+  @apply type-blockquote my-6;
+}
+
+.prose hr {
+  @apply border-neutral-200 dark:border-neutral-800 my-8;
 }
 
 .prose > :first-child {
-  /* Override removing top margin, causing layout shift */
   margin-top: 1.25em !important;
   margin-bottom: 1.25em !important;
 }
 
-pre {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
-
-pre::-webkit-scrollbar {
-  display: none;
-}
-
-/* Remove Safari input shadow on mobile */
 input[type="text"],
 input[type="email"] {
   -webkit-appearance: none;
@@ -232,4 +407,243 @@ table {
 
 .title {
   text-wrap: balance;
+}
+
+.shiki-wrapper {
+  @apply my-6 grid relative overflow-hidden;
+}
+
+.shiki-wrapper pre {
+  @apply rounded-lg overflow-auto border border-border py-3 px-0 text-sm;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  max-height: 500px;
+}
+
+.shiki-wrapper code {
+  display: block;
+  min-width: 100%;
+  background: transparent !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  font-size: inherit !important;
+}
+
+.shiki-wrapper .line {
+  @apply px-4 inline-block w-full;
+  min-height: 1.5rem;
+}
+
+.shiki-wrapper .line::before {
+  display: none;
+}
+
+.shiki-wrapper[data-line-numbers="true"] .line {
+  @apply pl-0 pr-4;
+}
+
+.shiki-wrapper[data-line-numbers="true"] .line::before {
+  content: attr(data-line);
+  @apply inline-block w-10 pr-4 mr-2 text-right select-none bg-line-number! tabular-nums sticky left-0;
+  color: oklch(0.5 0 0 / 35%);
+}
+
+/* Light theme: use --shiki-light colors */
+html:not(.dark) .shiki,
+html:not(.dark) .shiki span {
+  color: var(--shiki-light) !important;
+  background-color: var(--shiki-light-bg) !important;
+  font-style: var(--shiki-light-font-style) !important;
+  font-weight: var(--shiki-light-font-weight) !important;
+  text-decoration: var(--shiki-light-text-decoration) !important;
+}
+
+/* Dark theme: use --shiki-dark colors */
+html.dark .shiki,
+html.dark .shiki span {
+  --line-number-color: var(--shiki-dark-bg) !important;
+
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
+}
+
+.copy-button-container,
+.copy-button-placeholder {
+  @apply absolute top-2 right-2;
+}
+
+.copy-button-placeholder {
+  @apply size-6.5;
+}
+
+.code-block-header-container {
+  @apply relative;
+}
+
+.code-block-header {
+  @apply flex items-center justify-between px-4 py-2;
+  @apply border border-border border-b-0;
+  @apply bg-secondary dark:bg-background;
+  @apply rounded-t-lg;
+  font-family: var(--font-mono), ui-monospace, monospace;
+}
+
+.code-block-header-filename {
+  @apply flex items-center gap-2 text-sm text-muted-foreground;
+}
+
+.code-block-icon {
+  @apply size-3.5 flex items-center justify-center;
+}
+
+.code-block-header-filename svg {
+  @apply text-muted-foreground/70;
+}
+
+.code-block-header .copy-button-container,
+.code-block-header .copy-button-placeholder {
+  @apply static;
+}
+
+.shiki-wrapper.has-header pre {
+  @apply rounded-t-none;
+}
+
+.code-block-header .copy-button {
+  @apply text-muted-foreground hover:text-foreground;
+  @apply hover:bg-white/10;
+}
+
+.prose .shiki-wrapper pre {
+  @apply border border-border;
+}
+
+.prose .shiki-wrapper pre code {
+  @apply selection:bg-primary/10 selection:text-(--shiki-light) dark:selection:text-current bg-transparent! p-0!;
+}
+
+/* Diff notation styles */
+.shiki-wrapper .line.diff {
+  @apply w-full inline-block;
+}
+
+.shiki-wrapper .line.diff::before {
+  display: inline-block !important;
+}
+
+/* Diff colors */
+.shiki-wrapper .line.diff.add,
+.shiki-wrapper .line.diff.add span {
+  @apply bg-[#d4edda]! dark:bg-[#0a280a]! [--line-number-color:#d4edda]! dark:[--line-number-color:#0a280a]!;
+}
+
+.shiki-wrapper .line.diff.remove,
+.shiki-wrapper .line.diff.remove span {
+  @apply bg-[#f8d7da]! dark:bg-[#401114]! [--line-number-color:#f8d7da]! dark:[--line-number-color:#401114]!;
+}
+
+.shiki-wrapper .line.diff.add::before {
+  content: "+";
+  color: #28a745;
+}
+
+.shiki-wrapper .line.diff.remove::before {
+  content: "-";
+  color: #dc3545;
+}
+
+/* Line highlight styles - light theme */
+
+.shiki-wrapper .line.highlighted,
+.shiki-wrapper .line.highlighted span {
+  @apply bg-[#ecf4fe]! dark:bg-[#151f44]! [--line-number-color:#ecf4fe]! dark:[--line-number-color:#151f44]!;
+  /* dark:bg-[#102130] */
+  /* background-color: #fff3cd !important; */
+}
+
+/* Dark theme */
+/* html.dark .shiki-wrapper .line.diff.add,
+html.dark .shiki-wrapper .line.diff.add span {
+  background-color: oklab(36.091% -0.09744 0.07474 / 0.4) !important;
+} */
+
+/* html.dark .shiki-wrapper .line.diff.remove,
+html.dark .shiki-wrapper .line.diff.remove span {
+  background-color: oklch(0.4 0.15 25 / 0.4) !important;
+} */
+
+html.dark .shiki-wrapper .line.diff.add::before {
+  content: "+";
+  color: oklch(0.7 0.2 145);
+}
+
+html.dark .shiki-wrapper .line.diff.remove::before {
+  content: "-";
+  color: oklch(0.7 0.2 25);
+}
+
+/* html.dark .shiki-wrapper .line.highlighted,
+html.dark .shiki-wrapper .line.highlighted span {
+  background-color: oklch(0.4 0.1 250 / 0.3) !important;
+} */
+
+/* Focus mode styles */
+.shiki-wrapper .has-focused .line:not(.focused) {
+  opacity: 0.4;
+  filter: blur(0.8px);
+  transition:
+    opacity 0.2s,
+    filter 0.2s;
+}
+
+.shiki-wrapper .has-focused:hover .line:not(.focused) {
+  opacity: 0.7;
+  filter: blur(0.4px);
+}
+
+/* Code Tabs */
+.code-tabs-container {
+  @apply my-6 overflow-hidden;
+}
+
+.code-tabs-list {
+  @apply flex gap-0 border-b border-border;
+  font-family: var(--font-mono), ui-monospace, monospace;
+}
+
+.code-tab {
+  @apply px-4 py-2 text-sm font-medium;
+  @apply text-muted-foreground;
+  @apply border-b-2 border-transparent;
+  @apply -mb-px;
+  @apply transition-colors duration-150;
+  @apply hover:text-foreground hover:bg-muted/50;
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring;
+}
+
+.code-tab-active {
+  @apply text-foreground;
+  @apply border-b-2 border-foreground;
+}
+
+.code-tab-panel {
+  @apply hidden;
+}
+
+.code-tab-panel[data-active="true"] {
+  @apply block;
+}
+
+.code-tab-panel .shiki-wrapper {
+  @apply mt-0;
+}
+
+.code-tabs-container .shiki-wrapper pre {
+  @apply rounded-t-none border-t-0;
+}
+
+.code-tabs-container .shiki-wrapper.has-header .code-block-header {
+  @apply rounded-t-none;
 }

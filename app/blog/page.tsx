@@ -1,18 +1,57 @@
-import { BlogPosts } from "app/components/posts";
+import type { Metadata } from "next";
+import { Suspense } from "react";
+import { BlogContent } from "@/app/blog/blog-content";
+import { getBlogCategories, getBlogPosts } from "@/app/blog/utils";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Blog",
   description: "Read my thoughts on software development, design, and more.",
 };
 
-export default function BlogPage() {
+function BlogSkeleton() {
   return (
-    <section className="mx-auto max-w-4xl px-4 py-12">
-      <h1 className="mb-4 font-bold text-4xl tracking-tight">Blog</h1>
-      <p className="mb-12 text-neutral-600 text-xl dark:text-neutral-400">
-        Thoughts on software development, design, and more.
-      </p>
-      <BlogPosts />
-    </section>
+    <>
+      <header className="relative overflow-hidden">
+        <div className="container relative py-12 md:py-32 md:pb-24">
+          <h1 className="text-5xl text-foreground">Blog</h1>
+        </div>
+      </header>
+
+      <div className="container">
+        <div className="grid gap-12 lg:grid-cols-[200px_1fr]">
+          <aside className="lg:sticky lg:top-8 lg:h-fit">
+            <nav className="flex flex-col gap-1">
+              <div className="h-8 w-20 animate-pulse rounded-md bg-muted" />
+              <div className="h-8 w-24 animate-pulse rounded-md bg-muted" />
+              <div className="h-8 w-20 animate-pulse rounded-md bg-muted" />
+            </nav>
+          </aside>
+
+          <main>
+            <div className="space-y-8">
+              {["skeleton-1", "skeleton-2", "skeleton-3"].map((id) => (
+                <div className="space-y-2" key={id}>
+                  <div className="h-6 w-3/4 animate-pulse rounded bg-muted" />
+                  <div className="h-4 w-1/4 animate-pulse rounded bg-muted" />
+                </div>
+              ))}
+            </div>
+          </main>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export default function BlogPage() {
+  const allPosts = getBlogPosts();
+  const categories = getBlogCategories();
+
+  return (
+    <div className="bg-background">
+      <Suspense fallback={<BlogSkeleton />}>
+        <BlogContent allPosts={allPosts} categories={categories} />
+      </Suspense>
+    </div>
   );
 }

@@ -5,22 +5,53 @@ layout: default
 showTitle: false
 ---
 
-# Built to make you extraordinarily productive, Cursor is the best way to code with AI.
+<Hero>
+  <HeroBackdrop variant="gradient" />
+  <HeroLabel>Features</HeroLabel>
+  <HeroTitle>The best way to build software.</HeroTitle>
+  <HeroActions>
+    <HeroButton href="/download">Download for Windows ↓</HeroButton>
+  </HeroActions>
+</Hero>
 
-Cursor is a powerful AI-powered code editor that helps developers write better code faster. With features like intelligent autocomplete, code generation, and seamless AI integration, Cursor transforms the way you build software.
+<Feature>
+  <FeatureContent>
+    <FeatureTitle>Agent turns ideas into code</FeatureTitle>
+    <FeatureDescription>
+      A human-AI programmer, orders of magnitude more effective than any developer alone.
+    </FeatureDescription>
+    <FeatureActions>
+      <FeatureButton href="/agent">Learn about Agent →</FeatureButton>
+    </FeatureActions>
+  </FeatureContent>
+  <FeatureMedia>
+    <img src="https://images.unsplash.com/photo-1769109002985-c0ff65466052?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Cursor Agent interface" />
+  </FeatureMedia>
+</Feature>
 
-<div className="flex justify-center gap-4 mt-8 mb-16">
-  <Button variant="primary" href="/about">
-    Get Started
-  </Button>
-  <Button variant="secondary" href="/company/contact">
-    Contact Us
-  </Button>
-</div>
-
----
-
-<Hero variant="default" />
+<HighlightCardGrid title="Agent Features" columns={3}>
+  <HighlightCard>
+    <HighlightCardTitle>Codebase understanding</HighlightCardTitle>
+    <HighlightCardDescription>
+      Cursor's codebase embedding model gives Agent deep understanding and recall.
+    </HighlightCardDescription>
+    <HighlightCardImage src="https://images.unsplash.com/photo-1769109002985-c0ff65466052?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Codebase understanding" />
+  </HighlightCard>
+  <HighlightCard>
+    <HighlightCardTitle>Top model access</HighlightCardTitle>
+    <HighlightCardDescription>
+      Choose freely between frontier models from OpenAI, Anthropic, Gemini, and xAI.
+    </HighlightCardDescription>
+    <HighlightCardImage src="https://images.unsplash.com/photo-1769109002985-c0ff65466052?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Top model access" />
+  </HighlightCard>
+  <HighlightCard>
+    <HighlightCardTitle>Scoped changes</HighlightCardTitle>
+    <HighlightCardDescription>
+      Make targeted edits or run terminal commands with natural language.
+    </HighlightCardDescription>
+    <HighlightCardImage src="https://images.unsplash.com/photo-1769109002985-c0ff65466052?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Scoped changes" />
+  </HighlightCard>
+</HighlightCardGrid>
 
 ## Features
 
@@ -121,3 +152,10 @@ Our new Tab model makes 21% fewer suggestions while having 28% higher accept rat
 Achieving a 3.5x MoE layer speedup with a complete rebuild for Blackwell GPUs.
 
 **Research** · Aug 29, 2025
+
+---
+
+<CTA>
+  <CTATitle>Try Cursor now.</CTATitle>
+  <CTAButton href="/download">Download for Windows ↓</CTAButton>
+</CTA>

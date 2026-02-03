@@ -1,13 +1,14 @@
-import { formatDate, getBlogPosts } from "app/blog/utils";
-import { CustomMDX } from "app/components/mdx";
-import { baseUrl } from "app/sitemap";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { formatDate } from "@/app/blog/types";
+import { getBlogPosts } from "@/app/blog/utils";
+import { baseUrl } from "@/app/sitemap";
+import { CustomMDX } from "@/components/mdx";
 
 interface BlogPostPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export async function generateStaticParams() {
@@ -18,8 +19,11 @@ export async function generateStaticParams() {
   }));
 }
 
-export function generateMetadata({ params }: BlogPostPageProps): Metadata {
-  const post = getBlogPosts().find((post) => post.slug === params.slug);
+export async function generateMetadata({
+  params,
+}: BlogPostPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const post = getBlogPosts().find((post) => post.slug === slug);
 
   if (!post) {
     return {
@@ -59,8 +63,9 @@ export function generateMetadata({ params }: BlogPostPageProps): Metadata {
   };
 }
 
-export default function BlogPost({ params }: BlogPostPageProps) {
-  const post = getBlogPosts().find((post) => post.slug === params.slug);
+export default async function BlogPost({ params }: BlogPostPageProps) {
+  const { slug } = await params;
+  const post = getBlogPosts().find((post) => post.slug === slug);
 
   if (!post) {
     notFound();
@@ -69,6 +74,7 @@ export default function BlogPost({ params }: BlogPostPageProps) {
   return (
     <article className="mx-auto max-w-4xl px-4 py-12">
       <script
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: <Its safe, sinces its for SEO purposes JSON-LD>
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
@@ -92,7 +98,7 @@ export default function BlogPost({ params }: BlogPostPageProps) {
       />
 
       <header className="mb-12">
-        <h1 className="mb-4 font-bold text-4xl tracking-tight">
+        <h1 className="mt-6 mb-2 max-w-lg text-balance font-medium text-4xl tracking-tight">
           {post.metadata.title}
         </h1>
         <p className="text-neutral-600 text-sm dark:text-neutral-400">
