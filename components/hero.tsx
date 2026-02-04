@@ -84,6 +84,7 @@ export function HeroDescription({ children, className }: HeroDescriptionProps) {
         className
       )}
     >
+
       {children}
     </p>
   );

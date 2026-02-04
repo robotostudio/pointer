@@ -35,8 +35,8 @@ const jetBrainsMono = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: "Next.js Portfolio Starter",
-    template: "%s | Next.js Portfolio Starter",
+    default: "Pointer",
+    template: "%s | Pointer",
   },
   description: "This is my portfolio.",
   openGraph: {
