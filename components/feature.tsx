@@ -159,7 +159,7 @@ export function FeatureMedia({
         />
       )}
       {windowSrc && (
-        <div className="relative z-15 mx-auto h-10/12 w-10/12 overflow-hidden rounded-lg border border-white/10 shadow-2xl">
+        <div className="relative z-10 mx-auto h-10/12 w-10/12 overflow-hidden rounded-lg border border-white/10 shadow-2xl">
           <Image
             alt={`${alt} - focus`}
             className="h-auto w-full"
