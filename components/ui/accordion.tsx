@@ -1,5 +1,5 @@
 import { Accordion as AccordionPrimitive } from "@base-ui/react/accordion";
-import { ChevronDownIcon } from "lucide-react";
+import { ChevronDownIcon, ChevronUpIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 function Accordion({ className, ...props }: AccordionPrimitive.Root.Props) {
@@ -39,7 +39,11 @@ function AccordionTrigger({
       >
         {children}
         <ChevronDownIcon
-          className="pointer-events-none shrink-0 transition-transform delay-100 duration-300 ease-in-out group-aria-expanded/accordion-trigger:rotate-180"
+          className="pointer-events-none shrink-0 group-aria-expanded/accordion-trigger:hidden"
+          data-slot="accordion-trigger-icon"
+        />
+        <ChevronUpIcon
+          className="pointer-events-none hidden shrink-0 group-aria-expanded/accordion-trigger:inline"
           data-slot="accordion-trigger-icon"
         />
       </AccordionPrimitive.Trigger>
@@ -54,7 +58,7 @@ function AccordionContent({
 }: AccordionPrimitive.Panel.Props) {
   return (
     <AccordionPrimitive.Panel
-      className="overflow-hidden text-sm transition-[height] duration-300 ease-out"
+      className="overflow-hidden text-sm data-closed:animate-accordion-up data-open:animate-accordion-down"
       data-slot="accordion-content"
       {...props}
     >
