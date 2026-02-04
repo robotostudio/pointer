@@ -1,4 +1,6 @@
+import Image from "next/image";
 import type { ReactNode } from "react";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 interface FeatureProps {
@@ -118,22 +120,55 @@ export function FeatureButton({
     );
   }
 
-  return <button type="button" className={classes}>{children}</button>;
+  return (
+    <Button className={classes} type="button">
+      {children}
+    </Button>
+  );
 }
 
 interface FeatureMediaProps {
   children: ReactNode;
+  backgroundSrc?: string;
+  windowSrc?: string;
+  alt?: string;
   className?: string;
 }
 
-export function FeatureMedia({ children, className }: FeatureMediaProps) {
+export function FeatureMedia({
+  children,
+  className,
+  backgroundSrc,
+  windowSrc,
+  alt = "Feature media",
+}: FeatureMediaProps) {
   return (
     <div
       className={cn(
-        "relative aspect-square overflow-hidden rounded-lg shadow-xl lg:col-span-2 [&_img]:size-full [&_img]:object-cover",
+        "relative flex aspect-square items-center justify-center overflow-hidden rounded-lg shadow-xl lg:col-span-2",
         className
       )}
     >
+      {backgroundSrc && (
+        <Image
+          alt={alt}
+          className="z-10 object-cover"
+          fill
+          priority
+          src={backgroundSrc}
+        />
+      )}
+      {windowSrc && (
+        <div className="relative z-10 mx-auto h-10/12 w-10/12 overflow-hidden rounded-lg border border-white/10 shadow-2xl">
+          <Image
+            alt={`${alt} - focus`}
+            className="h-auto w-full"
+            height={900}
+            src={windowSrc}
+            width={1600}
+          />
+        </div>
+      )}
       {children}
     </div>
   );
