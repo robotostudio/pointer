@@ -107,7 +107,7 @@ export function EnterpriseFeatureTestimonial({
       </div>
       <div className="flex items-center gap-3">
         {avatar && (
-          <div className="relative size-8 overflow-hidden rounded-[4px] border border-white/10">
+          <div className="relative size-8 overflow-hidden rounded-lg border border-white/10">
             <Image alt={author} className="object-cover" fill src={avatar} />
           </div>
         )}

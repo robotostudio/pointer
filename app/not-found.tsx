@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function NotFound() {
   return (
     <div className="container">
-      <div className="mx-auto flex min-h-[calc(100vh-400px)] max-w-[400px] flex-col items-center justify-center gap-4 p-4 text-center">
+      <div className="mx-auto flex min-h-[calc(100vh-400px)] max-w-100 flex-col items-center justify-center gap-4 p-4 text-center">
         <h1 className="text-6xl text-foreground">404</h1>
         <p className="animate-fade-in text-lg text-muted-foreground">
           The page you’re looking for has wandered off, but don’t worry!

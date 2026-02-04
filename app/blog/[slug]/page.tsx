@@ -148,13 +148,13 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
             <CustomMDX source={post.content} />
           </div>
 
-          <footer className="mt-12 pt-6 text-sm text-muted-foreground">
+          <footer className="mt-12 pt-6 text-muted-foreground text-sm">
             {categoryLabel && (
               <p className="flex flex-row gap-1">
-                Filed under: {" "}
+                Filed under:{" "}
                 <Link
-                  href={`/blog?category=${category}`}
                   className="text-foreground hover:underline"
+                  href={`/blog?category=${category}`}
                 >
                   {categoryLabel}
                 </Link>
@@ -162,13 +162,14 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
             )}
             {post.metadata.author && (
               <p className="mt-1 flex flex-row gap-1">
-                Author: {" "}<span className="text-foreground">{post.metadata.author}</span>
+                Author:{" "}
+                <span className="text-foreground">{post.metadata.author}</span>
               </p>
             )}
           </footer>
 
           {(previousPost || nextPost) && (
-            <nav className="mt-16 grid gap-4  pt-8 sm:grid-cols-2">
+            <nav className="mt-16 grid gap-4 pt-8 sm:grid-cols-2">
               {previousPost ? (
                 <Link
                   className="group flex flex-col rounded-lg border border-border/50 bg-muted/30 px-6 py-4 transition-all hover:border-border hover:bg-muted/50"
