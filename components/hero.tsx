@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { ArrowRightIcon, DownloadIcon } from "./icons/button-icons";
 
 interface HeroProps {
   children: ReactNode;
@@ -84,7 +85,6 @@ export function HeroDescription({ children, className }: HeroDescriptionProps) {
         className
       )}
     >
-
       {children}
     </p>
   );
@@ -108,6 +108,7 @@ interface HeroButtonProps {
   href?: string;
   variant?: "primary" | "secondary" | "ghost";
   className?: string;
+  icon?: "download" | "right";
 }
 
 export function HeroButton({
@@ -115,6 +116,7 @@ export function HeroButton({
   href,
   variant = "primary",
   className,
+  icon,
 }: HeroButtonProps) {
   const baseStyles =
     "inline-flex items-center no-underline! justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950";
@@ -127,17 +129,31 @@ export function HeroButton({
     ghost: "text-neutral-400 hover:text-white",
   };
 
+  let IconComponent: ReactNode = null;
+  if (icon === "download") {
+    IconComponent = <DownloadIcon className="size-3.5" />;
+  } else if (icon === "right") {
+    IconComponent = <ArrowRightIcon className="size-4" />;
+  }
+
   const classes = cn(baseStyles, variants[variant], className);
+
+  const content = (
+    <>
+      {children}
+      {IconComponent}
+    </>
+  );
 
   if (href) {
     return (
       <a className={classes} href={href}>
-        {children}
+        {content}
       </a>
     );
   }
 
-  return <span className={classes}>{children}</span>;
+  return <span className={classes}>{content}</span>;
 }
 
 interface HeroMediaProps {

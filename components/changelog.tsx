@@ -72,6 +72,7 @@ interface ChangelogActionProps {
   children: ReactNode;
   variant?: "primary" | "secondary";
   className?: string;
+  icon?: "download" | "right";
 }
 
 export function ChangelogAction({
@@ -79,11 +80,13 @@ export function ChangelogAction({
   children,
   variant = "primary",
   className,
+  icon = "right",
 }: ChangelogActionProps) {
   return (
     <FeatureButton
       className={cn("text-xs!", className)}
       href={href}
+      icon={icon}
       variant={variant}
     >
       {children}

@@ -38,9 +38,7 @@ export function DefaultPageTemplate({ page }: PageTemplateProps) {
     <article className="container">
       <PageHeader metadata={page.metadata} />
 
-      <div className="prose prose-neutral dark:prose-invert max-w-none">
-        <CustomMDX source={page.content} />
-      </div>
+      <CustomMDX source={page.content} />
     </article>
   );
 }

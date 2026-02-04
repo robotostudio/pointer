@@ -57,20 +57,19 @@ export function LogoCloudItem({
         className
       )}
     >
-      {children ? (
-        children
-      ) : src ? (
-        <Image
-          alt={name}
-          className={cn(
-            "h-6 w-auto max-w-full object-contain",
-            invertOnDark && "dark:invert"
-          )}
-          height={40}
-          src={srcDark && isDark ? srcDark : src}
-          width={120}
-        />
-      ) : null}
+      {children ||
+        (src && (
+          <Image
+            alt={name}
+            className={cn(
+              "h-6 w-auto max-w-full object-contain",
+              invertOnDark && "dark:invert"
+            )}
+            height={40}
+            src={srcDark && isDark ? srcDark : src}
+            width={120}
+          />
+        ))}
     </div>
   );
 

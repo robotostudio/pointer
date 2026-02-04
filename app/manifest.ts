@@ -2,10 +2,10 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Pointer - MDX CMS Portfolio Platform",
+    name: "Pointer - MDX CMS Platform",
     short_name: "Pointer",
     description:
-      "A Next.js portfolio and content platform using file-based MDX content management. Content is just code - no CMS, no database, everything in git.",
+      "Pointer: A clean, simple portfolio and content platform. Build beautiful portfolios without complex CMS or databases. Everything is code, in git.",
     start_url: "/",
     display: "standalone",
     orientation: "portrait-primary",

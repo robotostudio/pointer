@@ -5,9 +5,11 @@ interface IconProps {
 export function CopyIcon({ className }: IconProps) {
   return (
     <svg
+      aria-hidden="true"
       className={className}
       fill="none"
       height="14"
+      role="img"
       stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -25,9 +27,11 @@ export function CopyIcon({ className }: IconProps) {
 export function CheckIcon({ className }: IconProps) {
   return (
     <svg
+      aria-hidden="true"
       className={className}
       fill="none"
       height="14"
+      role="img"
       stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"

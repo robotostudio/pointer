@@ -2,7 +2,8 @@ import type { MetadataRoute } from "next";
 import { getBlogPosts } from "@/app/blog/utils";
 import { getAllPagePaths } from "@/lib/content-service";
 
-export const baseUrl = "https://portfolio-blog-starter.vercel.app";
+export const baseUrl =
+  process.env.NEXT_PUBLIC_BASE_URL || "https://pointer-liart.vercel.app";
 
 function getSlugPriority(slug: string): number {
   if (slug.endsWith("/privacy") || slug.endsWith("/terms")) {

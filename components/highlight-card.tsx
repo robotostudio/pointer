@@ -24,13 +24,13 @@ export function HighlightCardGrid({
   return (
     <section className="my-12!">
       {title && (
-        <h2 className="mb-2! font-normal! text-foreground text-md!">{title}</h2>
+        <h4 className="mb-2! font-normal! text-foreground text-md!">{title}</h4>
       )}
-      {
-        <p className="mb-2 font-normal! text-xl! text-zinc-500! dark:text-zinc-400!">
+      {description && (
+        <p className="mb-2 text-balance font-normal! text-xl! text-zinc-500! dark:text-zinc-400!">
           {description}
         </p>
-      }
+      )}
       <div
         className={cn(
           "grid grid-cols-1 gap-4 md:grid-cols-2",
@@ -75,7 +75,7 @@ export function HighlightCardDescription({
   children,
 }: HighlightCardDescriptionProps) {
   return (
-    <div className="px-5 pt-2 text-muted-foreground text-sm [&>p]:my-0! [&_p]:text-inherit!">
+    <div className="px-5 text-muted-foreground text-sm [&>p]:my-0! [&_p]:text-inherit!">
       {children}
     </div>
   );
@@ -84,6 +84,7 @@ export function HighlightCardDescription({
 interface HighlightCardActionProps {
   children: ReactNode;
   href: string;
+  icon?: "download" | "right";
 }
 
 import { FeatureButton } from "./feature";
@@ -91,10 +92,16 @@ import { FeatureButton } from "./feature";
 export function HighlightCardAction({
   children,
   href,
+  icon = "right",
 }: HighlightCardActionProps) {
   return (
     <div className="px-5 pt-3">
-      <FeatureButton className="text-xs!" href={href} variant="primary">
+      <FeatureButton
+        className="text-xs!"
+        href={href}
+        icon={icon}
+        variant="primary"
+      >
         {children}
       </FeatureButton>
     </div>
@@ -108,11 +115,11 @@ interface HighlightCardImageProps {
 
 export function HighlightCardImage({ src, alt = "" }: HighlightCardImageProps) {
   return (
-    <div className="mt-4 flex-end px-3 pb-3">
+    <div className="mt-4 flex flex-col justify-end px-3 pb-3">
       <Image
         alt={alt}
-        className="my-0! aspect-square h-auto w-full rounded-md"
-        height={240}
+        className="my-0! aspect-square h-auto w-full rounded-md object-cover"
+        height={225}
         src={src}
         width={400}
       />

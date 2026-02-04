@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { ArrowRightIcon, DownloadIcon } from "./icons/button-icons";
 
 interface CTAProps {
   children: ReactNode;
@@ -41,23 +42,38 @@ interface CTAButtonProps {
   children: ReactNode;
   href?: string;
   className?: string;
+  icon?: "download" | "right";
 }
 
-export function CTAButton({ children, href, className }: CTAButtonProps) {
+export function CTAButton({ children, href, className, icon }: CTAButtonProps) {
+  let IconComponent: ReactNode = null;
+  if (icon === "download") {
+    IconComponent = <DownloadIcon className="size-3.5" />;
+  } else if (icon === "right") {
+    IconComponent = <ArrowRightIcon className="size-4" />;
+  }
+
   const buttonClasses = cn(
-    "no-underline! hover:underline! inline-flex items-center gap-2 rounded-full px-8 py-3 font-medium text-sm transition-all",
+    "inline-flex items-center gap-2 rounded-full px-8 py-3 font-medium text-sm transition-all",
     "bg-foreground text-background hover:opacity-90 active:scale-95",
     "dark:bg-white dark:text-black dark:hover:bg-white",
     className
   );
 
+  const content = (
+    <>
+      {children}
+      {IconComponent}
+    </>
+  );
+
   if (href) {
     return (
       <a className={buttonClasses} href={href}>
-        {children}
+        {content}
       </a>
     );
   }
 
-  return <span className={buttonClasses}>{children}</span>;
+  return <span className={buttonClasses}>{content}</span>;
 }

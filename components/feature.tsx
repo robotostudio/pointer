@@ -2,6 +2,7 @@ import Image from "next/image";
 import type { ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { ArrowRightIcon, DownloadIcon } from "./icons/button-icons";
 
 interface FeatureProps {
   children: ReactNode;
@@ -13,7 +14,7 @@ export function Feature({ children, className, reverse }: FeatureProps) {
   return (
     <section
       className={cn(
-        "my-6 grid items-center gap-8 border border-muted/60 bg-muted/30 p-4 text-foreground md:my-12 md:gap-12 md:py-4 lg:grid-cols-3",
+        "my-6 grid items-center gap-8 rounded-[5px] border border-muted/60 bg-muted/30 p-4 text-foreground md:my-12 md:gap-12 md:p-6 lg:grid-cols-3",
         reverse && "lg:[&>*:first-child]:order-2",
         className
       )}
@@ -41,12 +42,12 @@ interface FeatureTitleProps {
 export function FeatureTitle({
   children,
   className,
-  as: Tag = "h2",
+  as: Tag = "h3",
 }: FeatureTitleProps) {
   return (
     <Tag
       className={cn(
-        "mt-0! mb-2! text-balance font-medium text-2xl tracking-tight md:text-3xl",
+        "mt-0 text-balance font-medium text-md tracking-tight md:text-xl",
         className
       )}
     >
@@ -67,7 +68,7 @@ export function FeatureDescription({
   return (
     <div
       className={cn(
-        "max-w-lg text-base text-muted-foreground leading-relaxed [&>p]:my-0! [&_p]:text-inherit!",
+        "max-w-lg text-balance text-md text-muted-foreground leading-relaxed md:text-xl [&>p]:my-0 [&_p]:text-inherit",
         className
       )}
     >
@@ -94,6 +95,7 @@ interface FeatureButtonProps {
   href?: string;
   variant?: "primary" | "secondary";
   className?: string;
+  icon?: "download" | "right";
 }
 
 export function FeatureButton({
@@ -101,28 +103,43 @@ export function FeatureButton({
   href,
   variant = "primary",
   className,
+  icon,
 }: FeatureButtonProps) {
   const baseStyles =
-    "inline-flex items-center justify-center gap-2 font-medium text-sm transition-colors no-underline!";
+    "inline-flex items-center justify-center gap-2 font-medium text-sm transition-colors no-underline ";
 
   const variants = {
     primary: "text-orange-600 hover:text-orange-700 dark:text-orange-500",
     secondary: "text-neutral-600 hover:text-neutral-900 dark:text-neutral-400",
   };
 
+  let IconComponent: ReactNode = null;
+  if (icon === "download") {
+    IconComponent = <DownloadIcon className="size-3.5" />;
+  } else if (icon === "right") {
+    IconComponent = <ArrowRightIcon className="size-4" />;
+  }
+
   const classes = cn(baseStyles, variants[variant], className);
+
+  const content = (
+    <>
+      {children}
+      {IconComponent}
+    </>
+  );
 
   if (href) {
     return (
       <a className={classes} href={href}>
-        {children}
+        {content}
       </a>
     );
   }
 
   return (
     <Button className={classes} type="button">
-      {children}
+      {content}
     </Button>
   );
 }
@@ -145,7 +162,7 @@ export function FeatureMedia({
   return (
     <div
       className={cn(
-        "relative flex aspect-square items-center justify-center overflow-hidden rounded-lg shadow-xl lg:col-span-2",
+        "relative flex aspect-video items-center justify-center overflow-hidden rounded-[5px] shadow-xl lg:col-span-2",
         className
       )}
     >
@@ -159,13 +176,12 @@ export function FeatureMedia({
         />
       )}
       {windowSrc && (
-        <div className="relative z-10 mx-auto h-10/12 w-10/12 overflow-hidden rounded-lg border border-white/10 shadow-2xl">
+        <div className="relative z-10 mx-auto h-11/12 w-11/12 overflow-hidden rounded-[10px]">
           <Image
             alt={`${alt} - focus`}
-            className="h-auto w-full"
-            height={900}
+            className="object-contain"
+            fill
             src={windowSrc}
-            width={1600}
           />
         </div>
       )}

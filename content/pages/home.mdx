@@ -10,7 +10,7 @@ showTitle: false
   <HeroTitle>Built to make you extraordinarily productive,
   Pointer is the best way to code with AI.</HeroTitle>
   <HeroActions>
-    <HeroButton href="/download">Download for Windows ↓</HeroButton>
+    <HeroButton href="/download" icon="download">Download for Windows</HeroButton>
   </HeroActions>
   <HeroMedia backgroundSrc="https://images.unsplash.com/photo-1769109002985-c0ff65466052"
     windowSrc="https://images.unsplash.com/photo-1769109002985-c0ff65466052"
@@ -53,7 +53,7 @@ showTitle: false
       A human-AI programmer, orders of magnitude more effective than any developer alone.
     </FeatureDescription>
     <FeatureActions>
-      <FeatureButton href="/agent">Learn about Agent →</FeatureButton>
+      <FeatureButton href="/agent" icon="right">Learn about Agent</FeatureButton>
     </FeatureActions>
   </FeatureContent>
    <FeatureMedia backgroundSrc="https://images.unsplash.com/photo-1769109002985-c0ff65466052" windowSrc="https://images.unsplash.com/photo-1769109002985-c0ff65466052" alt="Cursor Agent interface" />
@@ -68,7 +68,7 @@ your next action with striking speed
 and precision.
     </FeatureDescription>
     <FeatureActions>
-      <FeatureButton href="/tab">Learn about Tab →</FeatureButton>
+      <FeatureButton href="/tab" icon="right">Learn about Tab</FeatureButton>
     </FeatureActions>
   </FeatureContent>
    <FeatureMedia backgroundSrc="https://images.unsplash.com/photo-1769109002985-c0ff65466052" windowSrc="https://images.unsplash.com/photo-1769109002985-c0ff65466052" alt="Cursor Agent interface" />
@@ -83,7 +83,7 @@ a teammate in Slack, and anywhere
 else you work.
     </FeatureDescription>
     <FeatureActions>
-      <FeatureButton href="/ecosystem">Learn about Cursor's ecosystem →</FeatureButton>
+      <FeatureButton href="/ecosystem" icon="right">Learn about Cursor's ecosystem</FeatureButton>
     </FeatureActions>
   </FeatureContent>
   <FeatureMedia backgroundSrc="https://images.unsplash.com/photo-1769109002985-c0ff65466052" windowSrc="https://images.unsplash.com/photo-1769109002985-c0ff65466052" alt="Cursor Agent interface" />
@@ -101,12 +101,14 @@ else you work.
     author="shadcn"
     role="Creator of shadcn/ui"
     avatar="https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=150&auto=format&fit=crop"
+    href="https://twitter.com/shadcn/status/1715423851963842881"
   />
   <TestimonialCard
     quote="The best LLM applications have an autonomy slider: you control how much independence to give the AI. In Cursor, you can do Tab completion, Cmd+K for targeted edits, or you can let it rip with the full autonomy agentic version."
     author="Andrej Karpathy"
     role="CEO, Eureka Labs"
     avatar="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=150&auto=format&fit=crop"
+    href="https://twitter.com/karpathy/status/1826350616952721408"
   />
   <TestimonialCard
     quote="Cursor quickly grew from hundreds to thousands of extremely enthusiastic Stripe employees. We spend more on R&D and software creation than any other undertaking, and there's significant economic outcomes when making that process more efficient and productive."
@@ -133,7 +135,7 @@ else you work.
     <HighlightCardDescription>
       Choose between every cutting-edge model from OpenAI, Anthropic, Gemini, and xAI.
     </HighlightCardDescription>
-    <HighlightCardAction href="/models">Explore models ↗</HighlightCardAction>
+    <HighlightCardAction href="/models" icon="right">Explore models</HighlightCardAction>
     <HighlightCardImage src="https://images.unsplash.com/photo-1769109002985-c0ff65466052?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Access the best models" />
   </HighlightCard>
   <HighlightCard>
@@ -141,7 +143,7 @@ else you work.
     <HighlightCardDescription>
       Cursor learns how your codebase works, no matter the scale or complexity.
     </HighlightCardDescription>
-    <HighlightCardAction href="/indexing">Learn about codebase indexing ↗</HighlightCardAction>
+    <HighlightCardAction href="/indexing" icon="right">Learn about codebase indexing</HighlightCardAction>
     <HighlightCardImage src="https://images.unsplash.com/photo-1769109002985-c0ff65466052?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Complete codebase understanding" />
   </HighlightCard>
   <HighlightCard>
@@ -149,7 +151,7 @@ else you work.
     <HighlightCardDescription>
       Trusted by over half of the Fortune 500 to accelerate development, securely and at scale.
     </HighlightCardDescription>
-    <HighlightCardAction href="/enterprise">Explore enterprise →</HighlightCardAction>
+    <HighlightCardAction href="/enterprise" icon="right">Explore enterprise</HighlightCardAction>
     <HighlightCardImage src="https://images.unsplash.com/photo-1769109002985-c0ff65466052?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Develop enduring software" />
   </HighlightCard>
 </HighlightCardGrid>
@@ -157,8 +159,8 @@ else you work.
 <Changelog 
   title="Changelog"
   action={
-    <ChangelogAction href="/changelog">
-      See what's new in Cursor →
+    <ChangelogAction href="/changelog" icon="right">
+      See what's new in Cursor
     </ChangelogAction>
   }
 >
@@ -210,7 +212,7 @@ else you work.
     date="Aug 29, 2025"
     href="/blog/mxfp8-kernels"
   />
-  <HighlightsAction href="/blog">View more posts →</HighlightsAction>
+  <HighlightsAction href="/blog" icon="right">View more posts</HighlightsAction>
 </Highlights>
  
 
@@ -220,7 +222,7 @@ else you work.
   <HeroTitle>Cursor is an applied team focused
 on building the future of coding.</HeroTitle>
   <HeroActions>
-    <HeroButton href="/download">Join us →</HeroButton>
+    <HeroButton href="/download" icon="right">Join us</HeroButton>
   </HeroActions>
   <HeroMedia backgroundSrc="https://images.unsplash.com/photo-1769109002985-c0ff65466052"
 
@@ -229,5 +231,5 @@ on building the future of coding.</HeroTitle>
 </Hero>
 <CTA>
   <CTATitle>Try Cursor now.</CTATitle>
-  <CTAButton href="/download">Download for Windows ↓</CTAButton>
+  <CTAButton href="/download" icon="download">Download for Windows</CTAButton>
 </CTA>

@@ -1,6 +1,7 @@
 "use client";
 
 import { MenuIcon } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
@@ -21,27 +22,19 @@ const navItems = [
 
 function PointerLogo() {
   return (
-    <svg
-      aria-hidden="true"
+    <Image
+      alt="Pointer Logo"
       className="size-5"
-      fill="none"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="1.5"
-      />
-    </svg>
+      height={20}
+      src="/logo.svg"
+      width={20}
+    />
   );
 }
 
 export function Navbar() {
   return (
-    <header className="w-full border-white/5 border-b">
+    <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md">
       <div className="container">
         <nav className="flex h-14 items-center justify-between">
           {/* Logo */}
@@ -50,14 +43,17 @@ export function Navbar() {
             href="/"
           >
             <PointerLogo />
-            <span className="font-medium text-sm tracking-wide">POINTER</span>
+            <span className="font-bold text-sm tracking-wide">POINTER</span>
           </Link>
 
           {/* Center Navigation - Desktop */}
           <div className="hidden items-center gap-1 md:flex">
             {navItems.map((item) => (
               <Link
-                className={buttonVariants({ variant: "ghost", size: "sm" })}
+                className={cn(
+                  buttonVariants({ variant: "ghost", size: "sm" }),
+                  "text-muted-foreground transition-colors hover:text-foreground"
+                )}
                 href={item.href}
                 key={item.name}
               >
@@ -70,8 +66,8 @@ export function Navbar() {
           <div className="flex items-center gap-2">
             <Link
               className={cn(
-                buttonVariants({ variant: "ghost", size: "sm" }),
-                "hidden md:inline-flex"
+                "hidden rounded-full border px-4 py-2 font-medium text-sm transition-all hover:bg-neutral-100 md:inline-flex dark:border-white/5 dark:hover:bg-white/5",
+                "text-muted-foreground hover:text-foreground"
               )}
               href="/sign-in"
             >
@@ -79,8 +75,8 @@ export function Navbar() {
             </Link>
             <Link
               className={cn(
-                buttonVariants({ variant: "outline", size: "sm" }),
-                "rounded-full border-foreground/20 bg-foreground/5 text-foreground hover:border-foreground/30 hover:bg-foreground/10"
+                "inline-flex items-center justify-center rounded-full bg-black px-5 py-2 font-medium text-neutral-100 text-sm transition-all active:scale-[0.98] dark:bg-white dark:text-neutral-950 dark:hover:bg-neutral-100/90",
+                "hover:bg-neutral-800"
               )}
               href="/download"
             >

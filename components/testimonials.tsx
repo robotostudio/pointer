@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
@@ -42,6 +43,7 @@ interface TestimonialCardProps {
   role: string;
   avatar?: string;
   className?: string;
+  href?: string;
 }
 
 export function TestimonialCard({
@@ -51,14 +53,10 @@ export function TestimonialCard({
   role,
   avatar,
   className,
+  href,
 }: TestimonialCardProps) {
-  return (
-    <div
-      className={cn(
-        "flex cursor-pointer flex-col rounded-[4px] border border-muted/40 bg-muted/30 p-8 transition-colors hover:bg-muted/40",
-        className
-      )}
-    >
+  const CardContent = (
+    <>
       {logo && <div className="mb-8">{logo}</div>}
       <div className="mb-8 grow font-normal! text-md text-neutral-700! leading-relaxed! dark:text-neutral-400!">
         "{quote}"
@@ -74,6 +72,27 @@ export function TestimonialCard({
           <span className="text-muted-foreground text-xs">{role}</span>
         </div>
       </div>
-    </div>
+    </>
   );
+
+  const containerClasses = cn(
+    "flex flex-col rounded-[4px] border border-muted/40 bg-muted/30 p-8 transition-colors",
+    href ? "cursor-pointer hover:bg-muted/40" : "cursor-default",
+    className
+  );
+
+  if (href) {
+    return (
+      <Link
+        className={containerClasses}
+        href={href}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        {CardContent}
+      </Link>
+    );
+  }
+
+  return <div className={containerClasses}>{CardContent}</div>;
 }

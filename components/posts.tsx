@@ -1,6 +1,8 @@
 import Link from "next/link";
+import type { ReactNode } from "react";
 import type { BlogPost } from "@/app/blog/types";
 import { formatDate } from "@/app/blog/types";
+import { ArrowRightIcon, DownloadIcon } from "./icons/button-icons";
 
 interface BlogPostsProps {
   posts: BlogPost[];
@@ -98,16 +100,29 @@ export function HighlightItem({
 interface HighlightsActionProps {
   href: string;
   children: React.ReactNode;
+  icon?: "download" | "right";
 }
 
-export function HighlightsAction({ href, children }: HighlightsActionProps) {
+export function HighlightsAction({
+  href,
+  children,
+  icon,
+}: HighlightsActionProps) {
+  let IconComponent: ReactNode = null;
+  if (icon === "download") {
+    IconComponent = <DownloadIcon className="size-3.5" />;
+  } else if (icon === "right") {
+    IconComponent = <ArrowRightIcon className="size-4" />;
+  }
+
   return (
     <div className="mt-4">
       <Link
-        className="type-sm no-underline! font-medium text-orange-600 hover:text-orange-700 hover:underline dark:text-orange-500"
+        className="type-sm no-underline! flex items-center gap-1 font-medium text-orange-600 hover:text-orange-700 hover:underline dark:text-orange-500"
         href={href}
       >
         {children}
+        {IconComponent}
       </Link>
     </div>
   );
