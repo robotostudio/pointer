@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { FeatureButton } from "./feature";
 
 interface HighlightCardGridProps {
   children: ReactNode;
@@ -87,8 +88,6 @@ interface HighlightCardActionProps {
   icon?: "download" | "right";
 }
 
-import { FeatureButton } from "./feature";
-
 export function HighlightCardAction({
   children,
   href,
@@ -115,11 +114,12 @@ interface HighlightCardImageProps {
 
 export function HighlightCardImage({ src, alt = "" }: HighlightCardImageProps) {
   return (
-    <div className="mt-4 flex flex-col justify-end px-3 pb-3">
+    <div className="mt-4 flex flex-col justify-end bg-muted/30 px-3 pb-3">
       <Image
         alt={alt}
-        className="my-0! aspect-square h-auto w-full rounded-md object-cover"
+        className="my-0! aspect-square h-auto w-full rounded-md object-cover hue-rotate-180 invert dark:hue-rotate-0 dark:invert-0"
         height={225}
+        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
         src={src}
         width={400}
       />

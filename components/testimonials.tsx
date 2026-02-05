@@ -63,8 +63,14 @@ export function TestimonialCard({
       </div>
       <div className="flex items-center gap-3">
         {avatar && (
-          <div className="relative size-10 overflow-hidden rounded-[4px] border border-white/10">
-            <Image alt={author} className="object-cover" fill src={avatar} />
+          <div className="relative size-10 overflow-hidden rounded-[4px] border border-white/10 bg-muted/50">
+            <Image
+              alt={author}
+              className="object-cover"
+              fill
+              sizes="40px"
+              src={avatar}
+            />
           </div>
         )}
         <div className="flex flex-col">

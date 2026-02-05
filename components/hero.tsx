@@ -174,7 +174,7 @@ export function HeroMedia({
   return (
     <div
       className={cn(
-        "relative mt-12 flex aspect-video w-full items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-zinc-900/50 shadow-2xl",
+        "relative mt-12 flex aspect-video w-full items-center justify-center overflow-hidden rounded-2xl border",
         className
       )}
     >
@@ -184,15 +184,18 @@ export function HeroMedia({
           className="-z-10 object-cover"
           fill
           priority
+          sizes="100vw"
           src={backgroundSrc}
         />
       )}
       {windowSrc && (
-        <div className="relative z-10 h-10/12 w-10/12 overflow-hidden rounded-lg border border-white/10 shadow-2xl">
+        <div className="relative z-10 h-10/12 w-10/12 overflow-hidden rounded-lg">
           <Image
             alt={`${alt} - focus`}
             className="h-auto w-full"
             height={900}
+            priority
+            sizes="(max-width: 768px) 90vw, 80vw"
             src={windowSrc}
             width={1600}
           />

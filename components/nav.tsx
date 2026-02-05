@@ -25,7 +25,10 @@ function PointerLogo() {
     <Image
       alt="Pointer Logo"
       className="size-5"
+      decoding="sync"
       height={20}
+      loading="eager"
+      priority
       src="/logo.svg"
       width={20}
     />

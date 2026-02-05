@@ -107,8 +107,14 @@ export function EnterpriseFeatureTestimonial({
       </div>
       <div className="flex items-center gap-3">
         {avatar && (
-          <div className="relative size-8 overflow-hidden rounded-lg border border-white/10">
-            <Image alt={author} className="object-cover" fill src={avatar} />
+          <div className="relative size-8 overflow-hidden rounded-lg border border-white/10 bg-muted/50">
+            <Image
+              alt={author}
+              className="object-cover"
+              fill
+              sizes="32px"
+              src={avatar}
+            />
           </div>
         )}
         <div className="flex flex-col">
@@ -138,7 +144,7 @@ export function EnterpriseFeatureMedia({
   return (
     <div
       className={cn(
-        "relative flex aspect-square items-center justify-center overflow-hidden rounded-lg shadow-xl lg:col-span-2",
+        "relative flex aspect-square items-center justify-center overflow-hidden rounded-[5px] shadow-xl lg:col-span-2",
         className
       )}
     >
@@ -148,15 +154,17 @@ export function EnterpriseFeatureMedia({
           className="object-cover"
           fill
           priority
+          sizes="(max-width: 1024px) 100vw, 66vw"
           src={backgroundSrc}
         />
       )}
       {windowSrc && (
-        <div className="relative z-10 h-10/12 w-10/12 overflow-hidden rounded-lg border border-white/10 shadow-2xl">
+        <div className="relative z-10 mx-auto h-auto w-11/12 overflow-hidden rounded-[10px]">
           <Image
             alt={`${alt} - focus`}
-            className="h-auto w-full"
-            height={900}
+            className="object-contain hue-rotate-180 invert dark:hue-rotate-0 dark:invert-0"
+            height={1000}
+            sizes="(max-width: 1024px) 90vw, 60vw"
             src={windowSrc}
             width={1600}
           />

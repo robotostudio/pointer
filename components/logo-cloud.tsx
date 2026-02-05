@@ -66,6 +66,7 @@ export function LogoCloudItem({
               invertOnDark && "dark:invert"
             )}
             height={40}
+            sizes="120px"
             src={srcDark && isDark ? srcDark : src}
             width={120}
           />

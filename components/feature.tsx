@@ -162,7 +162,7 @@ export function FeatureMedia({
   return (
     <div
       className={cn(
-        "relative flex aspect-video items-center justify-center overflow-hidden rounded-[5px] shadow-xl lg:col-span-2",
+        "relative flex aspect-square items-center justify-center overflow-hidden rounded-[5px] shadow-xl lg:col-span-2",
         className
       )}
     >
@@ -171,17 +171,19 @@ export function FeatureMedia({
           alt={alt}
           className="object-cover"
           fill
-          priority
+          sizes="(max-width: 1024px) 100vw, 66vw"
           src={backgroundSrc}
         />
       )}
       {windowSrc && (
-        <div className="relative z-10 mx-auto h-11/12 w-11/12 overflow-hidden rounded-[10px]">
+        <div className="relative z-10 mx-auto h-auto w-11/12 overflow-hidden rounded-[10px]">
           <Image
             alt={`${alt} - focus`}
-            className="object-contain"
-            fill
+            className="object-contain hue-rotate-180 invert dark:hue-rotate-0 dark:invert-0"
+            height={1000}
+            sizes="(max-width: 1024px) 90vw, 60vw"
             src={windowSrc}
+            width={1600}
           />
         </div>
       )}
