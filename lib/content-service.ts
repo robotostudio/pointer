@@ -8,6 +8,8 @@ import {
 import type { PageContent, PageMetadata } from "./content-types";
 
 const CONTENT_DIR = path.join(process.cwd(), "content", "pages");
+// biome-ignore lint/suspicious/noControlCharactersInRegex: intentional check for invalid path characters
+const INVALID_PATH_CHARS = /[<>:"|?*\u0000-\u001F]/;
 
 /**
  * Content Service - Handles all content operations with robust error handling
@@ -30,7 +32,9 @@ export class ContentService {
    * @returns Normalized path
    */
   private normalizePath(urlPath: string): string {
-    if (!urlPath) return "";
+    if (!urlPath) {
+      return "";
+    }
 
     // Remove leading and trailing slashes
     let normalized = urlPath.replaceAll(/^\/+/g, "").replaceAll(/\/+$/g, "");
@@ -50,17 +54,24 @@ export class ContentService {
    * @returns True if valid
    */
   private isValidPath(urlPath: string): boolean {
-    if (!urlPath || typeof urlPath !== "string") return false;
+    if (!urlPath || typeof urlPath !== "string") {
+      return false;
+    }
 
     // Check for path traversal attempts
-    if (urlPath.includes("..")) return false;
+    if (urlPath.includes("..")) {
+      return false;
+    }
 
     // Check for invalid characters (no control characters or special chars)
-    // eslint-disable-next-line no-control-regex
-    if (/[<>:"|?*\u0000-\u001F]/.test(urlPath)) return false;
+    if (INVALID_PATH_CHARS.test(urlPath)) {
+      return false;
+    }
 
     // Check for absolute paths
-    if (path.isAbsolute(urlPath)) return false;
+    if (path.isAbsolute(urlPath)) {
+      return false;
+    }
 
     return true;
   }
@@ -72,26 +83,24 @@ export class ContentService {
    */
   getPageByPath(urlPath: string): PageContent | null {
     // Handle root path
-    if (urlPath === "" || urlPath === "/") {
-      urlPath = "home";
-    }
+    const targetPath = urlPath === "" || urlPath === "/" ? "home" : urlPath;
 
     // Normalize and validate input
-    const normalizedPath = this.normalizePath(urlPath);
+    const normalizedPath = this.normalizePath(targetPath);
 
     if (!this.isValidPath(normalizedPath)) {
       if (process.env.NODE_ENV === "development") {
-        console.warn(`Invalid URL path: ${urlPath}`);
+        console.warn(`Invalid URL path: ${targetPath}`);
       }
       return null;
     }
 
     // Check cache first (only in production)
-    if (
-      process.env.NODE_ENV === "production" &&
-      this.pageCache.has(normalizedPath)
-    ) {
-      return this.pageCache.get(normalizedPath)!;
+    if (process.env.NODE_ENV === "production") {
+      const cached = this.pageCache.get(normalizedPath);
+      if (cached) {
+        return cached;
+      }
     }
 
     try {
@@ -149,8 +158,12 @@ export class ContentService {
       const paths = files
         .filter((file) => {
           // Exclude index files except root index
-          if (file === "index.mdx") return true;
-          if (file.endsWith("/index.mdx")) return false;
+          if (file === "index.mdx") {
+            return true;
+          }
+          if (file.endsWith("/index.mdx")) {
+            return false;
+          }
           return true;
         })
         .map((file) => filePathToUrlPath(file))
@@ -191,7 +204,9 @@ export class ContentService {
           } | null => {
             try {
               const filePath = urlPathToFilePath(urlPath, this.contentDir);
-              if (!filePath) return null;
+              if (!filePath) {
+                return null;
+              }
 
               const { metadata } = readMDXFile<PageMetadata>(filePath);
 

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { CATEGORY_LABELS, formatDate } from "@/app/blog/types";
 import { getBlogPosts } from "@/app/blog/utils";
 import { baseUrl } from "@/app/sitemap";
@@ -82,7 +82,8 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
     notFound();
   }
 
-  const previousPost = postIndex < allPosts.length - 1 ? allPosts[postIndex + 1] : null;
+  const previousPost =
+    postIndex < allPosts.length - 1 ? allPosts[postIndex + 1] : null;
   const nextPost = postIndex > 0 ? allPosts[postIndex - 1] : null;
 
   const category = post.metadata.category;
@@ -93,7 +94,7 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
       <div className="grid gap-12 lg:grid-cols-[200px_1fr]">
         <aside className="lg:sticky lg:top-16 lg:mt-10 lg:h-fit">
           <Breadcrumb>
-            <BreadcrumbList className="flex-row text-md items-center gap-1">
+            <BreadcrumbList className="flex-row items-center gap-1 text-md">
               <BreadcrumbItem>
                 <BreadcrumbLink href="/blog">Blog</BreadcrumbLink>
               </BreadcrumbItem>
@@ -147,8 +148,28 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
             <CustomMDX source={post.content} />
           </div>
 
+          <footer className="mt-12 pt-6 text-muted-foreground text-sm">
+            {categoryLabel && (
+              <p className="flex flex-row gap-1">
+                Filed under:{" "}
+                <Link
+                  className="text-foreground hover:underline"
+                  href={`/blog?category=${category}`}
+                >
+                  {categoryLabel}
+                </Link>
+              </p>
+            )}
+            {post.metadata.author && (
+              <p className="mt-1 flex flex-row gap-1">
+                Author:{" "}
+                <span className="text-foreground">{post.metadata.author}</span>
+              </p>
+            )}
+          </footer>
+
           {(previousPost || nextPost) && (
-            <nav className="mt-16 grid gap-4 border-t border-border pt-8 sm:grid-cols-2">
+            <nav className="mt-16 grid gap-4 pt-8 sm:grid-cols-2">
               {previousPost ? (
                 <Link
                   className="group flex flex-col rounded-lg border border-border/50 bg-muted/30 px-6 py-4 transition-all hover:border-border hover:bg-muted/50"
@@ -171,7 +192,7 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
                     </svg>
                     Previous
                   </span>
-                  <span className="font-medium text-foreground line-clamp-1">
+                  <span className="line-clamp-1 font-medium text-foreground">
                     {previousPost.metadata.title}
                   </span>
                 </Link>
@@ -200,7 +221,7 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
                       />
                     </svg>
                   </span>
-                  <span className="font-medium text-foreground line-clamp-1">
+                  <span className="line-clamp-1 font-medium text-foreground">
                     {nextPost.metadata.title}
                   </span>
                 </Link>

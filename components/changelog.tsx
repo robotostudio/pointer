@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
@@ -27,14 +28,22 @@ export function Changelog({
 
 interface ChangelogCardProps {
   children: ReactNode;
+  href?: string;
 }
 
-export function ChangelogCard({ children }: ChangelogCardProps) {
-  return (
-    <div className="flex flex-col space-y-4 rounded-lg border border-muted/60 bg-muted/20 p-5 transition-colors hover:bg-muted/30">
-      {children}
-    </div>
-  );
+export function ChangelogCard({ children, href }: ChangelogCardProps) {
+  const cardClasses =
+    "flex cursor-pointer flex-col space-y-4 rounded-lg border border-muted/60 bg-muted/20 p-5 transition-colors hover:bg-muted/30";
+
+  if (href) {
+    return (
+      <Link className={cardClasses} href={href}>
+        {children}
+      </Link>
+    );
+  }
+
+  return <div className={cardClasses}>{children}</div>;
 }
 
 interface ChangelogHeaderProps {
@@ -72,6 +81,7 @@ interface ChangelogActionProps {
   children: ReactNode;
   variant?: "primary" | "secondary";
   className?: string;
+  icon?: "download" | "right";
 }
 
 export function ChangelogAction({
@@ -79,11 +89,13 @@ export function ChangelogAction({
   children,
   variant = "primary",
   className,
+  icon = "right",
 }: ChangelogActionProps) {
   return (
     <FeatureButton
       className={cn("text-xs!", className)}
       href={href}
+      icon={icon}
       variant={variant}
     >
       {children}

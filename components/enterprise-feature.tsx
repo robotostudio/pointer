@@ -107,8 +107,14 @@ export function EnterpriseFeatureTestimonial({
       </div>
       <div className="flex items-center gap-3">
         {avatar && (
-          <div className="relative size-8 overflow-hidden rounded-[4px] border border-white/10">
-            <Image alt={author} className="object-cover" fill src={avatar} />
+          <div className="relative size-8 overflow-hidden rounded-lg border border-white/10 bg-muted/50">
+            <Image
+              alt={author}
+              className="object-cover"
+              fill
+              sizes="32px"
+              src={avatar}
+            />
           </div>
         )}
         <div className="flex flex-col">
@@ -121,21 +127,49 @@ export function EnterpriseFeatureTestimonial({
 }
 
 interface EnterpriseFeatureMediaProps {
-  children: ReactNode;
+  children?: ReactNode;
+  backgroundSrc?: string;
+  windowSrc?: string;
+  alt?: string;
   className?: string;
 }
 
 export function EnterpriseFeatureMedia({
   children,
   className,
+  backgroundSrc,
+  windowSrc,
+  alt = "Enterprise feature media",
 }: EnterpriseFeatureMediaProps) {
   return (
     <div
       className={cn(
-        "relative aspect-square overflow-hidden rounded-lg shadow-xl lg:col-span-2 [&_img]:size-full [&_img]:object-cover",
+        "relative flex aspect-square items-center justify-center overflow-hidden rounded-[5px] shadow-xl lg:col-span-2",
         className
       )}
     >
+      {backgroundSrc && (
+        <Image
+          alt={alt}
+          className="object-cover"
+          fill
+          priority
+          sizes="(max-width: 1024px) 100vw, 66vw"
+          src={backgroundSrc}
+        />
+      )}
+      {windowSrc && (
+        <div className="relative z-10 mx-auto h-auto w-11/12 overflow-hidden rounded-[10px]">
+          <Image
+            alt={`${alt} - focus`}
+            className="object-contain hue-rotate-180 invert dark:hue-rotate-0 dark:invert-0"
+            height={1000}
+            sizes="(max-width: 1024px) 90vw, 60vw"
+            src={windowSrc}
+            width={1600}
+          />
+        </div>
+      )}
       {children}
     </div>
   );

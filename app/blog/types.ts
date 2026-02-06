@@ -13,6 +13,7 @@ export interface BlogPostMetadata {
   summary: string;
   image?: string;
   category?: BlogCategory;
+  author?: string;
 }
 
 export interface BlogPost {

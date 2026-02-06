@@ -1,5 +1,7 @@
+import Image from "next/image";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { ArrowRightIcon, DownloadIcon } from "./icons/button-icons";
 
 interface HeroProps {
   children: ReactNode;
@@ -106,6 +108,7 @@ interface HeroButtonProps {
   href?: string;
   variant?: "primary" | "secondary" | "ghost";
   className?: string;
+  icon?: "download" | "right";
 }
 
 export function HeroButton({
@@ -113,6 +116,7 @@ export function HeroButton({
   href,
   variant = "primary",
   className,
+  icon,
 }: HeroButtonProps) {
   const baseStyles =
     "inline-flex items-center no-underline! justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950";
@@ -125,32 +129,78 @@ export function HeroButton({
     ghost: "text-neutral-400 hover:text-white",
   };
 
+  let IconComponent: ReactNode = null;
+  if (icon === "download") {
+    IconComponent = <DownloadIcon className="size-3.5" />;
+  } else if (icon === "right") {
+    IconComponent = <ArrowRightIcon className="size-4" />;
+  }
+
   const classes = cn(baseStyles, variants[variant], className);
+
+  const content = (
+    <>
+      {children}
+      {IconComponent}
+    </>
+  );
 
   if (href) {
     return (
       <a className={classes} href={href}>
-        {children}
+        {content}
       </a>
     );
   }
 
-  return <span className={classes}>{children}</span>;
+  return <span className={classes}>{content}</span>;
 }
 
 interface HeroMediaProps {
-  children: ReactNode;
+  children?: ReactNode;
   className?: string;
+  backgroundSrc?: string;
+  windowSrc?: string;
+  alt?: string;
 }
 
-export function HeroMedia({ children, className }: HeroMediaProps) {
+export function HeroMedia({
+  children,
+  className,
+  backgroundSrc,
+  windowSrc,
+  alt = "Hero media",
+}: HeroMediaProps) {
   return (
     <div
       className={cn(
-        "relative mt-12 aspect-video w-full overflow-hidden rounded-2xl border border-white/10 bg-neutral-900/50 shadow-2xl",
+        "relative mt-12 flex aspect-video w-full items-center justify-center overflow-hidden rounded-2xl border",
         className
       )}
     >
+      {backgroundSrc && (
+        <Image
+          alt={alt}
+          className="-z-10 object-cover"
+          fill
+          priority
+          sizes="100vw"
+          src={backgroundSrc}
+        />
+      )}
+      {windowSrc && (
+        <div className="relative z-10 h-10/12 w-10/12 overflow-hidden rounded-lg">
+          <Image
+            alt={`${alt} - focus`}
+            className="h-auto w-full"
+            height={900}
+            priority
+            sizes="(max-width: 768px) 90vw, 80vw"
+            src={windowSrc}
+            width={1600}
+          />
+        </div>
+      )}
       {children}
     </div>
   );

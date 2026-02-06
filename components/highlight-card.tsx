@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { FeatureButton } from "./feature";
 
 interface HighlightCardGridProps {
   children: ReactNode;
@@ -24,13 +25,13 @@ export function HighlightCardGrid({
   return (
     <section className="my-12!">
       {title && (
-        <h2 className="mb-2! font-normal! text-foreground text-md!">{title}</h2>
+        <h4 className="mb-2! font-normal! text-foreground text-md!">{title}</h4>
       )}
-      {
-        <p className="mb-2 font-normal! text-xl! text-zinc-500! dark:text-zinc-400!">
+      {description && (
+        <p className="mb-2 text-balance font-normal! text-xl! text-zinc-500! dark:text-zinc-400!">
           {description}
         </p>
-      }
+      )}
       <div
         className={cn(
           "grid grid-cols-1 gap-4 md:grid-cols-2",
@@ -75,7 +76,7 @@ export function HighlightCardDescription({
   children,
 }: HighlightCardDescriptionProps) {
   return (
-    <div className="px-5 pt-2 text-muted-foreground text-sm [&>p]:my-0! [&_p]:text-inherit!">
+    <div className="px-5 text-muted-foreground text-sm [&>p]:my-0! [&_p]:text-inherit!">
       {children}
     </div>
   );
@@ -84,17 +85,22 @@ export function HighlightCardDescription({
 interface HighlightCardActionProps {
   children: ReactNode;
   href: string;
+  icon?: "download" | "right";
 }
-
-import { FeatureButton } from "./feature";
 
 export function HighlightCardAction({
   children,
   href,
+  icon = "right",
 }: HighlightCardActionProps) {
   return (
     <div className="px-5 pt-3">
-      <FeatureButton className="text-xs!" href={href} variant="primary">
+      <FeatureButton
+        className="text-xs!"
+        href={href}
+        icon={icon}
+        variant="primary"
+      >
         {children}
       </FeatureButton>
     </div>
@@ -108,11 +114,12 @@ interface HighlightCardImageProps {
 
 export function HighlightCardImage({ src, alt = "" }: HighlightCardImageProps) {
   return (
-    <div className="mt-4 flex-end px-3 pb-3">
+    <div className="mt-4 flex flex-col justify-end bg-muted/30 px-3 pb-3">
       <Image
         alt={alt}
-        className="my-0! aspect-square h-auto w-full rounded-md"
-        height={240}
+        className="my-0! aspect-square h-auto w-full rounded-md object-cover hue-rotate-180 invert dark:hue-rotate-0 dark:invert-0"
+        height={225}
+        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
         src={src}
         width={400}
       />

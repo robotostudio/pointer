@@ -35,15 +35,17 @@ const jetBrainsMono = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: "Next.js Portfolio Starter",
-    template: "%s | Next.js Portfolio Starter",
+    default: "Pointer",
+    template: "%s | Pointer MDX CMS Portfolio Platform",
   },
-  description: "This is my portfolio.",
+  description:
+    "Pointer: A clean, simple portfolio and content platform. Build beautiful portfolios without complex CMS or databases. Everything is code, in git.",
   openGraph: {
-    title: "My Portfolio",
-    description: "This is my portfolio.",
+    title: "Pointer",
+    description:
+      "Pointer: A clean, simple portfolio and content platform. Build beautiful portfolios without complex CMS or databases. Everything is code, in git.",
     url: baseUrl,
-    siteName: "My Portfolio",
+    siteName: "Pointer",
     locale: "en_US",
     type: "website",
   },

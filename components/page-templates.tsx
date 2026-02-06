@@ -35,12 +35,10 @@ function PageHeader({ metadata }: PageHeaderProps) {
  */
 export function DefaultPageTemplate({ page }: PageTemplateProps) {
   return (
-    <article className="container">
+    <article className="container py-5 lg:py-10">
       <PageHeader metadata={page.metadata} />
 
-      <div className="prose prose-neutral dark:prose-invert max-w-none">
-        <CustomMDX source={page.content} />
-      </div>
+      <CustomMDX source={page.content} />
     </article>
   );
 }
