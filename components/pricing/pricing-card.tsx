@@ -27,7 +27,7 @@ export function PricingCard({
   return (
     <div className="flex cursor-pointer flex-col rounded border border-neutral-200 bg-muted/30 p-5 hover:bg-muted/60 dark:border-neutral-800 dark:bg-muted/30 dark:hover:bg-muted/50">
       <div className="flex items-center gap-2">
-        <h3 className="my-0! font-normal text-base text-neutral-900 dark:text-neutral-100">
+        <h3 className="my-0 font-normal text-base text-neutral-900 dark:text-neutral-100">
           {title}
         </h3>
         {badge && <span className="text-orange-500 text-sm">{badge}</span>}

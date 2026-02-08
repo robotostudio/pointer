@@ -21,7 +21,7 @@ export function PricingGrid({
   return (
     <section className="my-12">
       {title && (
-        <h2 className="mb-6 font-normal! text-base! text-zinc-500 dark:text-zinc-400">
+        <h2 className="mb-6 font-normal text-base text-zinc-500 dark:text-zinc-400">
           {title}
         </h2>
       )}

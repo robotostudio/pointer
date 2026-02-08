@@ -11,7 +11,7 @@ export function CTA({ children, className }: CTAProps) {
   return (
     <section
       className={cn(
-        "my-16! flex flex-col items-center gap-6 px-6 py-12 text-center md:my-24! md:px-12 md:py-20",
+        "my-16 flex flex-col items-center gap-6 px-6 py-12 text-center md:my-24 md:px-12 md:py-20",
         className
       )}
     >
@@ -29,7 +29,7 @@ export function CTATitle({ children, className }: CTATitleProps) {
   return (
     <h2
       className={cn(
-        "max-w-2xl text-balance font-medium text-3xl! text-foreground tracking-tight md:text-5xl!",
+        "max-w-2xl text-balance font-medium text-3xl text-foreground tracking-tight md:text-5xl",
         className
       )}
     >

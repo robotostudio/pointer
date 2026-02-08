@@ -15,7 +15,7 @@ export function PricingAction({
   return (
     <a
       className={cn(
-        "no-underline! mt-auto inline-flex w-fit items-center justify-center rounded-full px-6 py-2 text-sm transition-colors",
+        "mt-auto inline-flex w-fit items-center justify-center rounded-full px-6 py-2 text-sm no-underline transition-colors",
         variant === "primary"
           ? "bg-neutral-900 text-white hover:bg-neutral-800 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-neutral-200"
           : "border border-neutral-200 bg-transparent text-neutral-900 hover:bg-neutral-100 dark:border-neutral-700 dark:text-neutral-100 dark:hover:bg-neutral-800"

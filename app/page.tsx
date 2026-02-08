@@ -21,7 +21,7 @@ export async function generateMetadata() {
       title,
       description,
       url: baseUrl,
-      images: [{ url: "/og.png", type: "image/png" }],
+      images: [{ url: `${baseUrl}/og?title=${encodeURIComponent(title)}` }],
     },
   };
 }

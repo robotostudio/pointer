@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { PageTemplate } from "../../components/page-templates";
-import { getAllPagePaths, getPageByPath } from "../../lib/content-service";
+import { baseUrl } from "@/app/sitemap";
+import { PageTemplate } from "@/components/page-templates";
+import { getAllPagePaths, getPageByPath } from "@/lib/content-service";
 
 interface PageProps {
   params: Promise<{
@@ -9,9 +10,6 @@ interface PageProps {
   }>;
 }
 
-/**
- * Generate static params for all pages
- */
 export async function generateStaticParams() {
   const paths = getAllPagePaths();
 
@@ -20,9 +18,6 @@ export async function generateStaticParams() {
   }));
 }
 
-/**
- * Generate metadata for SEO
- */
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
@@ -37,22 +32,32 @@ export async function generateMetadata({
   }
 
   const { metadata } = page;
+  const ogImage =
+    metadata.image ||
+    `${baseUrl}/og?title=${encodeURIComponent(metadata.title)}`;
 
   return {
     title: metadata.title,
     description: metadata.description,
     authors: metadata.author ? [{ name: metadata.author }] : undefined,
+    alternates: {
+      canonical: `${baseUrl}/${urlPath}`,
+    },
     openGraph: {
       title: metadata.title || "Page",
       description: metadata.description,
-      images: metadata.image ? [metadata.image] : undefined,
+      url: `${baseUrl}/${urlPath}`,
+      images: [{ url: ogImage }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: metadata.title,
+      description: metadata.description,
+      images: [ogImage],
     },
   };
 }
 
-/**
- * Dynamic page component
- */
 export default async function Page({ params }: PageProps) {
   const slugParams = await params;
   const urlPath = slugParams.slug.join("/");

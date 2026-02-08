@@ -12,6 +12,7 @@ export interface BlogPostMetadata {
   publishedAt: string;
   summary: string;
   image?: string;
+  imageAlt?: string;
   category?: BlogCategory;
   author?: string;
 }

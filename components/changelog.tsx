@@ -16,8 +16,8 @@ export function Changelog({
   action,
 }: ChangelogProps) {
   return (
-    <section className="my-6! flex flex-col items-start justify-between gap-4!">
-      <h2 className="my-0! font-normal! text-2xl! text-foreground">{title}</h2>
+    <section className="my-6 flex flex-col items-start justify-between gap-4">
+      <h2 className="my-0 font-normal text-2xl text-foreground">{title}</h2>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
         {children}
       </div>
@@ -70,7 +70,7 @@ interface ChangelogContentProps {
 
 export function ChangelogContent({ children }: ChangelogContentProps) {
   return (
-    <div className="text-foreground text-sm! leading-relaxed! [&_p]:my-0!">
+    <div className="text-foreground text-sm leading-relaxed [&_p]:my-0">
       {children}
     </div>
   );
@@ -93,7 +93,7 @@ export function ChangelogAction({
 }: ChangelogActionProps) {
   return (
     <FeatureButton
-      className={cn("text-xs!", className)}
+      className={cn("text-xs", className)}
       href={href}
       icon={icon}
       variant={variant}

@@ -76,13 +76,13 @@ export function BlogContent({ allPosts, categories }: BlogContentProps) {
             </nav>
           </aside>
 
-          <main className="max-w-2xl">
+          <main className="lg:max-w-2xl">
             <BlogPosts posts={posts} />
 
-            {posts.length > 10 && (
+            {posts.length > 2 && (
               <div className="mt-12 flex justify-end">
                 <Link
-                  className="group flex w-full flex-col items-end rounded-lg border border-border/50 bg-muted/30 px-6 py-4 transition-all hover:border-muted-50/30 hover:bg-muted/50"
+                  className="group flex w-full flex-col items-end rounded-lg bg-muted/30 px-6 py-4 transition-all hover:border-muted-50/30 hover:bg-muted/50"
                   href={
                     validCategory
                       ? `/blog?category=${validCategory}&page=2`

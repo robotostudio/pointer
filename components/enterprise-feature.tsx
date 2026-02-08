@@ -16,7 +16,7 @@ export function EnterpriseFeature({
   return (
     <section
       className={cn(
-        "my-6 grid items-center gap-8 border border-muted/60 bg-muted/30 p-4 text-foreground md:my-12 md:gap-12 md:py-4 lg:grid-cols-3",
+        "my-6 grid items-center gap-8 rounded-lg border border-muted/60 bg-muted/30 p-4 text-foreground md:my-12 md:gap-12 md:py-4 lg:grid-cols-3",
         reverse && "lg:[&>*:first-child]:order-2",
         className
       )}
@@ -50,7 +50,7 @@ export function EnterpriseFeatureTitle({
   return (
     <h2
       className={cn(
-        "my-0! text-balance font-medium text-3xl text-foreground tracking-tight md:text-4xl",
+        "my-0 text-balance font-medium text-3xl text-foreground tracking-tight md:text-4xl",
         className
       )}
     >
@@ -71,7 +71,7 @@ export function EnterpriseFeatureDescription({
   return (
     <div
       className={cn(
-        "max-w-lg text-md! text-muted-foreground leading-relaxed md:text-lg! [&>p]:my-0! [&_p]:text-inherit!",
+        "max-w-lg text-md text-muted-foreground leading-relaxed md:text-lg [&>p]:my-0 [&_p]:text-inherit",
         className
       )}
     >
@@ -144,7 +144,7 @@ export function EnterpriseFeatureMedia({
   return (
     <div
       className={cn(
-        "relative flex aspect-square items-center justify-center overflow-hidden rounded-[5px] shadow-xl lg:col-span-2",
+        "relative flex aspect-square items-center justify-center overflow-hidden rounded-lg shadow-xl lg:col-span-2",
         className
       )}
     >
@@ -159,7 +159,7 @@ export function EnterpriseFeatureMedia({
         />
       )}
       {windowSrc && (
-        <div className="relative z-10 mx-auto h-auto w-11/12 overflow-hidden rounded-[10px]">
+        <div className="relative z-10 mx-auto h-auto w-11/12 overflow-hidden rounded-xl">
           <Image
             alt={`${alt} - focus`}
             className="object-contain hue-rotate-180 invert dark:hue-rotate-0 dark:invert-0"

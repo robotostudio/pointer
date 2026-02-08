@@ -23,12 +23,12 @@ export function HighlightCardGrid({
   description,
 }: HighlightCardGridProps) {
   return (
-    <section className="my-12!">
+    <section className="my-12">
       {title && (
-        <h4 className="mb-2! font-normal! text-foreground text-md!">{title}</h4>
+        <h4 className="mb-2 font-normal text-foreground text-md">{title}</h4>
       )}
       {description && (
-        <p className="mb-2 text-balance font-normal! text-xl! text-zinc-500! dark:text-zinc-400!">
+        <p className="mb-2 text-balance font-normal text-xl text-zinc-500 dark:text-zinc-400">
           {description}
         </p>
       )}
@@ -62,7 +62,7 @@ interface HighlightCardTitleProps {
 
 export function HighlightCardTitle({ children }: HighlightCardTitleProps) {
   return (
-    <h3 className="my-0! px-5 pt-5 font-medium text-base text-foreground">
+    <h3 className="my-0 px-5 pt-5 font-medium text-base text-foreground">
       {children}
     </h3>
   );
@@ -76,7 +76,7 @@ export function HighlightCardDescription({
   children,
 }: HighlightCardDescriptionProps) {
   return (
-    <div className="px-5 text-muted-foreground text-sm [&>p]:my-0! [&_p]:text-inherit!">
+    <div className="px-5 text-muted-foreground text-sm [&>p]:my-0 [&_p]:text-inherit">
       {children}
     </div>
   );
@@ -96,7 +96,7 @@ export function HighlightCardAction({
   return (
     <div className="px-5 pt-3">
       <FeatureButton
-        className="text-xs!"
+        className="text-xs"
         href={href}
         icon={icon}
         variant="primary"
@@ -117,7 +117,7 @@ export function HighlightCardImage({ src, alt = "" }: HighlightCardImageProps) {
     <div className="mt-4 flex flex-col justify-end bg-muted/30 px-3 pb-3">
       <Image
         alt={alt}
-        className="my-0! aspect-square h-auto w-full rounded-md object-cover hue-rotate-180 invert dark:hue-rotate-0 dark:invert-0"
+        className="my-0 aspect-square h-auto w-full rounded-md object-cover hue-rotate-180 invert dark:hue-rotate-0 dark:invert-0"
         height={225}
         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
         src={src}

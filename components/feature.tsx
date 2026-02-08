@@ -14,7 +14,7 @@ export function Feature({ children, className, reverse }: FeatureProps) {
   return (
     <section
       className={cn(
-        "my-6 grid items-center gap-8 rounded-[5px] border border-muted/60 bg-muted/30 p-4 text-foreground md:my-12 md:gap-12 md:p-6 lg:grid-cols-3",
+        "my-6 grid items-center gap-8 rounded-lg border border-muted/60 bg-muted/30 p-4 text-foreground md:my-12 md:gap-12 md:p-6 lg:grid-cols-3",
         reverse && "lg:[&>*:first-child]:order-2",
         className
       )}
@@ -162,7 +162,7 @@ export function FeatureMedia({
   return (
     <div
       className={cn(
-        "relative flex aspect-square items-center justify-center overflow-hidden rounded-[5px] shadow-xl lg:col-span-2",
+        "relative flex aspect-square items-center justify-center overflow-hidden rounded-lg shadow-xl lg:col-span-2",
         className
       )}
     >
@@ -176,7 +176,7 @@ export function FeatureMedia({
         />
       )}
       {windowSrc && (
-        <div className="relative z-10 mx-auto h-auto w-11/12 overflow-hidden rounded-[10px]">
+        <div className="relative z-10 mx-auto h-auto w-11/12 overflow-hidden rounded-xl">
           <Image
             alt={`${alt} - focus`}
             className="object-contain hue-rotate-180 invert dark:hue-rotate-0 dark:invert-0"

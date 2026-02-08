@@ -13,10 +13,10 @@ export function StatsSection({
   className,
 }: StatsSectionProps) {
   return (
-    <section className={cn("my-24! flex flex-col items-center", className)}>
+    <section className={cn("my-24 flex flex-col items-center", className)}>
       <div className="mb-4 text-center">
         {title && (
-          <h2 className="font-normal! text-3xl! text-foreground md:text-4xl!">
+          <h2 className="font-normal text-3xl text-foreground md:text-4xl">
             {title}
           </h2>
         )}
@@ -54,14 +54,14 @@ export function StatsItem({ value, description, className }: StatsItemProps) {
   return (
     <div
       className={cn(
-        "flex min-h-[240px] flex-col justify-between rounded-lg border border-muted/40 bg-muted/30 p-8 transition-colors hover:bg-muted/40",
+        "flex min-h-60 flex-col justify-between rounded-lg border border-muted/40 bg-muted/30 p-8 transition-colors hover:bg-muted/40",
         className
       )}
     >
-      <div className="font-normal! text-5xl! text-foreground! tracking-tight!">
+      <div className="font-normal text-5xl text-foreground tracking-tight">
         {value}
       </div>
-      <div className="text-sm! text-zinc-500! leading-relaxed! dark:text-zinc-400!">
+      <div className="text-sm text-zinc-500 leading-relaxed dark:text-zinc-400">
         {description}
       </div>
     </div>
