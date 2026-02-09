@@ -1,3 +1,5 @@
+import { baseUrl } from "@/app/sitemap";
+
 interface CollectionPageProps {
   title: string;
   description: string;
@@ -11,11 +13,12 @@ interface ArticleProps {
   url: string;
   datePublished: string;
   dateModified?: string;
-  image: string;
+  image?: string;
   author?: string;
 }
 
 interface CombinedJsonLdProps {
+  baseUrl: string;
   collectionPage?: CollectionPageProps;
   article?: ArticleProps;
 }
@@ -44,7 +47,10 @@ function buildCollectionPageSchema(props: CollectionPageProps) {
   };
 }
 
-function buildArticleSchema(props: ArticleProps) {
+function buildArticleSchema(props: ArticleProps, baseUrl: string) {
+  const image =
+    props.image ?? `${baseUrl}/og?title=${encodeURIComponent(props.headline)}`;
+
   return {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -52,7 +58,7 @@ function buildArticleSchema(props: ArticleProps) {
     datePublished: props.datePublished,
     dateModified: props.dateModified ?? props.datePublished,
     description: props.description,
-    image: props.image,
+    image,
     url: props.url,
     author: {
       "@type": "Person",
@@ -72,7 +78,7 @@ export function CombinedJsonLd({
   }
 
   if (article) {
-    schemas.push(buildArticleSchema(article));
+    schemas.push(buildArticleSchema(article, baseUrl));
   }
 
   if (schemas.length === 0) {

@@ -5,11 +5,44 @@ export function GET(request: Request) {
   const title = url.searchParams.get("title") || "Pointer";
 
   return new ImageResponse(
-    <div tw="flex flex-col w-full h-full items-center justify-center bg-white">
-      <div tw="flex flex-col md:flex-row w-full py-12 px-4 md:items-center justify-between p-8">
-        <h2 tw="flex flex-col text-4xl font-bold tracking-tight text-left">
+    <div
+      style={{
+        height: "100%",
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "white",
+        backgroundImage:
+          "linear-gradient(#f0f0f0 1px, transparent 1px), linear-gradient(90deg, #f0f0f0 1px, transparent 1px)",
+        backgroundSize: "40px 40px",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          width: "100%",
+          justifyContent: "center",
+          padding: "80px",
+          background: "rgba(255, 255, 255, 0.9)",
+          border: "1px solid #e5e7eb",
+        }}
+      >
+        <div
+          style={{
+            fontSize: 72,
+            fontWeight: 800,
+            textAlign: "center",
+            color: "black",
+            lineHeight: 1.1,
+            letterSpacing: "-0.05em",
+          }}
+        >
           {title}
-        </h2>
+        </div>
       </div>
     </div>,
     {

@@ -128,9 +128,10 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
               datePublished: post.metadata.publishedAt,
               image: post.metadata.image
                 ? `${baseUrl}${post.metadata.image}`
-                : `${baseUrl}/og?title=${encodeURIComponent(post.metadata.title)}`,
+                : undefined,
               author: post.metadata.author,
             }}
+            baseUrl={baseUrl}
           />
 
           <header className="mb-12">

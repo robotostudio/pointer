@@ -7,18 +7,24 @@ interface IconProps {
 export function DownloadIcon({ className }: IconProps) {
   return (
     <svg
-      className={cn("shrink-0", className)}
+      className={cn(
+        "lucide lucide-arrow-down-to-line-icon lucide-arrow-down-to-line",
+        className
+      )}
       fill="none"
-      height="17"
-      viewBox="0 0 9 17"
-      width="9"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
       xmlns="http://www.w3.org/2000/svg"
     >
       <title>Download</title>
-      <path
-        d="M7.36 16.032H1.12V14.896H4.016C3.392 13.664 2.432 12.496 1.12 11.376V10.448C2.24 10.976 3.104 11.488 3.664 11.984V1.472H4.8V12C5.36 11.488 6.224 10.976 7.36 10.448V11.376C6.048 12.496 5.088 13.664 4.464 14.896H7.36V16.032Z"
-        fill="currentColor"
-      />
+      <path d="M12 17V3" />
+      <path d="m6 11 6 6 6-6" />
+      <path d="M19 21H5" />
     </svg>
   );
 }

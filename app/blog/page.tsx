@@ -55,6 +55,7 @@ export default function BlogPage() {
   return (
     <div className="bg-background">
       <CombinedJsonLd
+        baseUrl={baseUrl}
         collectionPage={{
           title: "Blog",
           description,
