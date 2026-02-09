@@ -63,7 +63,7 @@ export function HeroTitle({
   return (
     <Tag
       className={cn(
-        "mt-0 mb-6 max-w-4xl text-balance font-medium text-xl tracking-tight md:text-4xl",
+        "mt-0 mb-6 max-w-2xl text-balance font-medium text-xl tracking-tight md:text-3xl",
         className
       )}
     >

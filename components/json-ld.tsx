@@ -1,5 +1,3 @@
-import { baseUrl } from "@/app/sitemap";
-
 interface CollectionPageProps {
   title: string;
   description: string;
@@ -68,6 +66,7 @@ function buildArticleSchema(props: ArticleProps, baseUrl: string) {
 }
 
 export function CombinedJsonLd({
+  baseUrl,
   collectionPage,
   article,
 }: CombinedJsonLdProps) {
