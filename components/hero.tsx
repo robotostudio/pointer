@@ -63,7 +63,7 @@ export function HeroTitle({
   return (
     <Tag
       className={cn(
-        "mt-0 mb-6 max-w-2xl text-balance font-medium text-xl tracking-tight md:text-3xl",
+        "mt-0 mb-6 max-w-2xl text-balance font-medium text-xl tracking-tight md:text-2xl",
         className
       )}
     >
@@ -174,7 +174,7 @@ export function HeroMedia({
   return (
     <div
       className={cn(
-        "relative mt-12 flex aspect-video w-full items-center justify-center overflow-hidden rounded-2xl border",
+        "relative mt-12 flex aspect-video w-full items-center justify-center overflow-hidden rounded-md border",
         className
       )}
     >
@@ -189,7 +189,7 @@ export function HeroMedia({
         />
       )}
       {windowSrc && (
-        <div className="relative z-10 h-10/12 w-10/12 overflow-hidden rounded-lg">
+        <div className="relative z-10 h-10/12 w-10/12 overflow-hidden rounded-sm">
           <Image
             alt={`${alt} - focus`}
             className="h-auto w-full"
