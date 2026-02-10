@@ -2,7 +2,7 @@
   "name": "pointer",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3001",
     "build": "next build",
     "start": "next start",
     "lint": "biome lint --max-diagnostics=none",
