@@ -19,7 +19,7 @@ export function TestimonialGrid({
   return (
     <section
       className={cn(
-        "my-16 flex flex-col items-center gap-2 md:gap-10",
+        "container my-16 flex flex-col items-center gap-2 p-0 md:gap-10",
         className
       )}
     >
@@ -82,7 +82,7 @@ export function TestimonialCard({
   );
 
   const containerClasses = cn(
-    "flex flex-col rounded-sm border border-muted/40 bg-muted/30 p-8 transition-colors",
+    "flex flex-col rounded-sm border border-muted/40 bg-card p-8 transition-colors dark:bg-muted/30",
     href ? "cursor-pointer hover:bg-muted/40" : "cursor-default",
     className
   );

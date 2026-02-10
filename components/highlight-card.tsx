@@ -23,15 +23,18 @@ export function HighlightCardGrid({
   description,
 }: HighlightCardGridProps) {
   return (
-    <section className="my-12">
-      {title && (
-        <h4 className="mb-2 font-normal text-foreground text-md">{title}</h4>
-      )}
-      {description && (
-        <p className="mb-2 text-balance font-normal text-xl text-zinc-500 dark:text-zinc-400">
-          {description}
-        </p>
-      )}
+    <section className="container my-12 p-0">
+      <div className="mb-6 flex flex-col items-start justify-between gap-1">
+        {title && (
+          <h2 className="font-normal text-2xl text-foreground">{title}</h2>
+        )}
+        {description && (
+          <p className="mb-2 text-balance font-normal text-xl text-zinc-500 dark:text-zinc-400">
+            {description}
+          </p>
+        )}
+      </div>
+
       <div
         className={cn(
           "grid grid-cols-1 gap-4 md:grid-cols-2",
@@ -50,7 +53,7 @@ interface HighlightCardProps {
 
 export function HighlightCard({ children }: HighlightCardProps) {
   return (
-    <div className="flex flex-col justify-between overflow-hidden rounded-lg border border-muted/60 bg-muted/30">
+    <div className="flex flex-col justify-between overflow-hidden rounded-lg border border-muted/60 bg-card dark:bg-muted/30">
       {children}
     </div>
   );
@@ -114,7 +117,7 @@ interface HighlightCardImageProps {
 
 export function HighlightCardImage({ src, alt = "" }: HighlightCardImageProps) {
   return (
-    <div className="mt-4 flex flex-col justify-end bg-muted/30 px-3 pb-3">
+    <div className="mt-4 flex flex-col justify-end bg-card px-3 pb-3 dark:bg-muted/30">
       <Image
         alt={alt}
         className="my-0 aspect-square h-auto w-full rounded-md object-cover hue-rotate-180 invert dark:hue-rotate-0 dark:invert-0"

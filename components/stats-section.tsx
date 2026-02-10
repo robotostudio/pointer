@@ -13,8 +13,13 @@ export function StatsSection({
   className,
 }: StatsSectionProps) {
   return (
-    <section className={cn("my-24 flex flex-col items-center", className)}>
-      <div className="mb-4 text-center">
+    <section
+      className={cn(
+        "container my-24 flex flex-col items-center p-0",
+        className
+      )}
+    >
+      <div className="mb-4 text-center md:mb-8">
         {title && (
           <h2 className="font-normal text-3xl text-foreground md:text-4xl">
             {title}
@@ -35,7 +40,7 @@ export function StatsGrid({ children, className }: StatsGridProps) {
   return (
     <div
       className={cn(
-        "grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3",
+        "grid w-full grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3",
         className
       )}
     >
@@ -54,7 +59,7 @@ export function StatsItem({ value, description, className }: StatsItemProps) {
   return (
     <div
       className={cn(
-        "flex min-h-60 flex-col justify-between rounded-lg border border-muted/40 bg-muted/30 p-8 transition-colors hover:bg-muted/40",
+        "flex min-h-60 flex-col justify-between rounded-lg border border-muted/40 bg-card px-2 py-4 transition-colors dark:bg-muted/30",
         className
       )}
     >

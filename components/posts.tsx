@@ -17,7 +17,7 @@ export function BlogPosts({ posts }: BlogPostsProps) {
     <div className="flex flex-col gap-4">
       {posts.map((post) => (
         <Link
-          className="group block cursor-pointer rounded-2xl bg-muted/30 p-4 transition-all duration-300 hover:bg-muted/60 dark:bg-muted/30 dark:hover:bg-muted/50"
+          className="group block cursor-pointer rounded-sm bg-card p-4 transition-all duration-300 hover:bg-card/80 dark:bg-muted/30 dark:hover:bg-muted/50"
           href={`/blog/${post.slug}`}
           key={post.slug}
         >
@@ -53,7 +53,7 @@ export function Highlights({
   title = "Recent highlights",
 }: HighlightsProps) {
   return (
-    <section className="my-16! grid w-full grid-cols-1 gap-8 md:grid-cols-3">
+    <section className="container my-16! grid w-full grid-cols-1 gap-8 p-0 md:grid-cols-3">
       <div className="md:col-span-1">
         <h2 className="font-medium text-muted-foreground text-xl!">{title}</h2>
       </div>

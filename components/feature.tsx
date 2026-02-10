@@ -14,7 +14,7 @@ export function Feature({ children, className, reverse }: FeatureProps) {
   return (
     <section
       className={cn(
-        "my-6 grid items-center gap-8 rounded-lg border border-muted/60 bg-muted/30 p-4 text-foreground md:my-12 md:gap-12 md:p-6 lg:grid-cols-3",
+        "container my-6 grid items-center gap-8 rounded-lg border border-muted/60 bg-card p-4 text-foreground md:my-12 md:gap-12 md:p-6 lg:grid-cols-3 dark:bg-muted/30",
         reverse && "lg:[&>*:first-child]:order-2",
         className
       )}

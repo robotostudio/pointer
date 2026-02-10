@@ -19,7 +19,7 @@ export function SecuritySection({
   return (
     <section
       className={cn(
-        "my-24 flex flex-col items-center gap-4 md:gap-8",
+        "container my-24 flex flex-col items-center gap-4 md:gap-8",
         className
       )}
     >
@@ -77,7 +77,7 @@ export function SecurityItem({
   return (
     <div
       className={cn(
-        "flex flex-col gap-2 rounded-lg border border-muted/40 bg-muted/30 p-8 transition-colors hover:bg-muted/40",
+        "flex flex-col gap-2 rounded-lg border border-muted/40 bg-card p-8 transition-colors dark:bg-muted/30",
         className
       )}
     >

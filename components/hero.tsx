@@ -1,7 +1,11 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
-import { ArrowRightIcon, DownloadIcon } from "./icons/button-icons";
+import {
+  ArrowRightIcon,
+  ArrowUpRight,
+  DownloadIcon,
+} from "./icons/button-icons";
 
 interface HeroProps {
   children: ReactNode;
@@ -134,6 +138,8 @@ export function HeroButton({
     IconComponent = <DownloadIcon className="size-3.5" />;
   } else if (icon === "right") {
     IconComponent = <ArrowRightIcon className="size-4" />;
+  } else if (icon === "upright") {
+    IconComponent = <ArrowUpRight className="size-4" />;
   }
 
   const classes = cn(baseStyles, variants[variant], className);

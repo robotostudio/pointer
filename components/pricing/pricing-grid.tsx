@@ -19,7 +19,7 @@ export function PricingGrid({
   title,
 }: PricingGridProps) {
   return (
-    <section className="my-12">
+    <section className="container my-12 p-0">
       {title && (
         <h2 className="mb-6 font-normal text-base text-zinc-500 dark:text-zinc-400">
           {title}
@@ -27,7 +27,7 @@ export function PricingGrid({
       )}
       <div
         className={cn(
-          "grid grid-cols-1 gap-4 md:grid-cols-2",
+          "grid grid-cols-1 gap-2 md:grid-cols-2",
           columnClasses[columns]
         )}
       >

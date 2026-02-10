@@ -99,7 +99,7 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
   return (
     <div className="container py-12 md:py-16">
       <div className="grid gap-12 lg:grid-cols-[200px_1fr]">
-        <aside className="lg:sticky lg:top-16 lg:mt-10 lg:h-fit">
+        <aside className="lg:sticky lg:top-24 lg:mt-10 lg:h-fit">
           <Breadcrumb>
             <BreadcrumbList className="flex-row items-center gap-1 text-base text-md">
               <BreadcrumbItem>
