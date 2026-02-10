@@ -19,18 +19,18 @@ export function SecuritySection({
   return (
     <section
       className={cn(
-        "my-24! flex flex-col items-center gap-4 md:gap-8",
+        "container my-24 flex flex-col items-center gap-4 md:gap-8",
         className
       )}
     >
       <div className="mb-4 text-center">
         {title && (
-          <h2 className="mb-4 font-normal! text-3xl! text-foreground md:text-4xl!">
+          <h2 className="mb-4 font-normal text-3xl text-foreground md:text-4xl">
             {title}
           </h2>
         )}
         {description && (
-          <p className="mx-auto max-w-2xl text-lg text-neutral-400!">
+          <p className="mx-auto max-w-2xl text-lg text-neutral-400">
             {description}
           </p>
         )}
@@ -77,12 +77,12 @@ export function SecurityItem({
   return (
     <div
       className={cn(
-        "flex flex-col gap-2 rounded-lg border border-muted/40 bg-muted/30 p-8 transition-colors hover:bg-muted/40",
+        "flex flex-col gap-2 rounded-lg border border-muted/40 bg-card p-8 transition-colors dark:bg-muted/30",
         className
       )}
     >
-      <h3 className="m-0! font-medium! text-base! text-foreground!">{title}</h3>
-      <p className="m-0! text-muted-foreground! text-sm! leading-relaxed!">
+      <h3 className="m-0 font-medium text-base text-foreground">{title}</h3>
+      <p className="m-0 text-muted-foreground text-sm leading-relaxed">
         {description}
       </p>
     </div>

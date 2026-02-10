@@ -1,7 +1,11 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
-import { ArrowRightIcon, DownloadIcon } from "./icons/button-icons";
+import {
+  ArrowRightIcon,
+  ArrowUpRight,
+  DownloadIcon,
+} from "./icons/button-icons";
 
 interface HeroProps {
   children: ReactNode;
@@ -21,7 +25,7 @@ export function Hero({ children, className, variant = "default" }: HeroProps) {
     >
       <div
         className={cn(
-          "container z-10 flex flex-col py-12 md:py-16",
+          "container z-10 flex flex-col px-5 py-12 md:px-10 md:py-18",
           variant === "centered" && "mx-auto max-w-4xl"
         )}
       >
@@ -63,7 +67,7 @@ export function HeroTitle({
   return (
     <Tag
       className={cn(
-        "mt-0! mb-6! max-w-4xl text-balance font-medium text-xl! tracking-tight md:text-4xl!",
+        "mt-0 mb-6 max-w-2xl text-balance font-medium text-xl tracking-tight md:text-2xl",
         className
       )}
     >
@@ -119,7 +123,7 @@ export function HeroButton({
   icon,
 }: HeroButtonProps) {
   const baseStyles =
-    "inline-flex items-center no-underline! justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950";
+    "inline-flex items-center no-underline justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950";
 
   const variants = {
     primary:
@@ -134,6 +138,8 @@ export function HeroButton({
     IconComponent = <DownloadIcon className="size-3.5" />;
   } else if (icon === "right") {
     IconComponent = <ArrowRightIcon className="size-4" />;
+  } else if (icon === "upright") {
+    IconComponent = <ArrowUpRight className="size-4" />;
   }
 
   const classes = cn(baseStyles, variants[variant], className);
@@ -174,7 +180,7 @@ export function HeroMedia({
   return (
     <div
       className={cn(
-        "relative mt-12 flex aspect-video w-full items-center justify-center overflow-hidden rounded-2xl border",
+        "relative mt-12 flex aspect-video w-full items-center justify-center overflow-hidden rounded-md border",
         className
       )}
     >
@@ -189,7 +195,7 @@ export function HeroMedia({
         />
       )}
       {windowSrc && (
-        <div className="relative z-10 h-10/12 w-10/12 overflow-hidden rounded-lg">
+        <div className="relative z-10 h-10/12 w-10/12 overflow-hidden rounded-sm">
           <Image
             alt={`${alt} - focus`}
             className="h-auto w-full"

@@ -14,12 +14,8 @@ interface LogoCloudProps {
 
 export function LogoCloud({ children, title, className }: LogoCloudProps) {
   return (
-    <section className={cn("my-12", className)}>
-      {title && (
-        <p className="type-sm mb-8 text-center text-muted-foreground">
-          {title}
-        </p>
-      )}
+    <section className={cn("container py-4", className)}>
+      {title && <p className="type-sm mb-8 text-center">{title}</p>}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-8">
         {children}
       </div>
@@ -52,7 +48,7 @@ export function LogoCloudItem({
   const content = (
     <div
       className={cn(
-        "flex h-14 cursor-pointer items-center justify-center rounded-lg bg-muted/30 px-4 hover:bg-muted/60 dark:bg-muted/30 dark:hover:bg-muted/50",
+        "container flex h-14 items-center justify-center rounded-lg bg-card p-10 dark:bg-muted/30 dark:hover:bg-muted/50",
         "[&_svg]:h-6 [&_svg]:w-auto [&_svg]:max-w-full [&_svg]:fill-current",
         className
       )}

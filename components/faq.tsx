@@ -15,18 +15,15 @@ interface FAQProps {
 
 export function FAQ({ children, title, className }: FAQProps) {
   return (
-    <section
-      className={cn(
-        "my-12 grid grid-cols-1 gap-8 md:grid-cols-[1fr_2fr] md:gap-16",
-        className
-      )}
-    >
-      {title && (
-        <h2 className="font-semibold text-2xl tracking-tight md:text-3xl">
-          {title}
-        </h2>
-      )}
-      <Accordion className="w-full">{children}</Accordion>
+    <section className={cn("py-12 md:py-18", className)}>
+      <div className="container grid grid-cols-1 justify-between gap-8 md:grid-cols-2 md:gap-16">
+        {title && (
+          <h2 className="font-normal text-2xl tracking-tight md:text-3xl">
+            {title}
+          </h2>
+        )}
+        <Accordion className="w-full max-w-2xl border-y">{children}</Accordion>
+      </div>
     </section>
   );
 }

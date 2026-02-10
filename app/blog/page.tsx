@@ -2,10 +2,15 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { BlogContent } from "@/app/blog/blog-content";
 import { getBlogCategories, getBlogPosts } from "@/app/blog/utils";
+import { baseUrl } from "@/app/sitemap";
+import { CombinedJsonLd } from "@/components/json-ld";
+
+const description =
+  "Insights on AI-powered development, coding agents, and software engineering from the Pointer team.";
 
 export const metadata: Metadata = {
   title: "Blog",
-  description: "Read my thoughts on software development, design, and more.",
+  description,
 };
 
 function BlogSkeleton() {
@@ -49,6 +54,18 @@ export default function BlogPage() {
 
   return (
     <div className="bg-background">
+      <CombinedJsonLd
+        baseUrl={baseUrl}
+        collectionPage={{
+          title: "Blog",
+          description,
+          url: `${baseUrl}/blog`,
+          items: allPosts.map((post) => ({
+            title: post.metadata.title,
+            url: `${baseUrl}/blog/${post.slug}`,
+          })),
+        }}
+      />
       <Suspense fallback={<BlogSkeleton />}>
         <BlogContent allPosts={allPosts} categories={categories} />
       </Suspense>

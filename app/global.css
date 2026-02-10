@@ -198,6 +198,7 @@
 
   --color-line-number: var(--line-number-color);
 
+  --radius: 4px;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -208,13 +209,13 @@
 }
 
 :root {
-  --background: oklch(1 0 0);
+  --background: oklch(0.98 0 0);
   --foreground: oklch(0.147 0.004 49.25);
 
-  --card: oklch(1 0 0);
+  --card: oklch(0.9578 0.0054 95.1);
   --card-foreground: oklch(0.147 0.004 49.25);
 
-  --popover: oklch(1 0 0);
+  --popover: oklch(0.98 0 0);
   --popover-foreground: oklch(0.147 0.004 49.25);
 
   --primary: oklch(0.216 0.006 56.043);
@@ -236,17 +237,17 @@
 }
 
 .dark {
-  --background: oklch(0.147 0.004 49.25);
+  --background: oklch(0.18 0.01 93.99);
   --foreground: oklch(0.985 0.001 106.423);
 
-  --card: oklch(0.216 0.006 56.043);
+  --card: oklch(0.21 0.01 91.72);
   --card-foreground: oklch(0.985 0.001 106.423);
 
-  --popover: oklch(0.216 0.006 56.043);
+  --popover: oklch(0.21 0.01 91.72);
   --popover-foreground: oklch(0.985 0.001 106.423);
 
   --primary: oklch(0.923 0.003 48.717);
-  --primary-foreground: oklch(0.216 0.006 56.043);
+  --primary-foreground: oklch(0.21 0.01 91.72);
 
   --secondary: oklch(0.268 0.007 34.298);
   --secondary-foreground: oklch(0.985 0.001 106.423);
@@ -458,10 +459,10 @@ html:not(.dark) .shiki span {
 /* Dark theme: use --shiki-dark colors */
 html.dark .shiki,
 html.dark .shiki span {
-  --line-number-color: var(--shiki-dark-bg) !important;
+  --line-number-color: oklch(0.21 0.01 91.72) !important;
 
   color: var(--shiki-dark) !important;
-  background-color: var(--shiki-dark-bg) !important;
+  background-color: oklch(0.21 0.01 91.72) !important;
   font-style: var(--shiki-dark-font-style) !important;
   font-weight: var(--shiki-dark-font-weight) !important;
   text-decoration: var(--shiki-dark-text-decoration) !important;

@@ -134,7 +134,7 @@ function FooterLinkGroup({
 
 export default function Footer() {
   return (
-    <footer className="border-white/5 border-t bg-background py-12">
+    <footer className="border-white/5 border-t bg-card py-12">
       <div className="container">
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 md:grid-cols-5">
           <FooterLinkGroup

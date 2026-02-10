@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { CATEGORY_LABELS, formatDate } from "@/app/blog/types";
 import { getBlogPosts } from "@/app/blog/utils";
 import { baseUrl } from "@/app/sitemap";
+import { CombinedJsonLd } from "@/components/json-ld";
 import { CustomMDX } from "@/components/mdx";
 import {
   Breadcrumb,
@@ -45,12 +46,17 @@ export async function generateMetadata({
     publishedAt: publishedTime,
     summary: description,
     image,
+    imageAlt,
   } = post.metadata;
   const ogImage = image || `${baseUrl}/og?title=${encodeURIComponent(title)}`;
+  const ogImageAlt = imageAlt || title;
 
   return {
     title,
     description,
+    alternates: {
+      canonical: `${baseUrl}/blog/${post.slug}`,
+    },
     openGraph: {
       title,
       description,
@@ -60,6 +66,7 @@ export async function generateMetadata({
       images: [
         {
           url: ogImage,
+          alt: ogImageAlt,
         },
       ],
     },
@@ -92,9 +99,9 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
   return (
     <div className="container py-12 md:py-16">
       <div className="grid gap-12 lg:grid-cols-[200px_1fr]">
-        <aside className="lg:sticky lg:top-16 lg:mt-10 lg:h-fit">
+        <aside className="lg:sticky lg:top-24 lg:mt-10 lg:h-fit">
           <Breadcrumb>
-            <BreadcrumbList className="flex-row items-center gap-1 text-md">
+            <BreadcrumbList className="flex-row items-center gap-1 text-base text-md">
               <BreadcrumbItem>
                 <BreadcrumbLink href="/blog">Blog</BreadcrumbLink>
               </BreadcrumbItem>
@@ -102,7 +109,9 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
                 <>
                   <BreadcrumbSeparator />
                   <BreadcrumbItem>
-                    <BreadcrumbPage>{categoryLabel}</BreadcrumbPage>
+                    <BreadcrumbPage aria-current="page">
+                      {categoryLabel}
+                    </BreadcrumbPage>
                   </BreadcrumbItem>
                 </>
               )}
@@ -110,29 +119,19 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
           </Breadcrumb>
         </aside>
 
-        <article className="max-w-2xl">
-          <script
-            // biome-ignore lint/security/noDangerouslySetInnerHtml: <Its safe, sinces its for SEO purposes JSON-LD>
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "BlogPosting",
-                headline: post.metadata.title,
-                datePublished: post.metadata.publishedAt,
-                dateModified: post.metadata.publishedAt,
-                description: post.metadata.summary,
-                image: post.metadata.image
-                  ? `${baseUrl}${post.metadata.image}`
-                  : `${baseUrl}/og?title=${encodeURIComponent(post.metadata.title)}`,
-                url: `${baseUrl}/blog/${post.slug}`,
-                author: {
-                  "@type": "Person",
-                  name: "My Portfolio",
-                },
-              }),
+        <article className="lg:max-w-2xl">
+          <CombinedJsonLd
+            article={{
+              headline: post.metadata.title,
+              description: post.metadata.summary,
+              url: `${baseUrl}/blog/${post.slug}`,
+              datePublished: post.metadata.publishedAt,
+              image: post.metadata.image
+                ? `${baseUrl}${post.metadata.image}`
+                : undefined,
+              author: post.metadata.author,
             }}
-            suppressHydrationWarning
-            type="application/ld+json"
+            baseUrl={baseUrl}
           />
 
           <header className="mb-12">
@@ -140,7 +139,8 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
               {post.metadata.title}
             </h1>
             <p className="text-neutral-600 text-sm dark:text-neutral-400">
-              {formatDate(post.metadata.publishedAt)}
+              {formatDate(post.metadata.publishedAt)} by{" "}
+              {post.metadata.author || "Unknown Author"}
             </p>
           </header>
 
@@ -148,9 +148,9 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
             <CustomMDX source={post.content} />
           </div>
 
-          <footer className="mt-12 pt-6 text-muted-foreground text-sm">
+          <div className="mt-12 pt-6 text-muted-foreground text-sm">
             {categoryLabel && (
-              <p className="flex flex-row gap-1">
+              <p className="flex flex-row gap-1 text-base">
                 Filed under:{" "}
                 <Link
                   className="text-foreground hover:underline"
@@ -161,12 +161,11 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
               </p>
             )}
             {post.metadata.author && (
-              <p className="mt-1 flex flex-row gap-1">
-                Author:{" "}
-                <span className="text-foreground">{post.metadata.author}</span>
+              <p className="mt-1 flex flex-row gap-1 text-base">
+                Author: <span>{post.metadata.author}</span>
               </p>
             )}
-          </footer>
+          </div>
 
           {(previousPost || nextPost) && (
             <nav className="mt-16 grid gap-4 pt-8 sm:grid-cols-2">
@@ -190,7 +189,7 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
                         strokeLinejoin="round"
                       />
                     </svg>
-                    Previous
+                    Previous Post
                   </span>
                   <span className="line-clamp-1 font-medium text-foreground">
                     {previousPost.metadata.title}
@@ -205,7 +204,7 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
                   href={`/blog/${nextPost.slug}`}
                 >
                   <span className="flex items-center gap-2 text-muted-foreground text-sm">
-                    Next
+                    Next Post
                     <svg
                       aria-hidden="true"
                       className="size-4 transition-transform group-hover:translate-x-0.5"
