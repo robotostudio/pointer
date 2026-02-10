@@ -10,7 +10,7 @@ interface CTAProps {
 export function CTA({ children, className }: CTAProps) {
   return (
     <section
-      className={cn("mx-auto bg-background md:px-12 md:py-42", className)}
+      className={cn("mx-auto bg-background py-12 md:px-12 md:py-42", className)}
     >
       <div className="container flex flex-col items-center gap-6 text-center">
         {children}

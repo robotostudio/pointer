@@ -14,14 +14,16 @@ export function EnterpriseFeature({
   reverse,
 }: EnterpriseFeatureProps) {
   return (
-    <section
-      className={cn(
-        "container my-6 grid items-center gap-8 rounded-lg border border-muted/60 bg-card p-4 text-foreground md:my-12 md:gap-12 md:py-4 lg:grid-cols-3 dark:bg-muted/30",
-        reverse && "lg:[&>*:first-child]:order-2",
-        className
-      )}
-    >
-      {children}
+    <section className="container py-12 md:py-18">
+      <div
+        className={cn(
+          "my-6 grid items-center gap-8 rounded-lg border border-muted/60 bg-card p-4 text-foreground md:my-12 md:gap-12 md:py-4 lg:grid-cols-3 dark:bg-muted/30",
+          reverse && "lg:[&>*:first-child]:order-2",
+          className
+        )}
+      >
+        {children}
+      </div>
     </section>
   );
 }

@@ -19,16 +19,16 @@ export function TestimonialGrid({
   return (
     <section
       className={cn(
-        "container my-16 flex flex-col items-center gap-2 p-0 md:gap-10",
+        "container flex flex-col items-center gap-2 py-14 md:gap-10 md:py-18",
         className
       )}
     >
       {title && (
-        <h2 className="mb-12 text-center font-normal text-3xl text-foreground md:text-4xl">
+        <h2 className="text-center font-normal text-3xl text-foreground md:text-4xl">
           {title}
         </h2>
       )}
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
         {children}
       </div>
       {actions && <div className="mt-4">{actions}</div>}
@@ -58,7 +58,7 @@ export function TestimonialCard({
   const CardContent = (
     <>
       {logo && <div className="mb-8">{logo}</div>}
-      <div className="mb-8 grow font-normal text-md text-neutral-700 leading-relaxed dark:text-neutral-400">
+      <div className="mb-8 grow font-normal text-md leading-relaxed">
         "{quote}"
       </div>
       <div className="flex items-center gap-3">
@@ -82,7 +82,7 @@ export function TestimonialCard({
   );
 
   const containerClasses = cn(
-    "flex flex-col rounded-sm border border-muted/40 bg-card p-8 transition-colors dark:bg-muted/30",
+    "flex flex-col rounded-sm border border-muted/40 bg-card p-4 transition-colors dark:bg-muted/30",
     href ? "cursor-pointer hover:bg-muted/40" : "cursor-default",
     className
   );

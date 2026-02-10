@@ -25,7 +25,7 @@ export function Hero({ children, className, variant = "default" }: HeroProps) {
     >
       <div
         className={cn(
-          "container z-10 flex flex-col py-12 md:py-16",
+          "container z-10 flex flex-col px-5 py-12 md:px-10 md:py-18",
           variant === "centered" && "mx-auto max-w-4xl"
         )}
       >

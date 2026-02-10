@@ -14,10 +14,7 @@ export function StatsSection({
 }: StatsSectionProps) {
   return (
     <section
-      className={cn(
-        "container my-24 flex flex-col items-center p-0",
-        className
-      )}
+      className={cn("container my-24 flex flex-col items-center", className)}
     >
       <div className="mb-4 text-center md:mb-8">
         {title && (

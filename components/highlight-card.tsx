@@ -23,7 +23,7 @@ export function HighlightCardGrid({
   description,
 }: HighlightCardGridProps) {
   return (
-    <section className="container my-12 p-0">
+    <section className="container py-12 md:py-18">
       <div className="mb-6 flex flex-col items-start justify-between gap-1">
         {title && (
           <h2 className="font-normal text-2xl text-foreground">{title}</h2>
@@ -37,7 +37,7 @@ export function HighlightCardGrid({
 
       <div
         className={cn(
-          "grid grid-cols-1 gap-4 md:grid-cols-2",
+          "grid grid-cols-1 gap-2 md:grid-cols-2",
           columnClasses[columns]
         )}
       >

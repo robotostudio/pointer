@@ -14,12 +14,8 @@ interface LogoCloudProps {
 
 export function LogoCloud({ children, title, className }: LogoCloudProps) {
   return (
-    <section className={cn("container my-12", className)}>
-      {title && (
-        <p className="type-sm mb-8 text-center text-muted-foreground">
-          {title}
-        </p>
-      )}
+    <section className={cn("container py-4", className)}>
+      {title && <p className="type-sm mb-8 text-center">{title}</p>}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-8">
         {children}
       </div>

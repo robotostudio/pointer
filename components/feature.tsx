@@ -12,14 +12,16 @@ interface FeatureProps {
 
 export function Feature({ children, className, reverse }: FeatureProps) {
   return (
-    <section
-      className={cn(
-        "container my-6 grid items-center gap-8 rounded-lg border border-muted/60 bg-card p-4 text-foreground md:my-12 md:gap-12 md:p-6 lg:grid-cols-3 dark:bg-muted/30",
-        reverse && "lg:[&>*:first-child]:order-2",
-        className
-      )}
-    >
-      {children}
+    <section className="container py-12 md:py-18">
+      <div
+        className={cn(
+          "grid items-center gap-8 rounded-lg border border-muted/60 bg-card p-4 text-foreground md:gap-12 md:p-6 lg:grid-cols-3 dark:bg-muted/30",
+          reverse && "lg:[&>*:first-child]:order-2",
+          className
+        )}
+      >
+        {children}
+      </div>
     </section>
   );
 }
@@ -109,7 +111,7 @@ export function FeatureButton({
     "inline-flex items-center justify-center gap-2 font-medium text-sm transition-colors no-underline ";
 
   const variants = {
-    primary: "text-orange-600 hover:text-orange-700 dark:text-orange-500",
+    primary: "text-orange-600 hover:text-orange-700 dark:text-orange-700",
     secondary: "text-neutral-600 hover:text-neutral-900 dark:text-neutral-400",
   };
 

@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import type { BlogPost } from "@/app/blog/types";
 import { formatDate } from "@/app/blog/types";
+import { cn } from "@/lib/utils";
 import { ArrowRightIcon, DownloadIcon } from "./icons/button-icons";
 
 interface BlogPostsProps {
@@ -46,19 +47,25 @@ export function BlogPosts({ posts }: BlogPostsProps) {
 interface HighlightsProps {
   children: React.ReactNode;
   title?: string;
+  className?: string;
 }
 
 export function Highlights({
   children,
+  className,
   title = "Recent highlights",
 }: HighlightsProps) {
   return (
-    <section className="container my-16! grid w-full grid-cols-1 gap-8 p-0 md:grid-cols-3">
-      <div className="md:col-span-1">
-        <h2 className="font-medium text-muted-foreground text-xl!">{title}</h2>
-      </div>
-      <div className="flex max-w-2xl! flex-col gap-4 md:col-span-2">
-        {children}
+    <section className={cn(className && "none", className)}>
+      <div className="container grid grid-cols-1 justify-between gap-8 py-12 md:grid-cols-3 md:gap-16 md:py-18">
+        <div className="md:col-span-1">
+          <h2 className="font-medium text-muted-foreground text-xl!">
+            {title}
+          </h2>
+        </div>
+        <div className="flex max-w-2xl! flex-col gap-4 md:col-span-2">
+          {children}
+        </div>
       </div>
     </section>
   );
