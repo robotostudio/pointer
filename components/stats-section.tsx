@@ -56,16 +56,14 @@ export function StatsItem({ value, description, className }: StatsItemProps) {
   return (
     <div
       className={cn(
-        "flex min-h-60 flex-col justify-between rounded-lg border border-muted/40 bg-card px-2 py-4 transition-colors dark:bg-muted/30",
+        "flex min-h-50 flex-col justify-between rounded-lg border border-muted/40 bg-card px-2 py-4 transition-colors dark:bg-muted/30",
         className
       )}
     >
       <div className="font-normal text-5xl text-foreground tracking-tight">
         {value}
       </div>
-      <div className="text-sm text-zinc-500 leading-relaxed dark:text-zinc-400">
-        {description}
-      </div>
+      <div className="text-sm leading-relaxed md:text-md">{description}</div>
     </div>
   );
 }

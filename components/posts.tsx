@@ -63,7 +63,7 @@ export function Highlights({
             {title}
           </h2>
         </div>
-        <div className="flex max-w-2xl! flex-col gap-4 md:col-span-2">
+        <div className="flex max-w-2xl flex-col gap-4 md:col-span-2">
           {children}
         </div>
       </div>

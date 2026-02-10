@@ -28,7 +28,7 @@ export function CTATitle({ children, className }: CTATitleProps) {
   return (
     <h2
       className={cn(
-        "text-balance font-medium text-6xl text-foreground tracking-tight",
+        "text-balance font-normal text-5xl text-foreground tracking-tight",
         className
       )}
     >
