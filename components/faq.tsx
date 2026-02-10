@@ -15,7 +15,7 @@ interface FAQProps {
 
 export function FAQ({ children, title, className }: FAQProps) {
   return (
-    <section className={cn(className && "py-12 md:py-18", className)}>
+    <section className={cn("py-12 md:py-18", className)}>
       <div className="container grid grid-cols-1 justify-between gap-8 md:grid-cols-2 md:gap-16">
         {title && (
           <h2 className="font-normal text-2xl tracking-tight md:text-3xl">

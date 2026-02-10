@@ -56,8 +56,8 @@ export function Highlights({
   title = "Recent highlights",
 }: HighlightsProps) {
   return (
-    <section className={cn(className && "none", className)}>
-      <div className="container grid grid-cols-1 justify-between gap-8 py-12 md:grid-cols-3 md:gap-16 md:py-18">
+    <section className={cn("py-12 md:py-18", className)}>
+      <div className="container grid grid-cols-1 justify-between gap-8 md:grid-cols-3 md:gap-16">
         <div className="md:col-span-1">
           <h2 className="font-medium text-muted-foreground text-xl!">
             {title}
