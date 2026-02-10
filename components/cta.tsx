@@ -10,7 +10,7 @@ interface CTAProps {
 export function CTA({ children, className }: CTAProps) {
   return (
     <section
-      className={cn("mx-auto bg-background py-12 md:px-12 md:py-42", className)}
+      className={cn("mx-auto bg-background py-22 md:px-12 md:py-42", className)}
     >
       <div className="container flex flex-col items-center gap-6 text-center">
         {children}
@@ -28,7 +28,7 @@ export function CTATitle({ children, className }: CTATitleProps) {
   return (
     <h2
       className={cn(
-        "text-balance font-medium text-3xl text-foreground tracking-tight md:text-6xl",
+        "text-balance font-medium text-6xl text-foreground tracking-tight",
         className
       )}
     >
