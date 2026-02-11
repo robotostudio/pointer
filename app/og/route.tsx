@@ -7,7 +7,7 @@ export async function GET(request: Request) {
   const title = url.searchParams.get("title") || "Pointer";
 
   const fontData = await readFile(
-    join(process.cwd(), "fonts/CursorGothic-Bold.woff2")
+    join(process.cwd(), "fonts/CursorGothic-Regular.woff2")
   );
 
   return new ImageResponse(
