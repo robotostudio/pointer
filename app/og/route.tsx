@@ -59,7 +59,7 @@ export async function GET(request: Request) {
         {
           name: "CursorGothic",
           data: fontData,
-          weight: 700,
+          weight: 400,
           style: "normal",
         },
       ],
