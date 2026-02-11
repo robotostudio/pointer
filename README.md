@@ -13,10 +13,6 @@ A modern content platform built with Next.js and MDX. Create pages, blogs, and m
 - **Static generation** — fast builds, no runtime data fetching
 - **Git-native** — full history, PR previews, AI agent-friendly
 
-## Tech Stack
-
-Next.js 16 / React 19 / TypeScript / Tailwind CSS / shadcn/ui / Vercel
-
 ## Content as Code
 
 Pages are MDX files that combine markdown with React components:
@@ -68,6 +64,3 @@ Pointer includes a library of composable MDX components:
 
 See [`docs/MDX_COMPONENTS.md`](docs/MDX_COMPONENTS.md) for full documentation with props and examples.
 
-## Deploy
-
-Optimized for Vercel — push to git and deploy automatically.
