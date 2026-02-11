@@ -1,112 +1,73 @@
-# MDX CMS
+# Pointer
 
-Simple, clean, agent-friendly content management with Next.js and MDX.
-
-> **Philosophy**: "The cost of abstractions with AI is very high. Content is just code."  
-> — [Lee Robinson](https://leerob.com/agents)
+A modern content platform built with Next.js and MDX. Create pages, blogs, and marketing sites using composable React components — all managed as code in git.
 
 ## Features
 
-- ✅ One MDX file per page
-- ✅ Custom React components in Markdown
-- ✅ No CMS, no database, no API calls
-- ✅ Everything in git, AI agent-friendly
-- ✅ Full TypeScript, type-safe
-- ✅ Fast static generation
+- **File-based MDX content** — one MDX file per page, no CMS or database
+- **Composable components** — Hero, Pricing, FAQ, Testimonials, Changelog, and more
+- **Blog with categories** — MDX-powered blog with filtering and post navigation
+- **Dynamic OG images** — auto-generated Open Graph images with custom fonts
+- **SEO built-in** — sitemap, robots.txt, RSS feed, JSON-LD structured data
+- **Dark mode** — system-aware theming with light/dark toggle
+- **Static generation** — fast builds, no runtime data fetching
+- **Git-native** — full history, PR previews, AI agent-friendly
 
-## Quick Start
+## Tech Stack
 
-```bash
-pnpm install && pnpm dev
-open http://localhost:3000
+Next.js 16 / React 19 / TypeScript / Tailwind CSS / shadcn/ui / Vercel
+
+## Content as Code
+
+Pages are MDX files that combine markdown with React components:
+
+```
+content/pages/     # Site pages → /*
+app/blog/posts/    # Blog posts → /blog/*
 ```
 
-## Create a Page
-
-**1. Create file:**
-```bash
-touch content/pages/pricing.mdx
-```
-
-**2. Add content:**
 ```mdx
 ---
 title: Pricing
-description: Our pricing plans
+description: Plans for every team
 ---
 
-# Pricing
-
-<CardGrid columns={3}>
-  <FeatureCard title="Free" description="For individuals" icon="🎯" />
-  <FeatureCard title="Pro" description="For teams" icon="⚡" />
-  <FeatureCard title="Enterprise" description="For orgs" icon="🏢" />
-</CardGrid>
-
-<Button variant="primary" href="/signup">Get Started</Button>
+<PricingHero>
+  <PricingGrid>
+    <PricingCard title="Free" price="$0">
+      <PricingFeatures>
+        <PricingFeature>5 projects</PricingFeature>
+        <PricingFeature>Community support</PricingFeature>
+      </PricingFeatures>
+      <PricingAction href="/signup">Get Started</PricingAction>
+    </PricingCard>
+  </PricingGrid>
+</PricingHero>
 ```
 
-**3. Done!** Visit `/pricing`
+## Project Structure
 
-## Create a Blog Post
-
-```bash
-touch app/blog/posts/my-post.mdx
 ```
-
-```mdx
----
-title: My Post
-publishedAt: 2026-01-02
-summary: Brief description
----
-
-# Content here
-
-<Callout type="info">
-Use components in blog posts too!
-</Callout>
+content/pages/     # MDX pages (home, pricing, features, enterprise, etc.)
+app/blog/posts/    # MDX blog posts
+app/og/            # Dynamic OG image generation
+components/        # React + MDX components
+lib/               # Utilities and content service
+docs/              # Code style, git conventions, MDX component docs
 ```
-
-Visit: `/blog/my-post`
 
 ## Components
 
-**FeatureCard** · **CardGrid** · **Button** · **Callout** · **Testimonial**
+Pointer includes a library of composable MDX components:
 
-See [`DOCS.md`](./DOCS.md) for details.
+**Layout** — Hero, Feature, EnterpriseFeature, CTA, SecuritySection, StatsSection
 
-## Structure
+**Cards** — HighlightCard, FeatureCard, TestimonialCard, PricingCard, ChangelogCard
 
-```
-content/pages/     # Pages (/) 
-app/blog/posts/    # Blog (/blog/slug)
-app/lib/           # Content utilities
-app/components/    # React components
-```
+**Content** — FAQ, LogoCloud, Highlights, Callout, Button
 
-## Why This Design?
-
-Based on [leerob.com/agents](https://leerob.com/agents):
-
-- **No CMS**: No $56k/mo CDN bills, no API overhead
-- **Agent-friendly**: AI can grep, read, edit directly
-- **Git-based**: Full history, easy rollbacks, PR previews
-- **Simple**: One file per page, no over-abstraction
-- **Fast**: Static generation, no network I/O
+See [`docs/MDX_COMPONENTS.md`](docs/MDX_COMPONENTS.md) for full documentation with props and examples.
 
 ## Deploy
 
-```bash
-pnpm build
-```
-
-Deploy to Vercel, Netlify, or any static host.
-
-## Documentation
-
-See [`DOCS.md`](./DOCS.md) for complete documentation.
-
----
-
-**Simple. Clean. Agent-ready.**
+Optimized for Vercel — push to git and deploy automatically.
