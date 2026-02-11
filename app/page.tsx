@@ -11,6 +11,9 @@ export async function generateMetadata() {
     page?.metadata.description ??
     "Pointer: A clean, simple portfolio and content platform. Build beautiful portfolios without complex CMS or databases. Everything is code, in git.";
 
+  const ogParams = new URLSearchParams({ title, description });
+  const ogImage = `${baseUrl}/og?${ogParams.toString()}`;
+
   return {
     title,
     description,
@@ -21,7 +24,7 @@ export async function generateMetadata() {
       title,
       description,
       url: baseUrl,
-      images: [{ url: `${baseUrl}/og?title=${encodeURIComponent(title)}` }],
+      images: [{ url: ogImage }],
     },
   };
 }

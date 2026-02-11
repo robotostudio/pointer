@@ -32,9 +32,11 @@ export async function generateMetadata({
   }
 
   const { metadata } = page;
-  const ogImage =
-    metadata.image ||
-    `${baseUrl}/og?title=${encodeURIComponent(metadata.title)}`;
+  const ogParams = new URLSearchParams({ title: metadata.title });
+  if (metadata.description) {
+    ogParams.set("description", metadata.description);
+  }
+  const ogImage = metadata.image || `${baseUrl}/og?${ogParams.toString()}`;
 
   return {
     title: metadata.title,
