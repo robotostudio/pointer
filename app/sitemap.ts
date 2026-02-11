@@ -1,12 +1,9 @@
 import type { MetadataRoute } from "next";
 import { getBlogPosts } from "@/app/blog/utils";
+import { getBaseUrl } from "@/lib/config";
 import { getAllPagePaths } from "@/lib/content-service";
 
-export const baseUrl =
-  process.env.NEXT_PUBLIC_BASE_URL ||
-  (process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : "https://pointer-roboto.vercel.app");
+export const baseUrl = getBaseUrl();
 
 function getSlugPriority(slug: string): number {
   if (slug.endsWith("/privacy") || slug.endsWith("/terms")) {
