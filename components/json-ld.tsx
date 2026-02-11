@@ -46,8 +46,11 @@ function buildCollectionPageSchema(props: CollectionPageProps) {
 }
 
 function buildArticleSchema(props: ArticleProps, baseUrl: string) {
-  const image =
-    props.image ?? `${baseUrl}/og?title=${encodeURIComponent(props.headline)}`;
+  const ogParams = new URLSearchParams({ title: props.headline });
+  if (props.description) {
+    ogParams.set("description", props.description);
+  }
+  const image = props.image ?? `${baseUrl}/og?${ogParams.toString()}`;
 
   return {
     "@context": "https://schema.org",
