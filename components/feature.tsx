@@ -164,7 +164,7 @@ export function FeatureMedia({
   return (
     <div
       className={cn(
-        "relative flex aspect-square items-center justify-center overflow-hidden rounded-lg shadow-xl lg:col-span-2",
+        "relative flex aspect-auto items-center justify-center overflow-hidden rounded-lg shadow-xl lg:col-span-2",
         className
       )}
     >

@@ -25,7 +25,7 @@ export function Hero({ children, className, variant = "default" }: HeroProps) {
     >
       <div
         className={cn(
-          "container z-10 flex flex-col px-5 py-12 md:px-10 md:py-18",
+          "container z-10 flex flex-col px-5 py-12 md:pt-24 md:pb-18",
           variant === "centered" && "mx-auto max-w-4xl"
         )}
       >
@@ -67,7 +67,7 @@ export function HeroTitle({
   return (
     <Tag
       className={cn(
-        "mt-0 mb-6 max-w-2xl text-balance font-medium text-xl tracking-tight md:text-2xl",
+        "mt-0 mb-6 max-w-3xl text-balance font-medium text-xl tracking-tight md:text-2xl",
         className
       )}
     >
@@ -180,14 +180,14 @@ export function HeroMedia({
   return (
     <div
       className={cn(
-        "relative mt-12 flex aspect-video w-full items-center justify-center overflow-hidden rounded-md border",
+        "relative mt-12 flex aspect-video w-full items-center justify-center overflow-hidden rounded-md",
         className
       )}
     >
       {backgroundSrc && (
         <Image
           alt={alt}
-          className="-z-10 object-cover"
+          className="-z-10 rounded-md object-cover"
           fill
           priority
           sizes="100vw"
@@ -195,7 +195,7 @@ export function HeroMedia({
         />
       )}
       {windowSrc && (
-        <div className="relative z-10 h-10/12 w-10/12 overflow-hidden rounded-sm">
+        <div className="relative z-10 w-full overflow-hidden rounded-sm">
           <Image
             alt={`${alt} - focus`}
             className="h-auto w-full"
