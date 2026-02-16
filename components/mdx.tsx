@@ -254,6 +254,7 @@ export async function CustomMDX(props: MDXRemoteProps) {
         {...props}
         components={{ ...components, ...props.components }}
         options={{
+          blockJS: false,
           mdxOptions: {
             rehypePlugins: [rehypeShiki],
           },

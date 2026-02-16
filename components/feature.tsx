@@ -164,7 +164,7 @@ export function FeatureMedia({
   return (
     <div
       className={cn(
-        "relative flex aspect-square items-center justify-center overflow-hidden rounded-lg shadow-xl lg:col-span-2",
+        "relative flex aspect-4/3 items-center justify-center overflow-hidden rounded-lg shadow-xl lg:col-span-2",
         className
       )}
     >
@@ -183,6 +183,7 @@ export function FeatureMedia({
             alt={`${alt} - focus`}
             className="object-contain hue-rotate-180 invert dark:hue-rotate-0 dark:invert-0"
             height={1000}
+            loading="eager"
             sizes="(max-width: 1024px) 90vw, 60vw"
             src={windowSrc}
             width={1600}
