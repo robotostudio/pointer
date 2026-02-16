@@ -146,7 +146,7 @@ export function EnterpriseFeatureMedia({
   return (
     <div
       className={cn(
-        "relative flex aspect-square items-center justify-center overflow-hidden rounded-lg shadow-xl lg:col-span-2",
+        "relative flex aspect-4/3 items-center justify-center overflow-hidden rounded-lg shadow-xl lg:col-span-2",
         className
       )}
     >
