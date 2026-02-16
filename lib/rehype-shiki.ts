@@ -78,7 +78,11 @@ export function rehypeShiki() {
 
         const code = getTextContent(codeElement);
 
-        if (parent && typeof index === "number") {
+        if (
+          parent &&
+          typeof index === "number" &&
+          (parent.type === "element" || parent.type === "root")
+        ) {
           codeBlocks.push({
             node,
             parent,

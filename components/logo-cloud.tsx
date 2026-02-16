@@ -48,7 +48,7 @@ export function LogoCloudItem({
   const content = (
     <div
       className={cn(
-        "container flex h-14 items-center justify-center rounded-lg bg-card p-10 dark:bg-muted/30 dark:hover:bg-muted/50",
+        "container flex h-14 items-center justify-center rounded-lg border border-muted/50 bg-card p-10 dark:bg-muted/30 dark:hover:bg-muted/50",
         "[&_svg]:h-6 [&_svg]:w-auto [&_svg]:max-w-full [&_svg]:fill-current",
         className
       )}
@@ -58,7 +58,7 @@ export function LogoCloudItem({
           <Image
             alt={name}
             className={cn(
-              "h-6 w-auto max-w-full object-contain",
+              "h-full w-auto max-w-full object-contain",
               invertOnDark && "dark:invert"
             )}
             height={40}

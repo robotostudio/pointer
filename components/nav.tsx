@@ -38,7 +38,7 @@ function PointerLogo() {
 export function Navbar() {
   return (
     <header className="sticky top-0 z-50 w-full bg-background">
-      <nav className="container flex h-14 items-center justify-between px-5">
+      <nav className="container relative flex h-14 items-center justify-between px-5">
         {/* Logo */}
         <Link
           className="flex items-center gap-1 text-foreground transition-opacity hover:opacity-80"
@@ -49,12 +49,12 @@ export function Navbar() {
         </Link>
 
         {/* Center Navigation - Desktop */}
-        <div className="hidden items-center gap-1 md:flex">
+        <div className="pointer-events-none absolute inset-x-0 hidden items-center justify-center gap-2 md:flex">
           {navItems.map((item) => (
             <Link
               className={cn(
                 buttonVariants({ variant: "ghost", size: "sm" }),
-                "transition-colors hover:text-foreground"
+                "pointer-events-auto transition-colors hover:text-foreground"
               )}
               href={item.href}
               key={item.name}
@@ -68,7 +68,7 @@ export function Navbar() {
         <div className="flex items-center gap-2">
           <Link
             className={cn(
-              "hidden rounded-full border px-4 py-2 font-medium text-sm transition-all hover:bg-neutral-100 md:inline-flex dark:border-white/5 dark:hover:bg-white/5",
+              "hidden cursor-pointer rounded-full border px-3 py-1 font-medium text-sm transition-all hover:bg-neutral-100 md:inline-flex dark:border-white/5 dark:hover:bg-white/5",
               "hover:text-foreground"
             )}
             href="/sign-in"
@@ -77,7 +77,7 @@ export function Navbar() {
           </Link>
           <Link
             className={cn(
-              "inline-flex items-center justify-center rounded-full bg-black px-5 py-2 font-medium text-neutral-100 text-sm transition-all active:scale-[0.98] dark:bg-white dark:text-neutral-950 dark:hover:bg-neutral-100/90",
+              "inline-flex cursor-pointer items-center justify-center rounded-full bg-black px-3 py-1 font-medium text-neutral-100 text-sm transition-all active:scale-[0.98] dark:bg-white dark:text-neutral-950 dark:hover:bg-neutral-100/90",
               "hover:bg-neutral-800"
             )}
             href="/download"

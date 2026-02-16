@@ -123,7 +123,7 @@ export function HeroButton({
   icon,
 }: HeroButtonProps) {
   const baseStyles =
-    "inline-flex items-center no-underline justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950";
+    "inline-flex items-center no-underline justify-center gap-2 rounded-full px-5 py-3 text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950";
 
   const variants = {
     primary:
