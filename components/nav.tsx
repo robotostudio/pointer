@@ -24,7 +24,7 @@ function PointerLogo() {
   return (
     <Image
       alt="Pointer Logo"
-      className="size-6"
+      className="size-6 invert dark:invert-0"
       decoding="sync"
       height={30}
       loading="eager"
