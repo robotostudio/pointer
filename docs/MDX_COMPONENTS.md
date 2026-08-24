@@ -103,6 +103,7 @@ Validated against `lib/content-schema.ts` at build time — unknown keys and
 missing required fields fail `pnpm build`.
 
 **Pages:**
+
 ```yaml
 title: Page Title                         # required
 description: SEO description              # required, max 220 chars
@@ -115,6 +116,7 @@ updatedAt: 2026-01-02                     # optional
 ```
 
 **Blog Posts:**
+
 ```yaml
 title: Post Title                         # required
 publishedAt: 2026-01-02                   # required
