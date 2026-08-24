@@ -13,16 +13,16 @@ const GROUP_ID_REGEX = /\bgroupId=["']([^"']+)["']/;
 let tabGroupCounter = 0;
 
 interface CodeBlockInfo {
+  code: string;
+  filename: string | null;
+  groupId: string | null;
+  index: number;
+  lang: string;
   node: Element;
   parent: Element | Root;
-  index: number;
-  code: string;
-  lang: string;
   showLineNumbers: boolean;
   startLineNumber: number;
-  filename: string | null;
   tab: string | null;
-  groupId: string | null;
 }
 
 interface TabGroup {
@@ -55,10 +55,10 @@ export function rehypeShiki() {
           }
         }
 
-        const meta =
-          (codeElement.data as unknown as Record<string, unknown>)?.meta ||
-          codeElement.properties?.metastring ||
-          "";
+        const codeData = codeElement.data as
+          | Record<string, unknown>
+          | undefined;
+        const meta = codeData?.meta || codeElement.properties?.metastring || "";
         const metaString = String(meta);
 
         const lineNumbersMatch = metaString.match(LINE_NUMBERS_REGEX);
@@ -84,16 +84,16 @@ export function rehypeShiki() {
           (parent.type === "element" || parent.type === "root")
         ) {
           codeBlocks.push({
+            code,
+            filename,
+            groupId,
+            index,
+            lang,
             node,
             parent,
-            index,
-            code,
-            lang,
             showLineNumbers: hasLineNumbers,
             startLineNumber,
-            filename,
             tab,
-            groupId,
           });
         }
       }
@@ -102,60 +102,67 @@ export function rehypeShiki() {
     // Group consecutive tab blocks
     const { groups, standalone } = groupConsecutiveTabBlocks(codeBlocks);
 
+    // Highlight every grouped block up front: awaiting inside the loop below
+    // would serialize the groups for no reason.
+    const groupWrappers = await Promise.all(
+      groups.map((group) =>
+        Promise.all(group.blocks.map((block) => createCodeBlockWrapper(block)))
+      )
+    );
+
     // Process tab groups
-    for (const group of groups) {
+    for (const [groupIndex, group] of groups.entries()) {
       const tabPanels: Element[] = [];
       const tabLabels: string[] = [];
+      const wrappers = groupWrappers[groupIndex];
 
-      for (let i = 0; i < group.blocks.length; i++) {
-        const block = group.blocks[i];
-        const wrapper = await createCodeBlockWrapper(block);
+      for (const [i, block] of group.blocks.entries()) {
         tabLabels.push(block.tab as string);
 
         const panel: Element = {
-          type: "element",
-          tagName: "div",
+          children: [wrappers[i]],
           properties: {
             className: ["code-tab-panel"],
-            "data-tab": block.tab,
             "data-active": String(i === 0),
+            "data-tab": block.tab,
           },
-          children: [wrapper],
+          tagName: "div",
+          type: "element",
         };
         tabPanels.push(panel);
       }
 
       const tabsContainer: Element = {
-        type: "element",
-        tagName: "div",
-        properties: {
-          className: ["code-tabs-container"],
-          "data-group-id": group.groupId,
-        },
         children: [
           {
-            type: "element",
-            tagName: "div",
+            children: tabLabels.map((label, i) => ({
+              children: [{ type: "text", value: label }],
+              properties: {
+                "aria-selected": String(i === 0),
+                className:
+                  i === 0 ? ["code-tab", "code-tab-active"] : ["code-tab"],
+                "data-tab": label,
+                role: "tab",
+                type: "button",
+              },
+              tagName: "button",
+              type: "element",
+            })),
             properties: {
               className: ["code-tabs-list"],
               role: "tablist",
             },
-            children: tabLabels.map((label, i) => ({
-              type: "element",
-              tagName: "button",
-              properties: {
-                className:
-                  i === 0 ? ["code-tab", "code-tab-active"] : ["code-tab"],
-                role: "tab",
-                "aria-selected": String(i === 0),
-                "data-tab": label,
-                type: "button",
-              },
-              children: [{ type: "text", value: label }],
-            })),
+            tagName: "div",
+            type: "element",
           },
           ...tabPanels,
         ],
+        properties: {
+          className: ["code-tabs-container"],
+          "data-group-id": group.groupId,
+        },
+        tagName: "div",
+        type: "element",
       };
 
       // Replace first block with container
@@ -163,7 +170,7 @@ export function rehypeShiki() {
         group.parentNode.children[group.startIndex] = tabsContainer;
 
         // Mark subsequent blocks for removal (set to null, then filter)
-        for (let i = 1; i < group.blocks.length; i++) {
+        for (let i = 1; i < group.blocks.length; i += 1) {
           const blockIndex = group.blocks[i].index;
           (group.parentNode.children as (Element | Text | null)[])[blockIndex] =
             null;
@@ -201,7 +208,7 @@ function groupConsecutiveTabBlocks(codeBlocks: CodeBlockInfo[]): {
   const standalone: CodeBlockInfo[] = [];
   const processed = new Set<number>();
 
-  for (let i = 0; i < codeBlocks.length; i++) {
+  for (let i = 0; i < codeBlocks.length; i += 1) {
     if (processed.has(i)) {
       continue;
     }
@@ -220,7 +227,7 @@ function groupConsecutiveTabBlocks(codeBlocks: CodeBlockInfo[]): {
     processed.add(i);
 
     // Look for consecutive tab blocks in the same parent
-    for (let j = i + 1; j < codeBlocks.length; j++) {
+    for (let j = i + 1; j < codeBlocks.length; j += 1) {
       const nextBlock = codeBlocks[j];
 
       // Must be same parent
@@ -255,7 +262,7 @@ function groupConsecutiveTabBlocks(codeBlocks: CodeBlockInfo[]): {
 
     // Only create a group if we have multiple blocks
     if (groupBlocks.length > 1) {
-      tabGroupCounter++;
+      tabGroupCounter += 1;
       groups.push({
         blocks: groupBlocks,
         groupId: explicitGroupId || `auto-${tabGroupCounter}`,
@@ -276,7 +283,7 @@ function areIndicesConsecutive(
   index1: number,
   index2: number
 ): boolean {
-  for (let k = index1 + 1; k < index2; k++) {
+  for (let k = index1 + 1; k < index2; k += 1) {
     const node = parent.children[k];
     // Allow only whitespace text nodes between
     if (node.type !== "text" || (node as Text).value.trim() !== "") {
@@ -304,47 +311,47 @@ async function createCodeBlockWrapper(block: CodeBlockInfo): Promise<Element> {
 
   if (filename) {
     const headerElement: Element = {
-      type: "element",
-      tagName: "div",
-      properties: {
-        className: ["code-block-header"],
-      },
       children: [
         {
-          type: "element",
-          tagName: "div",
+          children: [
+            {
+              children: fromHtml(getFileIconSvg(filename), {
+                fragment: true,
+              }).children as Element[],
+              properties: {
+                className: ["code-block-icon"],
+              },
+              tagName: "span",
+              type: "element",
+            },
+            {
+              children: [{ type: "text", value: filename }],
+              properties: {},
+              tagName: "span",
+              type: "element",
+            },
+          ],
           properties: {
             className: ["code-block-header-filename"],
             "data-filename": filename,
           },
-          children: [
-            {
-              type: "element",
-              tagName: "span",
-              properties: {
-                className: ["code-block-icon"],
-              },
-              children: fromHtml(getFileIconSvg(filename), {
-                fragment: true,
-              }).children as Element[],
-            },
-            {
-              type: "element",
-              tagName: "span",
-              properties: {},
-              children: [{ type: "text", value: filename }],
-            },
-          ],
+          tagName: "div",
+          type: "element",
         },
         {
-          type: "element",
-          tagName: "div",
+          children: [],
           properties: {
             className: ["copy-button-placeholder"],
           },
-          children: [],
+          tagName: "div",
+          type: "element",
         },
       ],
+      properties: {
+        className: ["code-block-header"],
+      },
+      tagName: "div",
+      type: "element",
     };
     wrapperChildren.push(headerElement);
   }
@@ -355,35 +362,35 @@ async function createCodeBlockWrapper(block: CodeBlockInfo): Promise<Element> {
 
   if (!filename) {
     const copyButtonContainer: Element = {
-      type: "element",
-      tagName: "div",
-      properties: {
-        className: ["copy-button-container"],
-      },
       children: [
         {
-          type: "element",
-          tagName: "div",
+          children: [],
           properties: {
             className: ["copy-button-placeholder"],
           },
-          children: [],
+          tagName: "div",
+          type: "element",
         },
       ],
+      properties: {
+        className: ["copy-button-container"],
+      },
+      tagName: "div",
+      type: "element",
     };
     wrapperChildren.push(copyButtonContainer);
   }
 
   return {
-    type: "element",
-    tagName: "div",
+    children: wrapperChildren,
     properties: {
       className: filename ? ["shiki-wrapper", "has-header"] : ["shiki-wrapper"],
       "data-language": lang,
       "data-line-numbers": String(showLineNumbers),
       ...(filename && { "data-filename": filename }),
     },
-    children: wrapperChildren,
+    tagName: "div",
+    type: "element",
   };
 }
 

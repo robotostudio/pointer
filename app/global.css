@@ -9,52 +9,52 @@
 
 @utility type-display {
   font-size: 4.5rem;
-  line-height: 1.1;
   font-weight: 500;
+  line-height: 1.1;
   letter-spacing: -0.03em;
   text-wrap: balance;
 }
 
 @utility type-h1 {
   font-size: 3.25rem;
-  line-height: 1.1;
   font-weight: 500;
+  line-height: 1.1;
   letter-spacing: -0.025em;
   text-wrap: balance;
 }
 
 @utility type-h2 {
   font-size: 2.25rem;
-  line-height: 1.15;
   font-weight: 500;
+  line-height: 1.15;
   letter-spacing: -0.02em;
 }
 
 @utility type-h3 {
   font-size: 1.625rem;
-  line-height: 1.2;
   font-weight: 500;
+  line-height: 1.2;
   letter-spacing: -0.0125em;
 }
 
 @utility type-h4 {
   font-size: 1.375rem;
-  line-height: 1.25;
   font-weight: 500;
+  line-height: 1.25;
   letter-spacing: -0.005em;
 }
 
 @utility type-h5 {
   font-size: 1.125rem;
-  line-height: 1.3;
   font-weight: 500;
+  line-height: 1.3;
   letter-spacing: -0.005em;
 }
 
 @utility type-h6 {
   font-size: 1rem;
-  line-height: 1.4;
   font-weight: 500;
+  line-height: 1.4;
   letter-spacing: 0.005em;
 }
 
@@ -83,39 +83,39 @@
 }
 
 @utility type-body {
-  @apply text-foreground;
   font-size: 1rem;
   line-height: 1.625;
   letter-spacing: 0.005em;
+  @apply text-foreground;
 }
 
 @utility type-body-secondary {
-  @apply text-muted-foreground;
   font-size: 1rem;
   line-height: 1.625;
   letter-spacing: 0.005em;
+  @apply text-muted-foreground;
 }
 
 @utility type-body-tertiary {
-  @apply text-muted-foreground/60;
   font-size: 1rem;
   line-height: 1.625;
   letter-spacing: 0.005em;
+  @apply text-muted-foreground/60;
 }
 
 @utility type-caption {
-  @apply text-muted-foreground;
   font-size: 0.875rem;
   line-height: 1.43;
   letter-spacing: 0.01em;
+  @apply text-muted-foreground;
 }
 
 @utility type-overline {
   font-size: 0.75rem;
-  line-height: 1.33;
   font-weight: 500;
-  letter-spacing: 0.05em;
+  line-height: 1.33;
   text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 @utility type-link {
@@ -291,13 +291,13 @@ pre::-webkit-scrollbar {
 }
 
 .prose .anchor {
-  @apply absolute invisible no-underline;
-
-  margin-left: -1em;
-  padding-right: 0.5em;
   width: 80%;
   max-width: 700px;
+  padding-right: 0.5em;
+
+  margin-left: -1em;
   cursor: pointer;
+  @apply absolute invisible no-underline;
 }
 
 .anchor:hover {
@@ -309,8 +309,8 @@ pre::-webkit-scrollbar {
 }
 
 .prose .anchor:after {
-  @apply text-neutral-300 dark:text-neutral-700;
   content: "#";
+  @apply text-neutral-300 dark:text-neutral-700;
 }
 
 .prose *:hover > .anchor {
@@ -326,9 +326,9 @@ pre::-webkit-scrollbar {
 }
 
 .prose pre code {
-  @apply p-0;
-  border: initial;
   line-height: 1.5;
+  border: initial;
+  @apply p-0;
 }
 
 .prose code span {
@@ -390,8 +390,8 @@ pre::-webkit-scrollbar {
 
 input[type="text"],
 input[type="email"] {
-  -webkit-appearance: none;
   -moz-appearance: none;
+  -webkit-appearance: none;
   appearance: none;
 }
 
@@ -411,23 +411,23 @@ table {
 }
 
 .shiki-wrapper pre {
-  @apply rounded-lg overflow-auto border border-border py-3 px-0 text-sm;
-  font-family: var(--font-mono), ui-monospace, monospace;
   max-height: 500px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  @apply rounded-lg overflow-auto border border-border py-3 px-0 text-sm;
 }
 
 .shiki-wrapper code {
   display: block;
   min-width: 100%;
-  background: transparent !important;
   padding: 0 !important;
-  border-radius: 0 !important;
   font-size: inherit !important;
+  background: transparent !important;
+  border-radius: 0 !important;
 }
 
 .shiki-wrapper .line {
-  @apply px-4 inline-block w-full;
   min-height: 1.5rem;
+  @apply px-4 inline-block w-full;
 }
 
 .shiki-wrapper .line::before {
@@ -439,38 +439,44 @@ table {
 }
 
 .shiki-wrapper[data-line-numbers="true"] .line::before {
+  color: oklch(0.5 0 0 / 35%);
   content: attr(data-line);
   @apply inline-block w-10 pr-4 mr-2 text-right select-none bg-line-number! tabular-nums sticky left-0;
-  color: oklch(0.5 0 0 / 35%);
 }
 
 /* Light theme: use --shiki-light colors */
 html:not(.dark) .shiki,
 html:not(.dark) .shiki span {
   --line-number-color: var(--shiki-light-bg) !important;
-
-  color: var(--shiki-light) !important;
-  background-color: var(--shiki-light-bg) !important;
   font-style: var(--shiki-light-font-style) !important;
   font-weight: var(--shiki-light-font-weight) !important;
+
+  color: var(--shiki-light) !important;
   text-decoration: var(--shiki-light-text-decoration) !important;
+  background-color: var(--shiki-light-bg) !important;
 }
 
 /* Dark theme: use --shiki-dark colors */
 html.dark .shiki,
 html.dark .shiki span {
   --line-number-color: oklch(0.21 0.01 91.72) !important;
-
-  color: var(--shiki-dark) !important;
-  background-color: oklch(0.21 0.01 91.72) !important;
   font-style: var(--shiki-dark-font-style) !important;
   font-weight: var(--shiki-dark-font-weight) !important;
+
+  color: var(--shiki-dark) !important;
   text-decoration: var(--shiki-dark-text-decoration) !important;
+  background-color: oklch(0.21 0.01 91.72) !important;
 }
 
 .copy-button-container,
 .copy-button-placeholder {
-  @apply absolute top-2 right-2;
+  @apply absolute top-2.5 right-2;
+}
+
+/* Nested in the container: absolute on both applied the offset twice,
+   pushing the button below the first code line. */
+.copy-button-container .copy-button-placeholder {
+  @apply static;
 }
 
 .copy-button-placeholder {
@@ -482,11 +488,11 @@ html.dark .shiki span {
 }
 
 .code-block-header {
+  font-family: var(--font-mono), ui-monospace, monospace;
   @apply flex items-center justify-between px-4 py-2;
   @apply border border-border border-b-0;
   @apply bg-secondary dark:bg-background;
   @apply rounded-t-lg;
-  font-family: var(--font-mono), ui-monospace, monospace;
 }
 
 .code-block-header-filename {
@@ -544,13 +550,13 @@ html.dark .shiki span {
 }
 
 .shiki-wrapper .line.diff.add::before {
-  content: "+";
   color: #28a745;
+  content: "+";
 }
 
 .shiki-wrapper .line.diff.remove::before {
-  content: "-";
   color: #dc3545;
+  content: "-";
 }
 
 /* Line highlight styles - light theme */
@@ -574,13 +580,13 @@ html.dark .shiki-wrapper .line.diff.remove span {
 } */
 
 html.dark .shiki-wrapper .line.diff.add::before {
-  content: "+";
   color: oklch(0.7 0.2 145);
+  content: "+";
 }
 
 html.dark .shiki-wrapper .line.diff.remove::before {
-  content: "-";
   color: oklch(0.7 0.2 25);
+  content: "-";
 }
 
 /* html.dark .shiki-wrapper .line.highlighted,
@@ -608,8 +614,8 @@ html.dark .shiki-wrapper .line.highlighted span {
 }
 
 .code-tabs-list {
-  @apply flex gap-0 border-b border-border;
   font-family: var(--font-mono), ui-monospace, monospace;
+  @apply flex gap-0 border-b border-border;
 }
 
 .code-tab {
@@ -648,6 +654,8 @@ html.dark .shiki-wrapper .line.highlighted span {
 }
 
 @theme {
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
   @keyframes accordion-down {
     from {
       height: 0;
@@ -664,6 +672,4 @@ html.dark .shiki-wrapper .line.highlighted span {
       height: 0;
     }
   }
-  --animate-accordion-down: accordion-down 0.2s ease-out;
-  --animate-accordion-up: accordion-up 0.2s ease-out;
 }

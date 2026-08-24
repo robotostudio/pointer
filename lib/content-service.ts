@@ -1,13 +1,34 @@
+import fs from "node:fs";
 import path from "node:path";
+import { filePathToUrlPath, getMDXFiles, readMDXFile } from "./content-parser";
 import {
-  filePathToUrlPath,
-  getMDXFiles,
-  readMDXFile,
-  urlPathToFilePath,
-} from "./content-parser";
-import type { PageContent, PageMetadata } from "./content-types";
+  ContentValidationError,
+  type PageContent,
+  type PageMetadata,
+  pageSchema,
+} from "./content-schema";
 
 const CONTENT_DIR = path.join(process.cwd(), "content", "pages");
+const LEADING_SLASH_REGEX = /^\//;
+const TRAILING_SLASH_REGEX = /\/$/;
+
+// Join CONTENT_DIR inline in each fs call: collecting candidates into an array
+// defeats Turbopack's tracer and bundles the whole project (39 files vs 122).
+function urlPathToFilePath(urlPath: string): string | null {
+  const normalizedPath = urlPath
+    .replace(LEADING_SLASH_REGEX, "")
+    .replace(TRAILING_SLASH_REGEX, "");
+
+  if (fs.existsSync(path.join(CONTENT_DIR, `${normalizedPath}.mdx`))) {
+    return path.join(CONTENT_DIR, `${normalizedPath}.mdx`);
+  }
+
+  if (fs.existsSync(path.join(CONTENT_DIR, normalizedPath, "index.mdx"))) {
+    return path.join(CONTENT_DIR, normalizedPath, "index.mdx");
+  }
+
+  return null;
+}
 // biome-ignore lint/suspicious/noControlCharactersInRegex: intentional check for invalid path characters
 const INVALID_PATH_CHARS = /[<>:"|?*\u0000-\u001F]/;
 
@@ -16,12 +37,10 @@ const INVALID_PATH_CHARS = /[<>:"|?*\u0000-\u001F]/;
  * and input validation
  */
 export class ContentService {
-  private readonly contentDir: string;
   private readonly pageCache: Map<string, PageContent>;
   private pathsCache: string[] | null;
 
-  constructor(contentDir: string = CONTENT_DIR) {
-    this.contentDir = path.resolve(contentDir);
+  constructor() {
     this.pageCache = new Map();
     this.pathsCache = null;
   }
@@ -104,7 +123,7 @@ export class ContentService {
     }
 
     try {
-      const filePath = urlPathToFilePath(normalizedPath, this.contentDir);
+      const filePath = urlPathToFilePath(normalizedPath);
 
       if (!filePath) {
         return null;
@@ -112,7 +131,13 @@ export class ContentService {
 
       // Verify file is within content directory (security check)
       const resolvedFilePath = path.resolve(filePath);
-      if (!resolvedFilePath.startsWith(this.contentDir)) {
+      const relativeToContentDir = path.relative(CONTENT_DIR, resolvedFilePath);
+      // Separator-aware: a bare startsWith("..") would reject a valid ..rc.mdx.
+      if (
+        relativeToContentDir === ".." ||
+        relativeToContentDir.startsWith(`..${path.sep}`) ||
+        path.isAbsolute(relativeToContentDir)
+      ) {
         if (process.env.NODE_ENV === "development") {
           console.warn(
             `Security: Attempted to access file outside content directory: ${filePath}`
@@ -121,11 +146,11 @@ export class ContentService {
         return null;
       }
 
-      const page = readMDXFile<PageMetadata>(filePath);
+      const page = readMDXFile(filePath, pageSchema);
       const pageContent: PageContent = {
         ...page,
-        type: "page",
         path: normalizedPath,
+        type: "page",
       };
 
       // Cache the result (only in production)
@@ -135,6 +160,9 @@ export class ContentService {
 
       return pageContent;
     } catch (error) {
+      if (error instanceof ContentValidationError) {
+        throw error;
+      }
       if (process.env.NODE_ENV === "development") {
         console.error(`Error loading page "${normalizedPath}":`, error);
       }
@@ -153,7 +181,7 @@ export class ContentService {
     }
 
     try {
-      const files = getMDXFiles(this.contentDir);
+      const files = getMDXFiles(CONTENT_DIR);
 
       const paths = files
         .filter((file) => {
@@ -203,18 +231,21 @@ export class ContentService {
             metadata: Partial<PageMetadata>;
           } | null => {
             try {
-              const filePath = urlPathToFilePath(urlPath, this.contentDir);
+              const filePath = urlPathToFilePath(urlPath);
               if (!filePath) {
                 return null;
               }
 
-              const { metadata } = readMDXFile<PageMetadata>(filePath);
+              const { metadata } = readMDXFile(filePath, pageSchema);
 
               return {
-                path: `/${urlPath}`,
                 metadata: metadata as Partial<PageMetadata>,
+                path: `/${urlPath}`,
               };
             } catch (error) {
+              if (error instanceof ContentValidationError) {
+                throw error;
+              }
               if (process.env.NODE_ENV === "development") {
                 console.error(
                   `Error loading metadata for "${urlPath}":`,
@@ -236,6 +267,9 @@ export class ContentService {
 
       return pages;
     } catch (error) {
+      if (error instanceof ContentValidationError) {
+        throw error;
+      }
       if (process.env.NODE_ENV === "development") {
         console.error("Error getting all pages:", error);
       }
@@ -256,7 +290,7 @@ export class ContentService {
         return false;
       }
 
-      return urlPathToFilePath(normalizedPath, this.contentDir) !== null;
+      return urlPathToFilePath(normalizedPath) !== null;
     } catch {
       return false;
     }

@@ -17,27 +17,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const pagePaths = getAllPagePaths();
 
   const pages: MetadataRoute.Sitemap = pagePaths.map((pagePath) => ({
-    url: `${baseUrl}/${pagePath}`,
     lastModified: new Date(),
     priority: getSlugPriority(pagePath),
+    url: `${baseUrl}/${pagePath}`,
   }));
 
   const blogs: MetadataRoute.Sitemap = blogPosts.map((post) => ({
-    url: `${baseUrl}/blog/${post.slug}`,
     lastModified: new Date(post.metadata.publishedAt),
     priority: 0.8,
+    url: `${baseUrl}/blog/${post.slug}`,
   }));
 
   const staticRoutes: MetadataRoute.Sitemap = [
     {
-      url: baseUrl,
       lastModified: new Date(),
       priority: 1,
+      url: baseUrl,
     },
     {
-      url: `${baseUrl}/blog`,
       lastModified: new Date(),
       priority: 0.9,
+      url: `${baseUrl}/blog`,
     },
   ];
 

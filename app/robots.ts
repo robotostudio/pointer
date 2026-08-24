@@ -3,11 +3,11 @@ import { baseUrl } from "@/app/sitemap";
 
 export default function robots(): MetadataRoute.Robots {
   return {
+    host: baseUrl,
     rules: {
-      userAgent: "*",
       allow: "/",
+      userAgent: "*",
     },
     sitemap: `${baseUrl}/sitemap.xml`,
-    host: baseUrl,
   };
 }

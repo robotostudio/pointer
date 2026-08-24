@@ -57,15 +57,15 @@ import {
 } from "./highlight-card";
 import { LogoCloud, LogoCloudItem } from "./logo-cloud";
 import { HighlightItem, Highlights, HighlightsAction } from "./posts";
+import { PricingAction } from "./pricing/pricing-action";
+import { PricingCard } from "./pricing/pricing-card";
 import {
-  PricingAction,
-  PricingCard,
   PricingDescription,
   PricingFeature,
   PricingFeatures,
-  PricingGrid,
-  PricingHero,
-} from "./pricing";
+} from "./pricing/pricing-features";
+import { PricingGrid } from "./pricing/pricing-grid";
+import { PricingHero } from "./pricing/pricing-hero";
 import {
   SecurityActions,
   SecurityGrid,
@@ -106,8 +106,8 @@ function Table({ data }: TableProps) {
 }
 
 interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
-  href?: string;
   children?: React.ReactNode;
+  href?: string;
 }
 
 function CustomLink({ href, children, ...props }: LinkProps) {
@@ -139,10 +139,10 @@ function CustomLink({ href, children, ...props }: LinkProps) {
 }
 
 interface ImageProps {
-  src: string;
   alt: string;
-  width?: number;
   height?: number;
+  src: string;
+  width?: number;
 }
 
 function RoundedImage({ alt, ...props }: ImageProps) {
@@ -171,6 +171,51 @@ function createHeading(level: number) {
 }
 
 const components = {
+  a: CustomLink,
+  Button,
+  Callout,
+  CardGrid,
+  Changelog,
+  ChangelogAction,
+  ChangelogCard,
+  ChangelogContent,
+  ChangelogHeader,
+  CTA,
+  CTAButton,
+  CTATitle,
+  EnterpriseFeature,
+  EnterpriseFeatureContent,
+  EnterpriseFeatureDescription,
+  EnterpriseFeatureMedia,
+  EnterpriseFeatureTestimonial,
+  EnterpriseFeatureTitle,
+  FAQ,
+  FAQItem,
+  Feature,
+  FeatureActions,
+  FeatureButton,
+  FeatureCard,
+  FeatureContent,
+  FeatureDescription,
+  FeatureMedia,
+  FeatureTitle,
+  Hero,
+  HeroActions,
+  HeroBackdrop,
+  HeroButton,
+  HeroDescription,
+  HeroLabel,
+  HeroMedia,
+  HeroTitle,
+  HighlightCard,
+  HighlightCardAction,
+  HighlightCardDescription,
+  HighlightCardGrid,
+  HighlightCardImage,
+  HighlightCardTitle,
+  HighlightItem,
+  Highlights,
+  HighlightsAction,
   h1: createHeading(1),
   h2: createHeading(2),
   h3: createHeading(3),
@@ -178,56 +223,15 @@ const components = {
   h5: createHeading(5),
   h6: createHeading(6),
   Image: RoundedImage,
-  a: CustomLink,
-  Table,
-  FeatureCard,
-  Button,
-  CardGrid,
-  Hero,
-  HeroLabel,
-  HeroTitle,
-  HeroDescription,
-  HeroActions,
-  HeroButton,
-  HeroMedia,
-  HeroBackdrop,
-  HighlightCard,
-  HighlightCardAction,
-  HighlightCardDescription,
-  HighlightCardGrid,
-  HighlightCardImage,
-  HighlightCardTitle,
-  Testimonial,
-  Callout,
-  CTA,
-  CTAButton,
-  CTATitle,
-  FAQ,
-  FAQItem,
-  Feature,
-  FeatureContent,
-  FeatureTitle,
-  FeatureDescription,
-  FeatureActions,
-  FeatureButton,
-  FeatureMedia,
   LogoCloud,
   LogoCloudItem,
-  PricingGrid,
-  PricingCard,
-  PricingFeatures,
-  PricingFeature,
-  PricingDescription,
   PricingAction,
+  PricingCard,
+  PricingDescription,
+  PricingFeature,
+  PricingFeatures,
+  PricingGrid,
   PricingHero,
-  Changelog,
-  ChangelogAction,
-  ChangelogCard,
-  ChangelogHeader,
-  ChangelogContent,
-  Highlights,
-  HighlightItem,
-  HighlightsAction,
   SecurityActions,
   SecurityGrid,
   SecurityItem,
@@ -235,14 +239,10 @@ const components = {
   StatsGrid,
   StatsItem,
   StatsSection,
-  TestimonialGrid,
+  Table,
+  Testimonial,
   TestimonialCard,
-  EnterpriseFeature,
-  EnterpriseFeatureContent,
-  EnterpriseFeatureDescription,
-  EnterpriseFeatureMedia,
-  EnterpriseFeatureTestimonial,
-  EnterpriseFeatureTitle,
+  TestimonialGrid,
 };
 
 export async function CustomMDX(props: MDXRemoteProps) {

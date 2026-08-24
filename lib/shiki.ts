@@ -30,8 +30,8 @@ const PRELOADED_LANGUAGES: BundledLanguage[] = [
 export function getHighlighter(): Promise<Highlighter> {
   if (!highlighterPromise) {
     highlighterPromise = createHighlighter({
-      themes: ["vesper", "github-light"],
       langs: PRELOADED_LANGUAGES,
+      themes: ["vesper", "github-light"],
     });
   }
   return highlighterPromise;
@@ -68,7 +68,6 @@ export async function highlightCode({
 
   if (showLineNumbers) {
     transformers.push({
-      name: "line-numbers",
       line(node, line) {
         const displayLine = line + (startLineNumber - 1);
         node.properties["data-line"] = displayLine;
@@ -78,17 +77,18 @@ export async function highlightCode({
           node.properties.class = "line";
         }
       },
+      name: "line-numbers",
     });
   }
 
   const html = highlighter.codeToHtml(code, {
+    cssVariablePrefix: "--shiki-",
+    defaultColor: false,
     lang: language,
     themes: {
-      light: "github-light",
       dark: "vesper",
+      light: "github-light",
     },
-    defaultColor: false,
-    cssVariablePrefix: "--shiki-",
     transformers,
   });
 

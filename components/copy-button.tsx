@@ -5,8 +5,8 @@ import { CheckIcon, CopyIcon } from "@/components/icons/copy-icons";
 import { cn } from "@/lib/utils";
 
 interface CopyButtonProps {
-  code: string;
   className?: string;
+  code: string;
 }
 
 export function CopyButton({ code, className }: CopyButtonProps) {

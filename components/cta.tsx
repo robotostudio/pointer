@@ -39,8 +39,8 @@ export function CTATitle({ children, className }: CTATitleProps) {
 
 interface CTAButtonProps {
   children: ReactNode;
-  href?: string;
   className?: string;
+  href?: string;
   icon?: "download" | "right";
 }
 

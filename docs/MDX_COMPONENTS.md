@@ -99,19 +99,33 @@ Background decoration layer.
 
 ## Frontmatter
 
+Validated against `lib/content-schema.ts` at build time — unknown keys and
+missing required fields fail `pnpm build`.
+
 **Pages:**
+
 ```yaml
-title: Page Title
-description: SEO description
-layout: default | full-width | centered  # optional
-showTitle: true | false                   # optional
+title: Page Title                         # required
+description: SEO description              # required, max 220 chars
+layout: default | full-width | centered   # optional, defaults to "default"
+showTitle: true | false                   # optional, defaults to true
+author: Name                              # optional
+image: /path.png                          # optional
+publishedAt: 2026-01-02                   # optional
+updatedAt: 2026-01-02                     # optional
 ```
 
 **Blog Posts:**
+
 ```yaml
-title: Post Title
-publishedAt: 2026-01-02
-summary: Brief description for listing
+title: Post Title                         # required
+publishedAt: 2026-01-02                   # required
+summary: Brief description for listing    # required, 80-220 chars
+author: Name                              # required
+category: product | research | company | news  # optional
+image: /path.png                          # optional
+imageAlt: Alt text                        # optional
+updatedAt: 2026-01-02                     # optional
 ```
 
 ## Feature

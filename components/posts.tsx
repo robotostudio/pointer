@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import type { BlogPost } from "@/app/blog/types";
-import { formatDate } from "@/app/blog/types";
+import type { BlogPost } from "@/lib/content-schema";
+import { formatDate } from "@/lib/format-date";
 import { cn } from "@/lib/utils";
 import { ArrowRightIcon, DownloadIcon } from "./icons/button-icons";
 
@@ -28,13 +28,13 @@ export function BlogPosts({ posts }: BlogPostsProps) {
           </p>
 
           <div className="mt-5 flex items-center gap-2 text-muted-foreground text-sm">
-            {post.metadata.category && (
+            {post.metadata.category ? (
               <>
                 <span className="capitalize">{post.metadata.category}</span>
                 <span>·</span>
               </>
-            )}
-            <time dateTime={post.metadata.publishedAt}>
+            ) : null}
+            <time dateTime={post.metadata.publishedAt.toISOString()}>
               {formatDate(post.metadata.publishedAt)}
             </time>
           </div>
@@ -46,8 +46,8 @@ export function BlogPosts({ posts }: BlogPostsProps) {
 
 interface HighlightsProps {
   children: React.ReactNode;
-  title?: string;
   className?: string;
+  title?: string;
 }
 
 export function Highlights({
@@ -72,11 +72,11 @@ export function Highlights({
 }
 
 interface HighlightItemProps {
-  title: string;
-  summary: string;
   category: string;
   date: string;
   href: string;
+  summary: string;
+  title: string;
 }
 
 export function HighlightItem({
@@ -105,8 +105,8 @@ export function HighlightItem({
 }
 
 interface HighlightsActionProps {
-  href: string;
   children: React.ReactNode;
+  href: string;
   icon?: "download" | "right";
 }
 

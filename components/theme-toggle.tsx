@@ -1,7 +1,7 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 function MonitorIcon() {
@@ -69,10 +69,47 @@ function MoonIcon() {
 }
 
 const themes = [
-  { value: "system", icon: MonitorIcon, label: "System theme" },
-  { value: "light", icon: SunIcon, label: "Light theme" },
-  { value: "dark", icon: MoonIcon, label: "Dark theme" },
+  { icon: MonitorIcon, label: "System theme", value: "system" },
+  { icon: SunIcon, label: "Light theme", value: "light" },
+  { icon: MoonIcon, label: "Dark theme", value: "dark" },
 ] as const;
+
+type ThemeValue = (typeof themes)[number]["value"];
+
+function ThemeButton({
+  Icon,
+  isActive,
+  label,
+  onSelect,
+  value,
+}: {
+  Icon: (typeof themes)[number]["icon"];
+  isActive: boolean;
+  label: string;
+  onSelect: (value: ThemeValue) => void;
+  value: ThemeValue;
+}) {
+  const handleClick = useCallback(() => {
+    onSelect(value);
+  }, [onSelect, value]);
+
+  return (
+    <button
+      aria-label={label}
+      aria-pressed={isActive}
+      className={cn(
+        "relative flex size-5 items-center justify-center rounded-full transition-all duration-200",
+        isActive
+          ? "bg-foreground/10 text-foreground"
+          : "text-muted-foreground hover:text-foreground/70"
+      )}
+      onClick={handleClick}
+      type="button"
+    >
+      <Icon />
+    </button>
+  );
+}
 
 export function ThemeToggle() {
   const [mounted, setMounted] = useState(false);
@@ -91,21 +128,14 @@ export function ThemeToggle() {
   return (
     <div className="flex h-7 items-center gap-0.5 rounded-full bg-muted/50 p-1">
       {themes.map(({ value, icon: Icon, label }) => (
-        <button
-          aria-label={label}
-          aria-pressed={theme === value}
-          className={cn(
-            "relative flex size-5 items-center justify-center rounded-full transition-all duration-200",
-            theme === value
-              ? "bg-foreground/10 text-foreground"
-              : "text-muted-foreground hover:text-foreground/70"
-          )}
+        <ThemeButton
+          Icon={Icon}
+          isActive={theme === value}
           key={value}
-          onClick={() => setTheme(value)}
-          type="button"
-        >
-          <Icon />
-        </button>
+          label={label}
+          onSelect={setTheme}
+          value={value}
+        />
       ))}
     </div>
   );

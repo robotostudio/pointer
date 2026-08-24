@@ -4,8 +4,8 @@ import { getAllPages } from "@/lib/content-service";
 
 interface OgEntry {
   label: string;
-  route: string;
   ogUrl: string;
+  route: string;
 }
 
 function buildOgUrl(title: string, description?: string): string {
@@ -23,19 +23,19 @@ function getOgEntries(): OgEntry[] {
   const entries: OgEntry[] = [
     {
       label: "Home",
-      route: "/",
       ogUrl: buildOgUrl(
         "The AI-Powered Code Editor for Productive Teams",
         "Build faster with intelligent code completion, real-time collaboration, and seamless AI integration."
       ),
+      route: "/",
     },
     {
       label: "Blog Index",
-      route: "/blog",
       ogUrl: buildOgUrl(
         "Blog",
         "Insights on AI-powered development, productivity, and the future of coding."
       ),
+      route: "/blog",
     },
   ];
 
@@ -43,18 +43,18 @@ function getOgEntries(): OgEntry[] {
     const title = page.metadata.title ?? "Untitled";
     entries.push({
       label: title,
-      route: page.path,
       ogUrl:
         page.metadata.image || buildOgUrl(title, page.metadata.description),
+      route: page.path,
     });
   }
 
   for (const post of posts) {
-    const title = post.metadata.title;
+    const { title } = post.metadata;
     entries.push({
       label: title,
-      route: `/blog/${post.slug}`,
       ogUrl: post.metadata.image || buildOgUrl(title, post.metadata.summary),
+      route: `/blog/${post.slug}`,
     });
   }
 

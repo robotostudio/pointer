@@ -3,8 +3,8 @@ import { cn } from "@/lib/utils";
 
 interface StatsSectionProps {
   children: ReactNode;
-  title?: string;
   className?: string;
+  title?: string;
 }
 
 export function StatsSection({
@@ -17,11 +17,11 @@ export function StatsSection({
       className={cn("container my-24 flex flex-col items-center", className)}
     >
       <div className="mb-4 text-center md:mb-8">
-        {title && (
+        {title ? (
           <h2 className="font-normal text-3xl text-foreground md:text-4xl">
             {title}
           </h2>
-        )}
+        ) : null}
       </div>
       {children}
     </section>
@@ -47,9 +47,9 @@ export function StatsGrid({ children, className }: StatsGridProps) {
 }
 
 interface StatsItemProps {
-  value: string;
-  description: string;
   className?: string;
+  description: string;
+  value: string;
 }
 
 export function StatsItem({ value, description, className }: StatsItemProps) {

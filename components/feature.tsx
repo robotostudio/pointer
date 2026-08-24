@@ -36,9 +36,9 @@ export function FeatureContent({ children, className }: FeatureContentProps) {
 }
 
 interface FeatureTitleProps {
+  as?: "h1" | "h2" | "h3" | "h4";
   children: ReactNode;
   className?: string;
-  as?: "h1" | "h2" | "h3" | "h4";
 }
 
 export function FeatureTitle({
@@ -94,10 +94,10 @@ export function FeatureActions({ children, className }: FeatureActionsProps) {
 
 interface FeatureButtonProps {
   children: ReactNode;
-  href?: string;
-  variant?: "primary" | "secondary";
   className?: string;
+  href?: string;
   icon?: "download" | "right";
+  variant?: "primary" | "secondary";
 }
 
 export function FeatureButton({
@@ -147,11 +147,11 @@ export function FeatureButton({
 }
 
 interface FeatureMediaProps {
-  children?: ReactNode;
-  backgroundSrc?: string;
-  windowSrc?: string;
   alt?: string;
+  backgroundSrc?: string;
+  children?: ReactNode;
   className?: string;
+  windowSrc?: string;
 }
 
 export function FeatureMedia({
@@ -168,7 +168,7 @@ export function FeatureMedia({
         className
       )}
     >
-      {backgroundSrc && (
+      {backgroundSrc ? (
         <Image
           alt={alt}
           className="object-cover"
@@ -176,8 +176,8 @@ export function FeatureMedia({
           sizes="(max-width: 1024px) 100vw, 66vw"
           src={backgroundSrc}
         />
-      )}
-      {windowSrc && (
+      ) : null}
+      {windowSrc ? (
         <div className="relative z-10 mx-auto h-auto w-11/12 overflow-hidden rounded-xl">
           <Image
             alt={`${alt} - focus`}
@@ -189,7 +189,7 @@ export function FeatureMedia({
             width={1600}
           />
         </div>
-      )}
+      ) : null}
       {children}
     </div>
   );

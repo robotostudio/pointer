@@ -2,11 +2,11 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 interface SecuritySectionProps {
-  children: ReactNode;
-  title?: string;
-  description?: string;
-  className?: string;
   actions?: ReactNode;
+  children: ReactNode;
+  className?: string;
+  description?: string;
+  title?: string;
 }
 
 export function SecuritySection({
@@ -24,23 +24,23 @@ export function SecuritySection({
       )}
     >
       <div className="mb-4 text-center">
-        {title && (
+        {title ? (
           <h2 className="mb-4 font-normal text-3xl text-foreground md:text-4xl">
             {title}
           </h2>
-        )}
-        {description && (
+        ) : null}
+        {description ? (
           <p className="mx-auto max-w-2xl text-lg text-neutral-400">
             {description}
           </p>
-        )}
+        ) : null}
       </div>
       {children}
-      {actions && (
+      {actions ? (
         <div className="mt-4 flex flex-wrap justify-center gap-4">
           {actions}
         </div>
-      )}
+      ) : null}
     </section>
   );
 }
@@ -64,9 +64,9 @@ export function SecurityGrid({ children, className }: SecurityGridProps) {
 }
 
 interface SecurityItemProps {
-  title: string;
-  description: string;
   className?: string;
+  description: string;
+  title: string;
 }
 
 export function SecurityItem({

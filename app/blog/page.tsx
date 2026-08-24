@@ -9,8 +9,8 @@ const description =
   "Insights on AI-powered development, coding agents, and software engineering from the Pointer team.";
 
 export const metadata: Metadata = {
-  title: "Blog",
   description,
+  title: "Blog",
 };
 
 function BlogSkeleton() {
@@ -57,13 +57,13 @@ export default function BlogPage() {
       <CombinedJsonLd
         baseUrl={baseUrl}
         collectionPage={{
-          title: "Blog",
           description,
-          url: `${baseUrl}/blog`,
           items: allPosts.map((post) => ({
             title: post.metadata.title,
             url: `${baseUrl}/blog/${post.slug}`,
           })),
+          title: "Blog",
+          url: `${baseUrl}/blog`,
         }}
       />
       <Suspense fallback={<BlogSkeleton />}>

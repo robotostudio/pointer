@@ -1,47 +1,47 @@
 interface CollectionPageProps {
-  title: string;
   description: string;
-  url: string;
   items: { title: string; url: string }[];
+  title: string;
+  url: string;
 }
 
 interface ArticleProps {
-  headline: string;
-  description: string;
-  url: string;
-  datePublished: string;
-  dateModified?: string;
-  image?: string;
   author?: string;
+  dateModified?: string;
+  datePublished: string;
+  description: string;
+  headline: string;
+  image?: string;
+  url: string;
 }
 
 interface CombinedJsonLdProps {
+  article?: ArticleProps;
   baseUrl: string;
   collectionPage?: CollectionPageProps;
-  article?: ArticleProps;
 }
 
 function buildCollectionPageSchema(props: CollectionPageProps) {
   return {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: props.title,
     description: props.description,
-    url: props.url,
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: props.items.map((item, index) => ({
+        "@type": "ListItem",
+        name: item.title,
+        position: index + 1,
+        url: item.url,
+      })),
+      numberOfItems: props.items.length,
+    },
+    name: props.title,
     publisher: {
       "@type": "Organization",
       name: "Pointer",
     },
-    mainEntity: {
-      "@type": "ItemList",
-      numberOfItems: props.items.length,
-      itemListElement: props.items.map((item, index) => ({
-        "@type": "ListItem",
-        position: index + 1,
-        name: item.title,
-        url: item.url,
-      })),
-    },
+    url: props.url,
   };
 }
 
@@ -55,16 +55,16 @@ function buildArticleSchema(props: ArticleProps, baseUrl: string) {
   return {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    headline: props.headline,
-    datePublished: props.datePublished,
-    dateModified: props.dateModified ?? props.datePublished,
-    description: props.description,
-    image,
-    url: props.url,
     author: {
       "@type": "Person",
       name: props.author ?? "Pointer Team",
     },
+    dateModified: props.dateModified ?? props.datePublished,
+    datePublished: props.datePublished,
+    description: props.description,
+    headline: props.headline,
+    image,
+    url: props.url,
   };
 }
 

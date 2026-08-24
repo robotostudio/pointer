@@ -10,55 +10,55 @@ import { Navbar } from "../components/nav";
 import { baseUrl } from "./sitemap";
 
 const cursorGothic = localFont({
+  display: "swap",
   src: [
     {
       path: "../fonts/CursorGothic-Regular.woff2",
-      weight: "400",
       style: "normal",
+      weight: "400",
     },
     {
       path: "../fonts/CursorGothic-Bold.woff2",
-      weight: "700",
       style: "normal",
+      weight: "700",
     },
   ],
   variable: "--font-cursor-gothic",
-  display: "swap",
 });
 
 const jetBrainsMono = localFont({
+  display: "swap",
   src: "../fonts/JetBrainsMono-Regular.woff2",
   variable: "--font-jetbrains-mono",
-  display: "swap",
 });
 
 export const metadata: Metadata = {
+  description:
+    "Pointer: A clean, simple portfolio and content platform. Build beautiful portfolios without complex CMS or databases. Everything is code, in git.",
   metadataBase: new URL(baseUrl),
+  openGraph: {
+    description:
+      "Pointer: A clean, simple portfolio and content platform. Build beautiful portfolios without complex CMS or databases. Everything is code, in git.",
+    locale: "en_US",
+    siteName: "Pointer",
+    title: "Pointer",
+    type: "website",
+    url: baseUrl,
+  },
+  robots: {
+    follow: true,
+    googleBot: {
+      follow: true,
+      index: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+    index: true,
+  },
   title: {
     default: "Pointer",
     template: "%s | Pointer MDX CMS Portfolio Platform",
-  },
-  description:
-    "Pointer: A clean, simple portfolio and content platform. Build beautiful portfolios without complex CMS or databases. Everything is code, in git.",
-  openGraph: {
-    title: "Pointer",
-    description:
-      "Pointer: A clean, simple portfolio and content platform. Build beautiful portfolios without complex CMS or databases. Everything is code, in git.",
-    url: baseUrl,
-    siteName: "Pointer",
-    locale: "en_US",
-    type: "website",
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
   },
 };
 
