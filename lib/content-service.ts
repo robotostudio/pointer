@@ -12,27 +12,18 @@ const CONTENT_DIR = path.join(process.cwd(), "content", "pages");
 const LEADING_SLASH_REGEX = /^\//;
 const TRAILING_SLASH_REGEX = /\/$/;
 
-// The `process.cwd(), "content", "pages"` literals must sit in the same
-// expression as the dynamic segment, or Turbopack can't tell which subtree is
-// read and traces the entire project into the server bundle.
+// Join CONTENT_DIR inline in each fs call: collecting candidates into an array
+// defeats Turbopack's tracer and bundles the whole project (39 files vs 122).
 function urlPathToFilePath(urlPath: string): string | null {
   const normalizedPath = urlPath
     .replace(LEADING_SLASH_REGEX, "")
     .replace(TRAILING_SLASH_REGEX, "");
 
-  if (
-    fs.existsSync(
-      path.join(process.cwd(), "content", "pages", `${normalizedPath}.mdx`)
-    )
-  ) {
+  if (fs.existsSync(path.join(CONTENT_DIR, `${normalizedPath}.mdx`))) {
     return path.join(CONTENT_DIR, `${normalizedPath}.mdx`);
   }
 
-  if (
-    fs.existsSync(
-      path.join(process.cwd(), "content", "pages", normalizedPath, "index.mdx")
-    )
-  ) {
+  if (fs.existsSync(path.join(CONTENT_DIR, normalizedPath, "index.mdx"))) {
     return path.join(CONTENT_DIR, normalizedPath, "index.mdx");
   }
 
