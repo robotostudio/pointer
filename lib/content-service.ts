@@ -132,8 +132,10 @@ export class ContentService {
       // Verify file is within content directory (security check)
       const resolvedFilePath = path.resolve(filePath);
       const relativeToContentDir = path.relative(CONTENT_DIR, resolvedFilePath);
+      // Separator-aware: a bare startsWith("..") would reject a valid ..rc.mdx.
       if (
-        relativeToContentDir.startsWith("..") ||
+        relativeToContentDir === ".." ||
+        relativeToContentDir.startsWith(`..${path.sep}`) ||
         path.isAbsolute(relativeToContentDir)
       ) {
         if (process.env.NODE_ENV === "development") {
