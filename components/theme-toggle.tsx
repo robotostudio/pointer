@@ -74,6 +74,8 @@ const themes = [
   { icon: MoonIcon, label: "Dark theme", value: "dark" },
 ] as const;
 
+type ThemeValue = (typeof themes)[number]["value"];
+
 function ThemeButton({
   Icon,
   isActive,
@@ -84,8 +86,8 @@ function ThemeButton({
   Icon: (typeof themes)[number]["icon"];
   isActive: boolean;
   label: string;
-  onSelect: (value: string) => void;
-  value: string;
+  onSelect: (value: ThemeValue) => void;
+  value: ThemeValue;
 }) {
   const handleClick = useCallback(() => {
     onSelect(value);

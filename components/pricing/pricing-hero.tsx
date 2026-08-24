@@ -17,7 +17,7 @@ export function PricingHero({
 }: PricingHeroProps) {
   const [period, setPeriod] = useState<BillingPeriod>("monthly");
   const handleValueChange = useCallback((value: string) => {
-    setPeriod(value as BillingPeriod);
+    setPeriod(value === "yearly" ? "yearly" : "monthly");
   }, []);
 
   return (
