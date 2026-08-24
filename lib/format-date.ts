@@ -10,10 +10,12 @@ export function formatDate(date: Date, includeRelative = false): string {
     return fullDate;
   }
 
+  // getUTC* to match the UTC-formatted full date above; frontmatter dates are
+  // UTC midnight, so local getters put viewers west of UTC a day out.
   const currentDate = new Date();
-  const yearsAgo = currentDate.getFullYear() - date.getFullYear();
-  const monthsAgo = currentDate.getMonth() - date.getMonth();
-  const daysAgo = currentDate.getDate() - date.getDate();
+  const yearsAgo = currentDate.getUTCFullYear() - date.getUTCFullYear();
+  const monthsAgo = currentDate.getUTCMonth() - date.getUTCMonth();
+  const daysAgo = currentDate.getUTCDate() - date.getUTCDate();
 
   let formattedDate = "";
 
