@@ -3,9 +3,16 @@ import { z } from "zod";
 const dateMessage = (field: string) =>
   `\`${field}\` must be a valid ISO date, e.g. 2026-05-12.`;
 
+const typeError = (field: string) => ({
+  error: (issue: { input: unknown }) =>
+    issue.input === undefined
+      ? `\`${field}\` is required.`
+      : `\`${field}\` must be a string.`,
+});
+
 const requiredString = (field: string) =>
   z
-    .string({ message: `\`${field}\` is required.` })
+    .string(typeError(field))
     .min(1, { message: `\`${field}\` must not be empty.` });
 
 // Meta descriptions under ~80 chars get rewritten by search engines. Aim 120-160.
@@ -13,7 +20,7 @@ const MAX_DESCRIPTION_LENGTH = 220;
 
 const seoDescription = (field: string) =>
   z
-    .string({ message: `\`${field}\` is required.` })
+    .string(typeError(field))
     .min(80, {
       message: `\`${field}\` should be at least 80 characters (aim for 120-160). It's used as the meta description and social preview, so write something with substance.`,
     })
@@ -43,13 +50,14 @@ export const pageSchema = z
     description: requiredString("description").max(MAX_DESCRIPTION_LENGTH, {
       message: `\`description\` should be under ${MAX_DESCRIPTION_LENGTH} characters — search engines truncate longer ones.`,
     }),
-    draft: z.boolean().default(false),
     image: z.string().optional(),
     layout: z.string().default("default"),
     publishedAt: z.coerce
       .date({ message: dateMessage("publishedAt") })
       .optional(),
-    showTitle: z.boolean().default(false),
+    // page-templates hides only on an explicit false, so defaulting to false
+    // would silently drop the h1 on any page omitting the field.
+    showTitle: z.boolean().default(true),
     title: requiredString("title"),
     updatedAt: z.coerce.date({ message: dateMessage("updatedAt") }).optional(),
   })
@@ -59,7 +67,6 @@ export const blogSchema = z
   .object({
     author: requiredString("author"),
     category: z.enum(BLOG_CATEGORIES).optional(),
-    draft: z.boolean().default(false),
     image: z.string().optional(),
     imageAlt: z.string().default(""),
     publishedAt: z.coerce.date({ message: dateMessage("publishedAt") }),

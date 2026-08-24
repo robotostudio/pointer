@@ -18,6 +18,28 @@ const validPage = {
   title: "Pricing",
 };
 
+// page-templates hides only on an explicit false.
+assert.equal(
+  parseFrontmatter(
+    pageSchema,
+    { description: "x".repeat(120), title: "Pricing" },
+    "t.mdx"
+  ).showTitle,
+  true
+);
+
+assert.throws(
+  () => parseFrontmatter(pageSchema, { ...validPage, draft: true }, "t.mdx"),
+  ContentValidationError,
+  "draft must be rejected until it is implemented"
+);
+
+assert.throws(
+  () => parseFrontmatter(pageSchema, { ...validPage, title: 2026 }, "t.mdx"),
+  /`title` must be a string/,
+  "type mismatches must not claim the field is missing"
+);
+
 const validPost = {
   author: "Pointer Team",
   category: "news",
@@ -27,7 +49,6 @@ const validPost = {
 };
 
 assert.equal(parseFrontmatter(pageSchema, validPage, "t.mdx").showTitle, false);
-assert.equal(parseFrontmatter(pageSchema, validPage, "t.mdx").draft, false);
 
 // Pages allow short marketing copy; only the 220-char ceiling applies.
 assert.equal(
