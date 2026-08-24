@@ -17,7 +17,6 @@ const navItems = [
   { href: "/features", name: "Features" },
   { href: "/enterprise", name: "Enterprise" },
   { href: "/pricing", name: "Pricing" },
-  { href: "/resources", name: "Resources" },
 ];
 
 function PointerLogo() {
