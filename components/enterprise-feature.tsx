@@ -83,11 +83,11 @@ export function EnterpriseFeatureDescription({
 }
 
 interface EnterpriseFeatureTestimonialProps {
-  quote: string;
   author: string;
-  role: string;
   avatar?: string;
   className?: string;
+  quote: string;
+  role: string;
 }
 
 export function EnterpriseFeatureTestimonial({
@@ -108,7 +108,7 @@ export function EnterpriseFeatureTestimonial({
         "{quote}"
       </div>
       <div className="flex items-center gap-3">
-        {avatar && (
+        {avatar ? (
           <div className="relative size-8 overflow-hidden rounded-lg border border-white/10 bg-muted/50">
             <Image
               alt={author}
@@ -118,7 +118,7 @@ export function EnterpriseFeatureTestimonial({
               src={avatar}
             />
           </div>
-        )}
+        ) : null}
         <div className="flex flex-col">
           <span className="font-medium text-foreground text-sm">{author}</span>
           <span className="text-muted-foreground text-xs">{role}</span>
@@ -129,11 +129,11 @@ export function EnterpriseFeatureTestimonial({
 }
 
 interface EnterpriseFeatureMediaProps {
-  children?: ReactNode;
-  backgroundSrc?: string;
-  windowSrc?: string;
   alt?: string;
+  backgroundSrc?: string;
+  children?: ReactNode;
   className?: string;
+  windowSrc?: string;
 }
 
 export function EnterpriseFeatureMedia({
@@ -150,7 +150,7 @@ export function EnterpriseFeatureMedia({
         className
       )}
     >
-      {backgroundSrc && (
+      {backgroundSrc ? (
         <Image
           alt={alt}
           className="object-cover"
@@ -159,8 +159,8 @@ export function EnterpriseFeatureMedia({
           sizes="(max-width: 1024px) 100vw, 66vw"
           src={backgroundSrc}
         />
-      )}
-      {windowSrc && (
+      ) : null}
+      {windowSrc ? (
         <div className="relative z-10 mx-auto h-auto w-11/12 overflow-hidden rounded-xl">
           <Image
             alt={`${alt} - focus`}
@@ -172,7 +172,7 @@ export function EnterpriseFeatureMedia({
             width={1600}
           />
         </div>
-      )}
+      ) : null}
       {children}
     </div>
   );

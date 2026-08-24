@@ -8,14 +8,14 @@ import { cn } from "@/lib/utils";
 
 interface LogoCloudProps {
   children: ReactNode;
-  title?: string;
   className?: string;
+  title?: string;
 }
 
 export function LogoCloud({ children, title, className }: LogoCloudProps) {
   return (
     <section className={cn("container py-4", className)}>
-      {title && <p className="type-sm mb-8 text-center">{title}</p>}
+      {title ? <p className="type-sm mb-8 text-center">{title}</p> : null}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-8">
         {children}
       </div>
@@ -24,13 +24,13 @@ export function LogoCloud({ children, title, className }: LogoCloudProps) {
 }
 
 interface LogoCloudItemProps {
-  name: string;
   children?: ReactNode;
+  className?: string;
+  href?: string;
+  invertOnDark?: boolean;
+  name: string;
   src?: string;
   srcDark?: string;
-  invertOnDark?: boolean;
-  href?: string;
-  className?: string;
 }
 
 export function LogoCloudItem({

@@ -4,15 +4,15 @@ import type { ReactNode } from "react";
 // Import these in mdx.tsx to make them available
 
 interface FeatureCardProps {
-  title: string;
   description: string;
   icon?: string;
+  title: string;
 }
 
 export function FeatureCard({ title, description, icon }: FeatureCardProps) {
   return (
     <div className="rounded-lg border border-neutral-200 p-6 transition hover:border-neutral-300 dark:border-neutral-800 dark:hover:border-neutral-700">
-      {icon && <div className="mb-3 text-3xl">{icon}</div>}
+      {icon ? <div className="mb-3 text-3xl">{icon}</div> : null}
       <h3 className="mb-2 font-semibold text-xl">{title}</h3>
       <p className="text-neutral-600 dark:text-neutral-400">{description}</p>
     </div>
@@ -21,8 +21,8 @@ export function FeatureCard({ title, description, icon }: FeatureCardProps) {
 
 interface ButtonProps {
   children: ReactNode;
-  variant?: "primary" | "secondary";
   href?: string;
+  variant?: "primary" | "secondary";
 }
 
 export function Button({ children, variant = "primary", href }: ButtonProps) {
@@ -68,10 +68,10 @@ export function CardGrid({ children, columns = 3 }: CardGridProps) {
 }
 
 interface TestimonialProps {
-  quote: string;
   author: string;
-  role: string;
   company?: string;
+  quote: string;
+  role: string;
 }
 
 export function Testimonial({
@@ -86,7 +86,7 @@ export function Testimonial({
       <div className="font-semibold">{author}</div>
       <div className="text-neutral-600 text-sm dark:text-neutral-400">
         {role}
-        {company && `, ${company}`}
+        {company ? `, ${company}` : null}
       </div>
     </div>
   );
@@ -99,13 +99,13 @@ interface CalloutProps {
 
 export function Callout({ children, type = "info" }: CalloutProps) {
   const styles = {
-    info: "bg-blue-50 dark:bg-blue-950 border-blue-200 dark:border-blue-800 text-blue-900 dark:text-blue-100",
-    warning:
-      "bg-yellow-50 dark:bg-yellow-950 border-yellow-200 dark:border-yellow-800 text-yellow-900 dark:text-yellow-100",
-    success:
-      "bg-green-50 dark:bg-green-950 border-green-200 dark:border-green-800 text-green-900 dark:text-green-100",
     error:
       "bg-red-50 dark:bg-red-950 border-red-200 dark:border-red-800 text-red-900 dark:text-red-100",
+    info: "bg-blue-50 dark:bg-blue-950 border-blue-200 dark:border-blue-800 text-blue-900 dark:text-blue-100",
+    success:
+      "bg-green-50 dark:bg-green-950 border-green-200 dark:border-green-800 text-green-900 dark:text-green-100",
+    warning:
+      "bg-yellow-50 dark:bg-yellow-950 border-yellow-200 dark:border-yellow-800 text-yellow-900 dark:text-yellow-100",
   };
 
   return (

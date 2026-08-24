@@ -11,21 +11,21 @@ export async function generateMetadata() {
     page?.metadata.description ??
     "Pointer: A clean, simple portfolio and content platform. Build beautiful portfolios without complex CMS or databases. Everything is code, in git.";
 
-  const ogParams = new URLSearchParams({ title, description });
+  const ogParams = new URLSearchParams({ description, title });
   const ogImage = `${baseUrl}/og?${ogParams.toString()}`;
 
   return {
-    title,
-    description,
     alternates: {
       canonical: baseUrl,
     },
+    description,
     openGraph: {
-      title,
       description,
-      url: baseUrl,
       images: [{ url: ogImage }],
+      title,
+      url: baseUrl,
     },
+    title,
   };
 }
 

@@ -5,9 +5,9 @@ import { cn } from "@/lib/utils";
 import { FeatureButton } from "./feature";
 
 interface ChangelogProps {
+  action?: ReactNode;
   children: ReactNode;
   title?: string;
-  action?: ReactNode;
 }
 
 export function Changelog({
@@ -47,18 +47,18 @@ export function ChangelogCard({ children, href }: ChangelogCardProps) {
 }
 
 interface ChangelogHeaderProps {
-  version?: string;
   date: string;
+  version?: string;
 }
 
 export function ChangelogHeader({ version, date }: ChangelogHeaderProps) {
   return (
     <div className="flex items-center gap-3 text-muted-foreground text-sm">
-      {version && (
+      {version ? (
         <span className="flex h-6 items-center justify-center rounded-full border border-muted-foreground/30 px-2 font-medium text-xs">
           {version}
         </span>
-      )}
+      ) : null}
       <span className="font-normal">{date}</span>
     </div>
   );
@@ -77,11 +77,11 @@ export function ChangelogContent({ children }: ChangelogContentProps) {
 }
 
 interface ChangelogActionProps {
-  href?: string;
   children: ReactNode;
-  variant?: "primary" | "secondary";
   className?: string;
+  href?: string;
   icon?: "download" | "right";
+  variant?: "primary" | "secondary";
 }
 
 export function ChangelogAction({

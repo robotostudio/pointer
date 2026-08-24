@@ -38,7 +38,7 @@ function setupTabGroup(container: HTMLElement): (() => void) | null {
       if (groupId) {
         window.dispatchEvent(
           new CustomEvent("code-tabs-sync", {
-            detail: { groupId, activeTab: tabLabel },
+            detail: { activeTab: tabLabel, groupId },
           })
         );
       }

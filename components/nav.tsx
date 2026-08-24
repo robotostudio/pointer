@@ -14,10 +14,10 @@ import {
 import { cn } from "@/lib/utils";
 
 const navItems = [
-  { name: "Features", href: "/features" },
-  { name: "Enterprise", href: "/enterprise" },
-  { name: "Pricing", href: "/pricing" },
-  { name: "Resources", href: "/resources" },
+  { href: "/features", name: "Features" },
+  { href: "/enterprise", name: "Enterprise" },
+  { href: "/pricing", name: "Pricing" },
+  { href: "/resources", name: "Resources" },
 ];
 
 function PointerLogo() {
@@ -53,7 +53,7 @@ export function Navbar() {
           {navItems.map((item) => (
             <Link
               className={cn(
-                buttonVariants({ variant: "ghost", size: "sm" }),
+                buttonVariants({ size: "sm", variant: "ghost" }),
                 "pointer-events-auto transition-colors hover:text-foreground"
               )}
               href={item.href}

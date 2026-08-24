@@ -47,55 +47,55 @@ function GlobeIcon({ className }: { className?: string }) {
 }
 
 const footerLinks = {
-  product: {
-    title: "Product",
-    links: [
-      { name: "Features", href: "/features" },
-      { name: "Enterprise", href: "/enterprise" },
-      { name: "Web Agents", href: "/web-agents" },
-      { name: "Bugbot", href: "/bugbot" },
-      { name: "CLI", href: "/cli" },
-      { name: "Pricing", href: "/pricing" },
-    ],
-  },
-  resources: {
-    title: "Resources",
-    links: [
-      { name: "Download", href: "/download" },
-      { name: "Changelog", href: "/changelog" },
-      { name: "Docs", href: "https://docs.example.com", external: true },
-      { name: "Learn", href: "https://learn.example.com", external: true },
-      { name: "Forum", href: "https://forum.example.com", external: true },
-      { name: "Status", href: "https://status.example.com", external: true },
-    ],
-  },
   company: {
+    links: [
+      { href: "/careers", name: "Careers" },
+      { href: "/blog", name: "Blog" },
+      { href: "/community", name: "Community" },
+      { href: "/workshops", name: "Workshops" },
+      { href: "/students", name: "Students" },
+      { href: "/brand", name: "Brand" },
+    ],
     title: "Company",
-    links: [
-      { name: "Careers", href: "/careers" },
-      { name: "Blog", href: "/blog" },
-      { name: "Community", href: "/community" },
-      { name: "Workshops", href: "/workshops" },
-      { name: "Students", href: "/students" },
-      { name: "Brand", href: "/brand" },
-    ],
-  },
-  legal: {
-    title: "Legal",
-    links: [
-      { name: "Terms of Service", href: "/terms" },
-      { name: "Privacy Policy", href: "/privacy" },
-      { name: "Data Use", href: "/data-use" },
-      { name: "Security", href: "/security" },
-    ],
   },
   connect: {
-    title: "Connect",
     links: [
-      { name: "X", href: "https://x.com", external: true },
-      { name: "LinkedIn", href: "https://linkedin.com", external: true },
-      { name: "YouTube", href: "https://youtube.com", external: true },
+      { external: true, href: "https://x.com", name: "X" },
+      { external: true, href: "https://linkedin.com", name: "LinkedIn" },
+      { external: true, href: "https://youtube.com", name: "YouTube" },
     ],
+    title: "Connect",
+  },
+  legal: {
+    links: [
+      { href: "/terms", name: "Terms of Service" },
+      { href: "/privacy", name: "Privacy Policy" },
+      { href: "/data-use", name: "Data Use" },
+      { href: "/security", name: "Security" },
+    ],
+    title: "Legal",
+  },
+  product: {
+    links: [
+      { href: "/features", name: "Features" },
+      { href: "/enterprise", name: "Enterprise" },
+      { href: "/web-agents", name: "Web Agents" },
+      { href: "/bugbot", name: "Bugbot" },
+      { href: "/cli", name: "CLI" },
+      { href: "/pricing", name: "Pricing" },
+    ],
+    title: "Product",
+  },
+  resources: {
+    links: [
+      { href: "/download", name: "Download" },
+      { href: "/changelog", name: "Changelog" },
+      { external: true, href: "https://docs.example.com", name: "Docs" },
+      { external: true, href: "https://learn.example.com", name: "Learn" },
+      { external: true, href: "https://forum.example.com", name: "Forum" },
+      { external: true, href: "https://status.example.com", name: "Status" },
+    ],
+    title: "Resources",
   },
 };
 
@@ -116,14 +116,14 @@ function FooterLinkGroup({
               className="inline-flex items-center gap-1 text-foreground/80 text-sm transition-colors hover:text-foreground"
               href={link.href}
               {...(link.external && {
-                target: "_blank",
                 rel: "noopener noreferrer",
+                target: "_blank",
               })}
             >
               {link.name}
-              {link.external && (
+              {link.external ? (
                 <ExternalLinkIcon className="text-muted-foreground" />
-              )}
+              ) : null}
             </Link>
           </li>
         ))}

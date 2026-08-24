@@ -6,8 +6,8 @@ import { FeatureButton } from "./feature";
 interface HighlightCardGridProps {
   children: ReactNode;
   columns?: 3 | 4;
-  title?: string;
   description?: string;
+  title?: string;
 }
 
 const columnClasses = {
@@ -25,14 +25,14 @@ export function HighlightCardGrid({
   return (
     <section className="container py-12 md:py-18">
       <div className="mb-6 flex flex-col items-start justify-between gap-1">
-        {title && (
+        {title ? (
           <h2 className="font-normal text-2xl text-foreground">{title}</h2>
-        )}
-        {description && (
+        ) : null}
+        {description ? (
           <p className="mb-2 text-balance font-normal text-xl text-zinc-500 dark:text-zinc-400">
             {description}
           </p>
-        )}
+        ) : null}
       </div>
 
       <div
@@ -111,8 +111,8 @@ export function HighlightCardAction({
 }
 
 interface HighlightCardImageProps {
-  src: string;
   alt?: string;
+  src: string;
 }
 
 export function HighlightCardImage({ src, alt = "" }: HighlightCardImageProps) {

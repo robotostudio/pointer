@@ -5,8 +5,8 @@ import { createPortal } from "react-dom";
 import { CopyButton } from "@/components/copy-button";
 
 interface CodeBlockMount {
-  placeholder: HTMLElement;
   code: string;
+  placeholder: HTMLElement;
 }
 
 export function CodeBlockEnhancer() {
@@ -29,7 +29,7 @@ export function CodeBlockEnhancer() {
       const code = codeElement?.textContent ?? "";
 
       if (code) {
-        newMounts.push({ placeholder, code });
+        newMounts.push({ code, placeholder });
       }
     }
 

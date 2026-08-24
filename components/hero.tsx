@@ -54,9 +54,9 @@ export function HeroLabel({ children, className }: HeroLabelProps) {
 }
 
 interface HeroTitleProps {
+  as?: "h1" | "h2" | "h3";
   children: ReactNode;
   className?: string;
-  as?: "h1" | "h2" | "h3";
 }
 
 export function HeroTitle({
@@ -109,10 +109,10 @@ export function HeroActions({ children, className }: HeroActionsProps) {
 
 interface HeroButtonProps {
   children: ReactNode;
-  href?: string;
-  variant?: "primary" | "secondary" | "ghost";
   className?: string;
+  href?: string;
   icon?: "download" | "right";
+  variant?: "primary" | "secondary" | "ghost";
 }
 
 export function HeroButton({
@@ -126,11 +126,11 @@ export function HeroButton({
     "inline-flex items-center no-underline justify-center gap-2 rounded-full px-5 py-3 text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950";
 
   const variants = {
+    ghost: "text-neutral-400 hover:text-white",
     primary:
       "bg-black dark:bg-white text-neutral-100 dark:text-neutral-950 hover:bg-neutral-700 dark:hover:bg-neutral-100 active:scale-[0.98]",
     secondary:
       "border border-white/20 bg-white/5 text-white hover:bg-white/10 hover:border-white/30",
-    ghost: "text-neutral-400 hover:text-white",
   };
 
   let IconComponent: ReactNode = null;
@@ -163,11 +163,11 @@ export function HeroButton({
 }
 
 interface HeroMediaProps {
+  alt?: string;
+  backgroundSrc?: string;
   children?: ReactNode;
   className?: string;
-  backgroundSrc?: string;
   windowSrc?: string;
-  alt?: string;
 }
 
 export function HeroMedia({
@@ -184,7 +184,7 @@ export function HeroMedia({
         className
       )}
     >
-      {backgroundSrc && (
+      {backgroundSrc ? (
         <Image
           alt={alt}
           className="-z-10 rounded-md object-cover"
@@ -193,8 +193,8 @@ export function HeroMedia({
           sizes="100vw"
           src={backgroundSrc}
         />
-      )}
-      {windowSrc && (
+      ) : null}
+      {windowSrc ? (
         <div className="relative z-10 w-full overflow-hidden rounded-sm">
           <Image
             alt={`${alt} - focus`}
@@ -206,7 +206,7 @@ export function HeroMedia({
             width={1600}
           />
         </div>
-      )}
+      ) : null}
       {children}
     </div>
   );
