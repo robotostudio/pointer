@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { CATEGORY_LABELS, formatDate } from "@/app/blog/types";
 import { getBlogPosts } from "@/app/blog/utils";
 import { baseUrl } from "@/app/sitemap";
 import { CombinedJsonLd } from "@/components/json-ld";
@@ -14,6 +13,8 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { CATEGORY_LABELS } from "@/lib/content-schema";
+import { formatDate } from "@/lib/format-date";
 
 interface BlogPostPageProps {
   params: Promise<{
@@ -33,7 +34,7 @@ export async function generateMetadata({
   params,
 }: BlogPostPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const post = getBlogPosts().find((post) => post.slug === slug);
+  const post = getBlogPosts().find((entry) => entry.slug === slug);
 
   if (!post) {
     return {
@@ -43,11 +44,12 @@ export async function generateMetadata({
 
   const {
     title,
-    publishedAt: publishedTime,
+    publishedAt,
     summary: description,
     image,
     imageAlt,
   } = post.metadata;
+  const publishedTime = publishedAt.toISOString();
   const ogParams = new URLSearchParams({ title });
   if (description) {
     ogParams.set("description", description);
@@ -56,29 +58,29 @@ export async function generateMetadata({
   const ogImageAlt = imageAlt || title;
 
   return {
-    title,
-    description,
     alternates: {
       canonical: `${baseUrl}/blog/${post.slug}`,
     },
+    description,
     openGraph: {
-      title,
       description,
-      type: "article",
-      publishedTime,
-      url: `${baseUrl}/blog/${post.slug}`,
       images: [
         {
-          url: ogImage,
           alt: ogImageAlt,
+          url: ogImage,
         },
       ],
+      publishedTime,
+      title,
+      type: "article",
+      url: `${baseUrl}/blog/${post.slug}`,
     },
+    title,
     twitter: {
       card: "summary_large_image",
-      title,
       description,
       images: [ogImage],
+      title,
     },
   };
 }
@@ -97,7 +99,7 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
     postIndex < allPosts.length - 1 ? allPosts[postIndex + 1] : null;
   const nextPost = postIndex > 0 ? allPosts[postIndex - 1] : null;
 
-  const category = post.metadata.category;
+  const { category } = post.metadata;
   const categoryLabel = category ? CATEGORY_LABELS[category] : null;
 
   return (
@@ -109,7 +111,7 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
               <BreadcrumbItem>
                 <BreadcrumbLink href="/blog">Blog</BreadcrumbLink>
               </BreadcrumbItem>
-              {categoryLabel && (
+              {categoryLabel ? (
                 <>
                   <BreadcrumbSeparator />
                   <BreadcrumbItem>
@@ -118,7 +120,7 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
                     </BreadcrumbPage>
                   </BreadcrumbItem>
                 </>
-              )}
+              ) : null}
             </BreadcrumbList>
           </Breadcrumb>
         </aside>
@@ -126,14 +128,14 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
         <article className="lg:max-w-2xl">
           <CombinedJsonLd
             article={{
-              headline: post.metadata.title,
+              author: post.metadata.author,
+              datePublished: post.metadata.publishedAt.toISOString(),
               description: post.metadata.summary,
-              url: `${baseUrl}/blog/${post.slug}`,
-              datePublished: post.metadata.publishedAt,
+              headline: post.metadata.title,
               image: post.metadata.image
                 ? `${baseUrl}${post.metadata.image}`
                 : undefined,
-              author: post.metadata.author,
+              url: `${baseUrl}/blog/${post.slug}`,
             }}
             baseUrl={baseUrl}
           />
@@ -153,7 +155,7 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
           </div>
 
           <div className="mt-12 pt-6 text-muted-foreground text-sm">
-            {categoryLabel && (
+            {categoryLabel ? (
               <p className="flex flex-row gap-1 text-base">
                 Filed under:{" "}
                 <Link
@@ -163,15 +165,13 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
                   {categoryLabel}
                 </Link>
               </p>
-            )}
-            {post.metadata.author && (
-              <p className="mt-1 flex flex-row gap-1 text-base">
-                Author: <span>{post.metadata.author}</span>
-              </p>
-            )}
+            ) : null}
+            <p className="mt-1 flex flex-row gap-1 text-base">
+              Author: <span>{post.metadata.author}</span>
+            </p>
           </div>
 
-          {(previousPost || nextPost) && (
+          {previousPost || nextPost ? (
             <nav className="mt-16 grid gap-4 pt-8 sm:grid-cols-2">
               {previousPost ? (
                 <Link
@@ -202,7 +202,7 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
               ) : (
                 <div />
               )}
-              {nextPost && (
+              {nextPost ? (
                 <Link
                   className="group flex flex-col items-end rounded-lg border border-border/50 bg-muted/30 px-6 py-4 transition-all hover:border-border hover:bg-muted/50"
                   href={`/blog/${nextPost.slug}`}
@@ -228,9 +228,9 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
                     {nextPost.metadata.title}
                   </span>
                 </Link>
-              )}
+              ) : null}
             </nav>
-          )}
+          ) : null}
         </article>
       </div>
     </div>

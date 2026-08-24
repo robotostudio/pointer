@@ -2,12 +2,12 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { BlogPosts } from "@/components/posts";
 import {
   type BlogPost,
   CATEGORY_LABELS,
   isValidCategory,
-} from "@/app/blog/types";
-import { BlogPosts } from "@/components/posts";
+} from "@/lib/content-schema";
 
 interface BlogContentProps {
   allPosts: BlogPost[];
@@ -40,14 +40,14 @@ export function BlogContent({ allPosts, categories }: BlogContentProps) {
             ) : (
               <span className="text-foreground">Blog</span>
             )}
-            {validCategory && (
+            {validCategory ? (
               <>
                 <span className="text-muted-foreground"> / </span>
                 <span className="text-foreground">
                   {CATEGORY_LABELS[validCategory]}
                 </span>
               </>
-            )}
+            ) : null}
           </h1>
         </div>
       </header>

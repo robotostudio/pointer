@@ -1,4 +1,4 @@
-import type { PageContent, PageMetadata } from "../lib/content-types";
+import type { PageContent, PageMetadata } from "@/lib/content-schema";
 import { CustomMDX } from "./mdx";
 
 interface PageTemplateProps {
@@ -16,16 +16,16 @@ function PageHeader({ metadata }: PageHeaderProps) {
 
   return (
     <header className="mb-12">
-      {metadata.title && (
+      {metadata.title ? (
         <h1 className="mb-4 font-bold text-4xl tracking-tight">
           {metadata.title}
         </h1>
-      )}
-      {metadata.description && (
+      ) : null}
+      {metadata.description ? (
         <p className="text-neutral-600 text-xl dark:text-neutral-400">
           {metadata.description}
         </p>
-      )}
+      ) : null}
     </header>
   );
 }

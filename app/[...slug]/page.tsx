@@ -39,23 +39,23 @@ export async function generateMetadata({
   const ogImage = metadata.image || `${baseUrl}/og?${ogParams.toString()}`;
 
   return {
-    title: metadata.title,
-    description: metadata.description,
-    authors: metadata.author ? [{ name: metadata.author }] : undefined,
     alternates: {
       canonical: `${baseUrl}/${urlPath}`,
     },
+    authors: metadata.author ? [{ name: metadata.author }] : undefined,
+    description: metadata.description,
     openGraph: {
-      title: metadata.title || "Page",
       description: metadata.description,
-      url: `${baseUrl}/${urlPath}`,
       images: [{ url: ogImage }],
+      title: metadata.title || "Page",
+      url: `${baseUrl}/${urlPath}`,
     },
+    title: metadata.title,
     twitter: {
       card: "summary_large_image",
-      title: metadata.title,
       description: metadata.description,
       images: [ogImage],
+      title: metadata.title,
     },
   };
 }
