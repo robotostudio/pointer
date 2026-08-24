@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { BLOG_CATEGORIES } from "./blog-categories";
 
 const dateMessage = (field: string) =>
   `\`${field}\` must be a valid ISO date, e.g. 2026-05-12.`;
@@ -27,20 +28,6 @@ const seoDescription = (field: string) =>
     .max(MAX_DESCRIPTION_LENGTH, {
       message: `\`${field}\` should be under ${MAX_DESCRIPTION_LENGTH} characters — search engines truncate longer ones.`,
     });
-
-export const BLOG_CATEGORIES = [
-  "product",
-  "research",
-  "company",
-  "news",
-] as const;
-
-export const CATEGORY_LABELS: Record<BlogCategory, string> = {
-  company: "Company",
-  news: "News",
-  product: "Product",
-  research: "Research",
-};
 
 export const pageSchema = z
   .object({
@@ -76,13 +63,6 @@ export const blogSchema = z
   })
   .strict();
 
-export type BlogCategory = (typeof BLOG_CATEGORIES)[number];
-
-export function isValidCategory(
-  value: string | undefined
-): value is BlogCategory {
-  return value !== undefined && BLOG_CATEGORIES.includes(value as BlogCategory);
-}
 export type PageMetadata = z.infer<typeof pageSchema>;
 export type BlogPostMetadata = z.infer<typeof blogSchema>;
 

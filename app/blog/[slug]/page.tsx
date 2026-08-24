@@ -13,7 +13,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { CATEGORY_LABELS } from "@/lib/content-schema";
+import { CATEGORY_LABELS } from "@/lib/blog-categories";
 import { formatDate } from "@/lib/format-date";
 
 interface BlogPostPageProps {

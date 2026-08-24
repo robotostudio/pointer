@@ -1,13 +1,9 @@
 import "server-only";
 
 import path from "node:path";
+import { type BlogCategory, CATEGORY_LABELS } from "@/lib/blog-categories";
 import { getMDXFiles, readMDXFile } from "@/lib/content-parser";
-import {
-  type BlogCategory,
-  type BlogPost,
-  blogSchema,
-  CATEGORY_LABELS,
-} from "@/lib/content-schema";
+import { type BlogPost, blogSchema } from "@/lib/content-schema";
 
 const POSTS_DIR = path.join(process.cwd(), "app", "blog", "posts");
 

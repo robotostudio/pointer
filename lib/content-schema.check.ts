@@ -2,11 +2,11 @@
 
 import assert from "node:assert/strict";
 import path from "node:path";
+import { isValidCategory } from "./blog-categories";
 import { getMDXFiles, readMDXFile } from "./content-parser";
 import {
   blogSchema,
   ContentValidationError,
-  isValidCategory,
   pageSchema,
   parseFrontmatter,
 } from "./content-schema";

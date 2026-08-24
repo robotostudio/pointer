@@ -3,11 +3,8 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { BlogPosts } from "@/components/posts";
-import {
-  type BlogPost,
-  CATEGORY_LABELS,
-  isValidCategory,
-} from "@/lib/content-schema";
+import { CATEGORY_LABELS, isValidCategory } from "@/lib/blog-categories";
+import type { BlogPost } from "@/lib/content-schema";
 
 interface BlogContentProps {
   allPosts: BlogPost[];
