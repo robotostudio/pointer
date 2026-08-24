@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Stops `next dev` rewriting a rules block into the tracked CLAUDE.md.
+  agentRules: false,
   cacheComponents: true,
   images: {
     deviceSizes: [640, 828, 1080, 1440, 1920, 2560, 3840],
