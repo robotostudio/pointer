@@ -140,7 +140,11 @@ export class ContentService {
 
       // Verify file is within content directory (security check)
       const resolvedFilePath = path.resolve(filePath);
-      if (!resolvedFilePath.startsWith(CONTENT_DIR)) {
+      const relativeToContentDir = path.relative(CONTENT_DIR, resolvedFilePath);
+      if (
+        relativeToContentDir.startsWith("..") ||
+        path.isAbsolute(relativeToContentDir)
+      ) {
         if (process.env.NODE_ENV === "development") {
           console.warn(
             `Security: Attempted to access file outside content directory: ${filePath}`
