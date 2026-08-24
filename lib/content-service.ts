@@ -270,6 +270,9 @@ export class ContentService {
 
       return pages;
     } catch (error) {
+      if (error instanceof ContentValidationError) {
+        throw error;
+      }
       if (process.env.NODE_ENV === "development") {
         console.error("Error getting all pages:", error);
       }
