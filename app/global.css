@@ -470,7 +470,13 @@ html.dark .shiki span {
 
 .copy-button-container,
 .copy-button-placeholder {
-  @apply absolute top-2 right-2;
+  @apply absolute top-2.5 right-2;
+}
+
+/* Nested in the container: absolute on both applied the offset twice,
+   pushing the button below the first code line. */
+.copy-button-container .copy-button-placeholder {
+  @apply static;
 }
 
 .copy-button-placeholder {
