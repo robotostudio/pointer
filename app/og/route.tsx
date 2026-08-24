@@ -2,13 +2,24 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
-const MAX_DESCRIPTION_LENGTH = 140;
+// Not the schema's 220-char ceiling — this is what fits the OG canvas.
+const OG_TITLE_LIMIT = 100;
+const OG_DESCRIPTION_LIMIT = 140;
+const ELLIPSIS = "...";
+
+const truncate = (value: string, limit: number) =>
+  value.length > limit
+    ? `${value.slice(0, limit - ELLIPSIS.length)}${ELLIPSIS}`
+    : value;
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
-  const title =
+  // Both params are attacker-controlled on a public unauthenticated route.
+  const title = truncate(
     url.searchParams.get("title") ||
-    "The AI-Powered Code Editor for Productive Teams";
+      "The AI-Powered Code Editor for Productive Teams",
+    OG_TITLE_LIMIT
+  );
   const description = url.searchParams.get("description") || "";
 
   const [fontData, logoData] = await Promise.all([
@@ -20,10 +31,7 @@ export async function GET(request: Request) {
 
   const hasDescription = description.length > 0;
   const titleSize = hasDescription ? 56 : 64;
-  const truncatedDescription =
-    description.length > MAX_DESCRIPTION_LENGTH
-      ? `${description.slice(0, MAX_DESCRIPTION_LENGTH - 3)}...`
-      : description;
+  const truncatedDescription = truncate(description, OG_DESCRIPTION_LIMIT);
 
   return new ImageResponse(
     <div
