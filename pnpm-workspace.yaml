@@ -1,0 +1,5 @@
+allowBuilds:
+  '@vercel/speed-insights': true
+  sharp: true
+minimumReleaseAgeExclude:
+  - '@types/react-dom@19.2.5'
