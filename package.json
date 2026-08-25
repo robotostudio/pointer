@@ -1,6 +1,7 @@
 {
   "name": "pointer",
   "private": true,
+  "license": "MIT",
   "scripts": {
     "build": "next build",
     "check": "biome check --max-diagnostics=none",
