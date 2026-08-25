@@ -64,3 +64,6 @@ Pointer includes a library of composable MDX components:
 
 See [`docs/MDX_COMPONENTS.md`](docs/MDX_COMPONENTS.md) for full documentation with props and examples.
 
+## License
+
+MIT — see [LICENSE](LICENSE).
