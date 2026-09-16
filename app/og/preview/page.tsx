@@ -8,12 +8,8 @@ interface OgEntry {
   route: string;
 }
 
-function buildOgUrl(title: string, description?: string): string {
-  const params = new URLSearchParams({ title });
-  if (description) {
-    params.set("description", description);
-  }
-  return `${baseUrl}/og?${params.toString()}`;
+function buildOgUrl(): string {
+  return `${baseUrl}/og`;
 }
 
 function getOgEntries(): OgEntry[] {
@@ -23,18 +19,12 @@ function getOgEntries(): OgEntry[] {
   const entries: OgEntry[] = [
     {
       label: "Home",
-      ogUrl: buildOgUrl(
-        "The AI-Powered Code Editor for Productive Teams",
-        "Build faster with intelligent code completion, real-time collaboration, and seamless AI integration."
-      ),
+      ogUrl: buildOgUrl(),
       route: "/",
     },
     {
       label: "Blog Index",
-      ogUrl: buildOgUrl(
-        "Blog",
-        "Insights on AI-powered development, productivity, and the future of coding."
-      ),
+      ogUrl: buildOgUrl(),
       route: "/blog",
     },
   ];
@@ -43,8 +33,7 @@ function getOgEntries(): OgEntry[] {
     const title = page.metadata.title ?? "Untitled";
     entries.push({
       label: title,
-      ogUrl:
-        page.metadata.image || buildOgUrl(title, page.metadata.description),
+      ogUrl: page.metadata.image || buildOgUrl(),
       route: page.path,
     });
   }
@@ -53,7 +42,7 @@ function getOgEntries(): OgEntry[] {
     const { title } = post.metadata;
     entries.push({
       label: title,
-      ogUrl: post.metadata.image || buildOgUrl(title, post.metadata.summary),
+      ogUrl: post.metadata.image || buildOgUrl(),
       route: `/blog/${post.slug}`,
     });
   }
