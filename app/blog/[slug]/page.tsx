@@ -50,11 +50,7 @@ export async function generateMetadata({
     imageAlt,
   } = post.metadata;
   const publishedTime = publishedAt.toISOString();
-  const ogParams = new URLSearchParams({ title });
-  if (description) {
-    ogParams.set("description", description);
-  }
-  const ogImage = image || `${baseUrl}/og?${ogParams.toString()}`;
+  const ogImage = image || `${baseUrl}/og`;
   const ogImageAlt = imageAlt || title;
 
   return {
