@@ -162,7 +162,7 @@ export default function Footer() {
         <div className="mt-12 flex flex-col items-start justify-between gap-4 border-white/5 border-t pt-8 sm:flex-row sm:items-center">
           <div className="flex items-center gap-4 text-muted-foreground text-sm">
             <span>
-              © <YearBadge /> Cursor
+              © <YearBadge /> Pointer
             </span>
             <span className="flex items-center gap-1.5">
               <span className="size-2 rounded-full bg-red-500" />
